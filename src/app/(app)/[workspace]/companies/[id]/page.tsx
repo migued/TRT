@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
-import { ArrowLeft, Building2, Globe, Users, FileText, Edit, Mail, Phone, Calendar } from 'lucide-react'
+import { ArrowLeft, Building2, Globe, Users, FileText, Edit, Mail, Phone, Calendar, MapPin, Linkedin, Facebook, Instagram, Twitter } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { DeleteCompanyButton } from '@/components/companies/delete-company-button'
 
@@ -73,14 +73,9 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
             </div>
             <div>
               <h1 className="text-2xl font-bold text-slate-900">{company.name}</h1>
-              <div className="flex items-center gap-4 mt-2">
-                {company.industry && (
-                  <span className="text-sm text-slate-600">{company.industry}</span>
-                )}
-                {company.size && (
-                  <span className="text-sm text-slate-600">{company.size}</span>
-                )}
-              </div>
+              {company.address && (
+                <p className="text-sm text-slate-600 mt-2">{company.address}</p>
+              )}
             </div>
           </div>
 
@@ -132,6 +127,68 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
                   <div>
                     <p className="text-sm font-medium text-slate-600">RFC</p>
                     <p className="text-slate-900">{company.tax_id}</p>
+                  </div>
+                </div>
+              )}
+
+              {company.address && (
+                <div className="flex items-start gap-3">
+                  <MapPin className="h-5 w-5 text-slate-400 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-slate-600">Dirección</p>
+                    <p className="text-slate-900">{company.address}</p>
+                  </div>
+                </div>
+              )}
+
+              {(company.linkedin_url || company.facebook_url || company.instagram_url || company.twitter_url) && (
+                <div className="pt-4 border-t border-slate-200">
+                  <p className="text-sm font-medium text-slate-600 mb-3">Redes Sociales</p>
+                  <div className="flex flex-wrap gap-3">
+                    {company.linkedin_url && (
+                      <a
+                        href={company.linkedin_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-3 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors"
+                      >
+                        <Linkedin className="h-4 w-4" />
+                        <span className="text-sm">LinkedIn</span>
+                      </a>
+                    )}
+                    {company.facebook_url && (
+                      <a
+                        href={company.facebook_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-3 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors"
+                      >
+                        <Facebook className="h-4 w-4" />
+                        <span className="text-sm">Facebook</span>
+                      </a>
+                    )}
+                    {company.instagram_url && (
+                      <a
+                        href={company.instagram_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-3 py-2 bg-pink-50 text-pink-600 rounded-lg hover:bg-pink-100 transition-colors"
+                      >
+                        <Instagram className="h-4 w-4" />
+                        <span className="text-sm">Instagram</span>
+                      </a>
+                    )}
+                    {company.twitter_url && (
+                      <a
+                        href={company.twitter_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-3 py-2 bg-slate-50 text-slate-900 rounded-lg hover:bg-slate-100 transition-colors"
+                      >
+                        <Twitter className="h-4 w-4" />
+                        <span className="text-sm">Twitter</span>
+                      </a>
+                    )}
                   </div>
                 </div>
               )}

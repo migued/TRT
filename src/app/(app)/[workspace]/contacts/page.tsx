@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
-import Link from 'next/link'
 import { Plus, Search } from 'lucide-react'
 import { ContactsTable } from '@/components/contacts/contacts-table'
+import { CreateContactButton } from '@/components/contacts/create-contact-button'
 
 interface ContactsPageProps {
   params: Promise<{ workspace: string }>
@@ -55,13 +55,11 @@ export default async function ContactsPage({ params, searchParams }: ContactsPag
             Gestiona tus contactos y clientes
           </p>
         </div>
-        <Link
-          href={`/${workspaceSlug}/contacts/new`}
-          className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-        >
-          <Plus className="h-4 w-4" />
-          Nuevo Contacto
-        </Link>
+        <CreateContactButton
+          workspaceSlug={workspaceSlug}
+          workspaceId={workspace.id}
+          variant="primary"
+        />
       </div>
 
       {/* Search and Filters */}
@@ -106,13 +104,11 @@ export default async function ContactsPage({ params, searchParams }: ContactsPag
                 : 'Comienza agregando tu primer contacto.'}
             </p>
             {!search && (
-              <Link
-                href={`/${workspaceSlug}/contacts/new`}
-                className="mt-6 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-              >
-                <Plus className="h-4 w-4" />
-                Crear Primer Contacto
-              </Link>
+              <CreateContactButton
+                workspaceSlug={workspaceSlug}
+                workspaceId={workspace.id}
+                variant="empty"
+              />
             )}
           </div>
         )}

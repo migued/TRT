@@ -3,16 +3,19 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, Building2 } from 'lucide-react'
+import { ArrowLeft, Building2, Linkedin, Facebook, Instagram, Twitter } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 
 interface Company {
   id: string
   name: string
   website: string | null
-  industry: string | null
-  size: string | null
+  address: string | null
   tax_id: string | null
+  linkedin_url: string | null
+  facebook_url: string | null
+  instagram_url: string | null
+  twitter_url: string | null
   notes: string | null
 }
 
@@ -29,9 +32,12 @@ export function EditCompanyForm({ company, workspaceSlug }: EditCompanyFormProps
   const [formData, setFormData] = useState({
     name: company.name,
     website: company.website || '',
-    industry: company.industry || '',
-    size: company.size || '',
+    address: company.address || '',
     tax_id: company.tax_id || '',
+    linkedin_url: company.linkedin_url || '',
+    facebook_url: company.facebook_url || '',
+    instagram_url: company.instagram_url || '',
+    twitter_url: company.twitter_url || '',
     notes: company.notes || ''
   })
 
@@ -48,9 +54,12 @@ export function EditCompanyForm({ company, workspaceSlug }: EditCompanyFormProps
         .update({
           name: formData.name,
           website: formData.website || null,
-          industry: formData.industry || null,
-          size: formData.size || null,
+          address: formData.address || null,
           tax_id: formData.tax_id || null,
+          linkedin_url: formData.linkedin_url || null,
+          facebook_url: formData.facebook_url || null,
+          instagram_url: formData.instagram_url || null,
+          twitter_url: formData.twitter_url || null,
           notes: formData.notes || null,
           updated_at: new Date().toISOString()
         })
@@ -116,84 +125,106 @@ export function EditCompanyForm({ company, workspaceSlug }: EditCompanyFormProps
               />
             </div>
 
-            {/* Website */}
-            <div>
-              <label htmlFor="website" className="block text-sm font-medium text-slate-700 mb-2">
-                Sitio web
-              </label>
-              <input
-                type="url"
-                id="website"
-                value={formData.website}
-                onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="https://ejemplo.com"
-                disabled={loading}
-              />
+            {/* Website & RFC */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="website" className="block text-sm font-medium text-slate-700 mb-2">
+                  Sitio web
+                </label>
+                <input
+                  type="url"
+                  id="website"
+                  value={formData.website}
+                  onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="https://ejemplo.com"
+                  disabled={loading}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="tax_id" className="block text-sm font-medium text-slate-700 mb-2">
+                  RFC
+                </label>
+                <input
+                  type="text"
+                  id="tax_id"
+                  value={formData.tax_id}
+                  onChange={(e) => setFormData({ ...formData, tax_id: e.target.value })}
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="ABC123456789"
+                  disabled={loading}
+                />
+              </div>
             </div>
 
-            {/* Industry */}
+            {/* Address */}
             <div>
-              <label htmlFor="industry" className="block text-sm font-medium text-slate-700 mb-2">
-                Industria
-              </label>
-              <select
-                id="industry"
-                value={formData.industry}
-                onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                disabled={loading}
-              >
-                <option value="">Seleccionar industria...</option>
-                <option value="Tecnología">Tecnología</option>
-                <option value="Manufactura">Manufactura</option>
-                <option value="Servicios">Servicios</option>
-                <option value="Retail">Retail</option>
-                <option value="Salud">Salud</option>
-                <option value="Educación">Educación</option>
-                <option value="Construcción">Construcción</option>
-                <option value="Alimentación">Alimentación</option>
-                <option value="Logística">Logística</option>
-                <option value="Consultoría">Consultoría</option>
-                <option value="Otra">Otra</option>
-              </select>
-            </div>
-
-            {/* Company Size */}
-            <div>
-              <label htmlFor="size" className="block text-sm font-medium text-slate-700 mb-2">
-                Tamaño de empresa
-              </label>
-              <select
-                id="size"
-                value={formData.size}
-                onChange={(e) => setFormData({ ...formData, size: e.target.value })}
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                disabled={loading}
-              >
-                <option value="">Seleccionar tamaño...</option>
-                <option value="1-10">1-10 empleados</option>
-                <option value="11-50">11-50 empleados</option>
-                <option value="51-200">51-200 empleados</option>
-                <option value="201-500">201-500 empleados</option>
-                <option value="501+">501+ empleados</option>
-              </select>
-            </div>
-
-            {/* Tax ID (RFC for Mexico) */}
-            <div>
-              <label htmlFor="tax_id" className="block text-sm font-medium text-slate-700 mb-2">
-                RFC
+              <label htmlFor="address" className="block text-sm font-medium text-slate-700 mb-2">
+                Dirección
               </label>
               <input
                 type="text"
-                id="tax_id"
-                value={formData.tax_id}
-                onChange={(e) => setFormData({ ...formData, tax_id: e.target.value })}
+                id="address"
+                value={formData.address}
+                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                 className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Ej: ABC123456789"
+                placeholder="Calle, Número, Colonia, Ciudad, Estado, CP"
                 disabled={loading}
               />
+            </div>
+
+            {/* Social Media */}
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-3">
+                Redes Sociales
+              </label>
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <Linkedin className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                  <input
+                    type="url"
+                    value={formData.linkedin_url}
+                    onChange={(e) => setFormData({ ...formData, linkedin_url: e.target.value })}
+                    className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="https://linkedin.com/company/..."
+                    disabled={loading}
+                  />
+                </div>
+                <div className="flex items-center gap-2">
+                  <Facebook className="h-5 w-5 text-blue-500 flex-shrink-0" />
+                  <input
+                    type="url"
+                    value={formData.facebook_url}
+                    onChange={(e) => setFormData({ ...formData, facebook_url: e.target.value })}
+                    className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="https://facebook.com/..."
+                    disabled={loading}
+                  />
+                </div>
+                <div className="flex items-center gap-2">
+                  <Instagram className="h-5 w-5 text-pink-500 flex-shrink-0" />
+                  <input
+                    type="url"
+                    value={formData.instagram_url}
+                    onChange={(e) => setFormData({ ...formData, instagram_url: e.target.value })}
+                    className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="https://instagram.com/..."
+                    disabled={loading}
+                  />
+                </div>
+                <div className="flex items-center gap-2">
+                  <Twitter className="h-5 w-5 text-slate-900 flex-shrink-0" />
+                  <input
+                    type="url"
+                    value={formData.twitter_url}
+                    onChange={(e) => setFormData({ ...formData, twitter_url: e.target.value })}
+                    className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="https://twitter.com/... o https://x.com/..."
+                    disabled={loading}
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Notes */}
