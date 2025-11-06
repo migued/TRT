@@ -5,16 +5,17 @@ import { createClient } from '@/lib/supabase/server'
 import { MarkOpportunityWonButton } from '@/components/opportunities/mark-opportunity-won-button'
 import { MarkOpportunityLostButton } from '@/components/opportunities/mark-opportunity-lost-button'
 import { DeleteOpportunityButton } from '@/components/opportunities/delete-opportunity-button'
+import { CreateQuoteButton } from '@/components/quotes/create-quote-button'
 
 interface OpportunityPageProps {
-  params: {
+  params: Promise<{
     workspace: string
     id: string
-  }
+  }>
 }
 
 export default async function OpportunityPage({ params }: OpportunityPageProps) {
-  const { workspace: workspaceSlug, id: opportunityId } = params
+  const { workspace: workspaceSlug, id: opportunityId } = await params
   const supabase = await createClient()
 
   // Get current user
@@ -126,6 +127,12 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
           <div className="flex items-center gap-3">
             {!isWon && !isLost && (
               <>
+                <CreateQuoteButton
+                  workspaceSlug={workspaceSlug}
+                  workspaceId={workspace.id}
+                  variant="secondary"
+                  opportunityId={opportunityId}
+                />
                 <Link
                   href={`/${workspaceSlug}/opportunities/${opportunityId}/edit`}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700"
