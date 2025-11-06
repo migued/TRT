@@ -89,7 +89,6 @@ export function EditProductForm({ product, workspaceSlug }: EditProductFormProps
 
       // Redirect to product detail page
       router.push(`/${workspaceSlug}/products/${product.id}`)
-      router.refresh()
     } catch (err) {
       console.error('Error updating product:', err)
       setError(err instanceof Error ? err.message : 'Error al actualizar el producto')

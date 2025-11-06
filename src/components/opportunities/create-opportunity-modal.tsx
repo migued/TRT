@@ -160,7 +160,6 @@ export function CreateOpportunityModal({ workspaceSlug, workspaceId, isOpen, onC
       // Success - close modal and refresh
       onClose()
       if (onSuccess) onSuccess()
-      router.refresh()
 
       // Reset form
       setFormData({

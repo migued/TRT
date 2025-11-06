@@ -33,7 +33,6 @@ export function DeleteCompanyButton({ companyId, companyName, workspaceSlug }: D
 
       // Redirect to companies list
       router.push(`/${workspaceSlug}/companies`)
-      router.refresh()
     } catch (err) {
       console.error('Error deleting company:', err)
       setError(err instanceof Error ? err.message : 'Error al eliminar la empresa')

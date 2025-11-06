@@ -69,7 +69,6 @@ export function EditCompanyForm({ company, workspaceSlug }: EditCompanyFormProps
 
       // Redirect to company detail page
       router.push(`/${workspaceSlug}/companies/${company.id}`)
-      router.refresh()
     } catch (err) {
       console.error('Error updating company:', err)
       setError(err instanceof Error ? err.message : 'Error al actualizar la empresa')

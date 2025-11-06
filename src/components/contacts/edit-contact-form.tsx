@@ -55,7 +55,6 @@ export function EditContactForm({ workspaceSlug, contact }: EditContactFormProps
 
       // Redirect to contact detail
       router.push(`/${workspaceSlug}/contacts/${contact.id}`)
-      router.refresh()
     } catch (err: any) {
       console.error('Error updating contact:', err)
       setError(err.message || 'Error al actualizar el contacto')

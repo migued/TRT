@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { OpportunityCard } from './opportunity-card'
 import { createClient } from '@/lib/supabase/client'
 
@@ -39,8 +38,8 @@ interface OpportunityKanbanProps {
   workspaceId: string
 }
 
-export function OpportunityKanban({ stages, opportunities, workspaceSlug, workspaceId }: OpportunityKanbanProps) {
-  const router = useRouter()
+export function OpportunityKanban({ stages, opportunities: initialOpportunities, workspaceSlug, workspaceId }: OpportunityKanbanProps) {
+  const [opportunities, setOpportunities] = useState(initialOpportunities)
   const [draggedOpportunity, setDraggedOpportunity] = useState<string | null>(null)
 
   // Group opportunities by stage
@@ -62,23 +61,35 @@ export function OpportunityKanban({ stages, opportunities, workspaceSlug, worksp
 
     if (!draggedOpportunity) return
 
+    // Optimistic update - update UI immediately
+    setOpportunities(prev =>
+      prev.map(opp =>
+        opp.id === draggedOpportunity
+          ? { ...opp, stage: targetStage }
+          : opp
+      )
+    )
+
+    setDraggedOpportunity(null)
+
+    // Persist to database in background
     try {
       const supabase = createClient()
 
-      // Update opportunity stage
       const { error } = await supabase
         .from('opportunities')
         .update({ stage: targetStage })
         .eq('id', draggedOpportunity)
 
-      if (error) throw error
-
-      // Refresh the page to show updated data
-      router.refresh()
+      if (error) {
+        // Revert on error - refetch from server
+        console.error('Error updating opportunity stage:', error)
+        setOpportunities(initialOpportunities)
+      }
     } catch (error) {
       console.error('Error updating opportunity stage:', error)
-    } finally {
-      setDraggedOpportunity(null)
+      // Revert on error
+      setOpportunities(initialOpportunities)
     }
   }
 

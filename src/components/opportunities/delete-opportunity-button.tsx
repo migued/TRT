@@ -33,7 +33,6 @@ export function DeleteOpportunityButton({ opportunityId, opportunityTitle, works
 
       // Redirect to opportunities list
       router.push(`/${workspaceSlug}/opportunities`)
-      router.refresh()
     } catch (err) {
       console.error('Error deleting opportunity:', err)
       setError(err instanceof Error ? err.message : 'Error al eliminar la oportunidad')

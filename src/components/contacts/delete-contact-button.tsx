@@ -35,7 +35,6 @@ export function DeleteContactButton({
 
       // Redirect to contacts list
       router.push(`/${workspaceSlug}/contacts`)
-      router.refresh()
     } catch (error) {
       console.error('Error deleting contact:', error)
       alert('Error al eliminar el contacto')

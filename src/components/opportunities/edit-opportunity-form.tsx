@@ -141,7 +141,6 @@ export function EditOpportunityForm({ opportunity, stages, workspaceSlug, worksp
 
       // Redirect to opportunity detail page
       router.push(`/${workspaceSlug}/opportunities/${opportunity.id}`)
-      router.refresh()
     } catch (err) {
       console.error('Error updating opportunity:', err)
       setError(err instanceof Error ? err.message : 'Error al actualizar la oportunidad')

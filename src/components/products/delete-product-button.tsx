@@ -33,7 +33,6 @@ export function DeleteProductButton({ productId, productName, workspaceSlug }: D
 
       // Redirect to products list
       router.push(`/${workspaceSlug}/products`)
-      router.refresh()
     } catch (err) {
       console.error('Error deleting product:', err)
       setError(err instanceof Error ? err.message : 'Error al eliminar el producto')

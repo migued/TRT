@@ -162,7 +162,6 @@ export function CreateCompanyModal({ workspaceSlug, workspaceId, isOpen, onClose
       // Success - close modal and refresh
       onClose()
       if (onSuccess) onSuccess()
-      router.refresh()
 
       // Reset form
       setCompanyData({
