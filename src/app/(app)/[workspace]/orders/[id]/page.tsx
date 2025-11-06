@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowLeft, ShoppingCart, User, Building2, Calendar, Mail, Phone, FileText, ExternalLink, DollarSign } from 'lucide-react'
 import { UpdateOrderStatusButton } from '@/components/orders/update-order-status-button'
 import { CreateProjectButton } from '@/components/projects/create-project-button'
+import { AIAssistant } from '@/components/ai/ai-assistant'
 
 interface OrderDetailPageProps {
   params: Promise<{ workspace: string; id: string }>
@@ -366,6 +367,13 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
           </div>
         </div>
       </div>
+
+      {/* AI Assistant */}
+      <AIAssistant
+        workspaceId={workspace.id}
+        orderId={order.id}
+        contactId={contact?.id}
+      />
     </div>
   )
 }

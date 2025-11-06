@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowLeft, Folder, User, Building2, Calendar, ShoppingCart, CheckCircle, Clock } from 'lucide-react'
 import { ProjectTasks } from '@/components/projects/project-tasks'
 import { UpdateProjectStatusButton } from '@/components/projects/update-project-status-button'
+import { AIAssistant } from '@/components/ai/ai-assistant'
 
 interface ProjectDetailPageProps {
   params: Promise<{ workspace: string; id: string }>
@@ -270,6 +271,13 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           )}
         </div>
       </div>
+
+      {/* AI Assistant */}
+      <AIAssistant
+        workspaceId={workspace.id}
+        projectId={project.id}
+        contactId={contact?.id}
+      />
     </div>
   )
 }

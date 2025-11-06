@@ -141,6 +141,188 @@ ${opportunity.notes ? `- Notes: ${opportunity.notes}` : ''}`
       }
     }
 
+    // Add order context if provided
+    if (context?.orderId) {
+      const { data: order } = await supabase
+        .from('orders')
+        .select(`
+          order_number,
+          status,
+          total,
+          items,
+          notes,
+          contacts (name, email, companies (name)),
+          quotes (quote_number)
+        `)
+        .eq('id', context.orderId)
+        .single()
+
+      if (order) {
+        systemPrompt += `\n\nCurrent Order:
+- Number: ${order.order_number}
+- Status: ${order.status}
+- Total: $${order.total || 0}
+- Contact: ${order.contacts?.name} at ${order.contacts?.companies?.name || 'N/A'}
+- Items: ${Array.isArray(order.items) ? order.items.length : 0} items
+${order.quotes ? `- From Quote: ${order.quotes.quote_number}` : ''}`
+      }
+    }
+
+    // Add project context if provided
+    if (context?.projectId) {
+      const { data: project } = await supabase
+        .from('projects')
+        .select(`
+          title,
+          description,
+          status,
+          stage,
+          start_date,
+          due_date,
+          contacts (name, companies (name)),
+          orders (order_number, total)
+        `)
+        .eq('id', context.projectId)
+        .single()
+
+      if (project) {
+        systemPrompt += `\n\nCurrent Project:
+- Title: ${project.title}
+- Status: ${project.status}
+- Stage: ${project.stage}
+- Start: ${project.start_date || 'N/A'}
+- Due: ${project.due_date || 'N/A'}
+- Contact: ${project.contacts?.name} at ${project.contacts?.companies?.name || 'N/A'}
+${project.description ? `- Description: ${project.description}` : ''}
+${project.orders ? `- Order Value: $${project.orders.total}` : ''}`
+
+        // Get project tasks
+        const { data: tasks } = await supabase
+          .from('tasks')
+          .select('title, status, priority, due_date')
+          .eq('project_id', context.projectId)
+          .order('created_at', { ascending: false })
+          .limit(10)
+
+        if (tasks && tasks.length > 0) {
+          const pendingTasks = tasks.filter(t => t.status === 'pending')
+          const completedTasks = tasks.filter(t => t.status === 'completed')
+          systemPrompt += `\n\nProject Tasks:
+- Total: ${tasks.length} (${completedTasks.length} completed, ${pendingTasks.length} pending)
+Recent Tasks:\n${tasks.slice(0, 5).map(t =>
+  `  - [${t.status === 'completed' ? '✓' : ' '}] ${t.title} (${t.priority})`
+).join('\n')}`
+        }
+      }
+    }
+
+    // Add company context if provided
+    if (context?.companyId) {
+      const { data: company } = await supabase
+        .from('companies')
+        .select(`
+          name,
+          industry,
+          website,
+          notes
+        `)
+        .eq('id', context.companyId)
+        .single()
+
+      if (company) {
+        systemPrompt += `\n\nCurrent Company:
+- Name: ${company.name}
+- Industry: ${company.industry || 'N/A'}
+- Website: ${company.website || 'N/A'}`
+
+        // Get contacts from this company
+        const { data: contacts } = await supabase
+          .from('contacts')
+          .select('name, position, email')
+          .eq('company_id', context.companyId)
+          .limit(5)
+
+        if (contacts && contacts.length > 0) {
+          systemPrompt += `\n\nContacts at ${company.name}:\n${contacts.map(c =>
+            `- ${c.name} (${c.position || 'Unknown position'})`
+          ).join('\n')}`
+        }
+
+        // Get opportunities with this company
+        const { data: opportunities } = await supabase
+          .from('opportunities')
+          .select('title, amount, stage, contacts!inner(company_id)')
+          .eq('contacts.company_id', context.companyId)
+          .order('created_at', { ascending: false })
+          .limit(5)
+
+        if (opportunities && opportunities.length > 0) {
+          const totalValue = opportunities.reduce((sum, o) => sum + (o.amount || 0), 0)
+          systemPrompt += `\n\nOpportunities with ${company.name}:
+- Total Pipeline Value: $${totalValue}
+- Opportunities:\n${opportunities.map(o =>
+  `  - ${o.title} (${o.stage}) - $${o.amount || 0}`
+).join('\n')}`
+        }
+      }
+    }
+
+    // Add products catalog context (always available for product recommendations)
+    if (context?.workspaceId) {
+      const { data: products } = await supabase
+        .from('products')
+        .select('name, description, price, category')
+        .eq('workspace_id', context.workspaceId)
+        .order('name', { ascending: true })
+        .limit(20)
+
+      if (products && products.length > 0) {
+        systemPrompt += `\n\nAvailable Products/Services (${products.length}):\n${products.map(p =>
+          `- ${p.name}: ${p.description || 'No description'} - $${p.price}${p.category ? ` (${p.category})` : ''}`
+        ).join('\n')}`
+      }
+    }
+
+    // Add workspace-wide insights for analytics
+    if (context?.includeAnalytics && context?.workspaceId) {
+      // Get top opportunities
+      const { data: topOpportunities } = await supabase
+        .from('opportunities')
+        .select('title, amount, stage, probability')
+        .eq('workspace_id', context.workspaceId)
+        .order('amount', { ascending: false })
+        .limit(5)
+
+      if (topOpportunities && topOpportunities.length > 0) {
+        const totalPipeline = topOpportunities.reduce((sum, o) => sum + (o.amount || 0), 0)
+        systemPrompt += `\n\nTop Opportunities in Pipeline:
+- Total Value: $${totalPipeline}
+${topOpportunities.map(o =>
+  `- ${o.title}: $${o.amount || 0} (${o.stage}, ${o.probability}% probability)`
+).join('\n')}`
+      }
+
+      // Get recent transactions
+      const { data: transactions } = await supabase
+        .from('transactions')
+        .select('type, amount, description, transaction_date')
+        .eq('workspace_id', context.workspaceId)
+        .order('transaction_date', { ascending: false })
+        .limit(10)
+
+      if (transactions && transactions.length > 0) {
+        const income = transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0)
+        const expenses = transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0)
+        systemPrompt += `\n\nRecent Financial Activity:
+- Recent Income: $${income}
+- Recent Expenses: $${expenses}
+- Net: $${income - expenses}
+Recent Transactions:\n${transactions.slice(0, 5).map(t =>
+  `- ${t.type === 'income' ? '+' : '-'}$${t.amount}: ${t.description}`
+).join('\n')}`
+      }
+    }
+
     // Call Claude API with streaming
     const stream = await anthropic.messages.stream({
       model: 'claude-3-5-sonnet-20241022',

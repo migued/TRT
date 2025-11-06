@@ -15,6 +15,8 @@ interface AIAssistantProps {
   quoteId?: string
   orderId?: string
   projectId?: string
+  companyId?: string
+  includeAnalytics?: boolean
 }
 
 export function AIAssistant({
@@ -23,7 +25,9 @@ export function AIAssistant({
   opportunityId,
   quoteId,
   orderId,
-  projectId
+  projectId,
+  companyId,
+  includeAnalytics = false
 }: AIAssistantProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([])
@@ -62,7 +66,9 @@ export function AIAssistant({
         opportunityId,
         quoteId,
         orderId,
-        projectId
+        projectId,
+        companyId,
+        includeAnalytics
       }
 
       const response = await fetch('/api/ai/chat', {
