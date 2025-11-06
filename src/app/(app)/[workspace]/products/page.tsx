@@ -1,7 +1,8 @@
 import { createClient } from '@/lib/supabase/server'
-import { Plus, Search } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import { ProductsTable } from '@/components/products/products-table'
 import { CreateProductButton } from '@/components/products/create-product-button'
+import { ProductFilters } from '@/components/products/product-filters'
 
 interface ProductsPageProps {
   params: Promise<{ workspace: string }>
@@ -73,56 +74,7 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
       </div>
 
       {/* Search and Filters */}
-      <div className="rounded-lg bg-white p-4 shadow">
-        <form action="" className="space-y-4">
-          <div className="flex gap-4">
-            <div className="flex-1">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-                <input
-                  type="search"
-                  name="search"
-                  defaultValue={search}
-                  placeholder="Buscar por nombre, descripción o SKU..."
-                  className="w-full rounded-lg border border-slate-300 pl-10 pr-4 py-2 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500"
-                />
-              </div>
-            </div>
-            <button
-              type="submit"
-              className="rounded-lg bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-200"
-            >
-              Buscar
-            </button>
-          </div>
-
-          {/* Filters */}
-          <div className="flex gap-4">
-            <select
-              name="type"
-              defaultValue={type || 'all'}
-              className="rounded-lg border border-slate-300 px-4 py-2 text-sm focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500"
-              onChange={(e) => e.currentTarget.form?.requestSubmit()}
-            >
-              <option value="all">Todos los tipos</option>
-              <option value="physical">Producto Físico</option>
-              <option value="digital">Producto Digital</option>
-              <option value="service">Servicio</option>
-            </select>
-
-            <select
-              name="active"
-              defaultValue={active || 'all'}
-              className="rounded-lg border border-slate-300 px-4 py-2 text-sm focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500"
-              onChange={(e) => e.currentTarget.form?.requestSubmit()}
-            >
-              <option value="all">Todos los estados</option>
-              <option value="true">Activos</option>
-              <option value="false">Inactivos</option>
-            </select>
-          </div>
-        </form>
-      </div>
+      <ProductFilters workspaceSlug={workspaceSlug} />
 
       {/* Products List */}
       <div className="rounded-lg bg-white shadow">
