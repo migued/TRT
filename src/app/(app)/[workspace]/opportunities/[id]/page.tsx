@@ -6,6 +6,7 @@ import { MarkOpportunityWonButton } from '@/components/opportunities/mark-opport
 import { MarkOpportunityLostButton } from '@/components/opportunities/mark-opportunity-lost-button'
 import { DeleteOpportunityButton } from '@/components/opportunities/delete-opportunity-button'
 import { CreateQuoteButton } from '@/components/quotes/create-quote-button'
+import { AIAssistant } from '@/components/ai/ai-assistant'
 
 interface OpportunityPageProps {
   params: Promise<{
@@ -351,6 +352,13 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
           </div>
         </div>
       </div>
+
+      {/* AI Assistant */}
+      <AIAssistant
+        workspaceId={workspace.id}
+        opportunityId={opportunityId}
+        contactId={opportunity.contact_id}
+      />
     </div>
   )
 }

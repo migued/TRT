@@ -5,6 +5,7 @@ import { ArrowLeft, FileText, User, Building2, Calendar, Mail, Phone, Edit, Send
 import { MarkQuoteAcceptedButton } from '@/components/quotes/mark-quote-accepted-button'
 import { DeleteQuoteButton } from '@/components/quotes/delete-quote-button'
 import { CreateOrderButton } from '@/components/orders/create-order-button'
+import { AIAssistant } from '@/components/ai/ai-assistant'
 
 interface QuoteDetailPageProps {
   params: Promise<{ workspace: string; id: string }>
@@ -415,6 +416,13 @@ export default async function QuoteDetailPage({ params }: QuoteDetailPageProps) 
           </div>
         </div>
       </div>
+
+      {/* AI Assistant */}
+      <AIAssistant
+        workspaceId={workspace.id}
+        quoteId={quote.id}
+        contactId={quote.contacts?.id}
+      />
     </div>
   )
 }
