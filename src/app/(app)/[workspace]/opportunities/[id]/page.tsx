@@ -282,23 +282,24 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
                     <Building2 className="h-5 w-5 text-slate-400" />
                     <span className="text-sm font-medium text-slate-600">Empresa</span>
                   </div>
-                  <Link
-                    href={`/${workspaceSlug}/companies/${opportunity.contacts.companies.id}`}
-                    className="block p-4 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-colors"
-                  >
-                    <p className="font-medium text-slate-900">{opportunity.contacts.companies.name}</p>
+                  <div className="p-4 border border-slate-200 rounded-lg">
+                    <Link
+                      href={`/${workspaceSlug}/companies/${opportunity.contacts.companies.id}`}
+                      className="font-medium text-slate-900 hover:text-orange-600"
+                    >
+                      {opportunity.contacts.companies.name}
+                    </Link>
                     {opportunity.contacts.companies.website && (
                       <a
                         href={opportunity.contacts.companies.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-blue-600 hover:text-blue-700 mt-1 inline-block"
-                        onClick={(e) => e.stopPropagation()}
+                        className="text-sm text-blue-600 hover:text-blue-700 mt-1 block"
                       >
                         {opportunity.contacts.companies.website}
                       </a>
                     )}
-                  </Link>
+                  </div>
                 </div>
               )}
             </div>
