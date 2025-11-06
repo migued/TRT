@@ -6,6 +6,7 @@ import { MarkQuoteAcceptedButton } from '@/components/quotes/mark-quote-accepted
 import { DeleteQuoteButton } from '@/components/quotes/delete-quote-button'
 import { CreateOrderButton } from '@/components/orders/create-order-button'
 import { AIAssistant } from '@/components/ai/ai-assistant'
+import { SendEmailButton } from '@/components/email/send-email-button'
 
 interface QuoteDetailPageProps {
   params: Promise<{ workspace: string; id: string }>
@@ -86,6 +87,34 @@ export default async function QuoteDetailPage({ params }: QuoteDetailPageProps) 
 
   const status = statusConfig[quote.status as keyof typeof statusConfig] || statusConfig.draft
 
+  // Generate email body for quote
+  const generateQuoteEmailBody = () => {
+    const itemsList = Array.isArray(quote.items)
+      ? quote.items.map((item: any) => `- ${item.description}: ${item.quantity} x ${formatter.format(item.unit_price)} = ${formatter.format(item.subtotal)}`).join('\n')
+      : ''
+
+    return `Estimado/a ${contact?.name || 'Cliente'},
+
+Adjunto encontrarás la cotización ${quote.quote_number} con los siguientes detalles:
+
+ARTÍCULOS:
+${itemsList}
+
+TOTALES:
+Subtotal: ${formatter.format(quote.subtotal || 0)}
+${quote.discount > 0 ? `Descuento: -${formatter.format(quote.discount)}\n` : ''}IVA: ${formatter.format(quote.tax || 0)}
+TOTAL: ${formatter.format(quote.total || 0)}
+
+${quote.valid_until ? `Esta cotización es válida hasta: ${formatDate(quote.valid_until)}\n` : ''}
+Puedes revisar los detalles completos en: ${process.env.NEXT_PUBLIC_APP_URL || 'https://tudominio.com'}/${workspaceSlug}/public/quotes/${quote.public_token}
+
+${quote.terms ? `\nTérminos y Condiciones:\n${quote.terms}\n` : ''}
+Quedamos atentos a cualquier duda o comentario.
+
+Saludos cordiales,
+${workspace.name}`
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -121,12 +150,15 @@ export default async function QuoteDetailPage({ params }: QuoteDetailPageProps) 
                   <Edit className="h-4 w-4" />
                   Editar
                 </Link>
-                <button
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-                >
-                  <Send className="h-4 w-4" />
-                  Enviar
-                </button>
+                <SendEmailButton
+                  workspaceId={workspace.id}
+                  quoteId={quote.id}
+                  contactId={contact?.id}
+                  contactEmail={contact?.email || ''}
+                  defaultSubject={`Cotización ${quote.quote_number} - ${workspace.name}`}
+                  defaultBody={generateQuoteEmailBody()}
+                  variant="primary"
+                />
               </>
             )}
 
