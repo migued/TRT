@@ -3,6 +3,7 @@ import { notFound, redirect } from 'next/navigation'
 import { ArrowLeft, Building2, Globe, Users, FileText, Edit, Mail, Phone, Calendar, MapPin, Linkedin, Facebook, Instagram, Twitter } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { DeleteCompanyButton } from '@/components/companies/delete-company-button'
+import { AIAssistant } from '@/components/ai/ai-assistant'
 
 interface CompanyPageProps {
   params: {
@@ -326,6 +327,13 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
           </div>
         </div>
       </div>
+
+      {/* AI Assistant */}
+      <AIAssistant
+        workspaceId={workspace.id}
+        companyId={company.id}
+        includeAnalytics={true}
+      />
     </div>
   )
 }

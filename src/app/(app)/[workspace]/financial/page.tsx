@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { DollarSign, TrendingUp, TrendingDown, Wallet } from 'lucide-react'
 import { TransactionsTable } from '@/components/financial/transactions-table'
 import { AddTransactionButton } from '@/components/financial/add-transaction-button'
+import { AIAssistant } from '@/components/ai/ai-assistant'
 
 interface FinancialPageProps {
   params: Promise<{ workspace: string }>
@@ -189,6 +190,12 @@ export default async function FinancialPage({ params, searchParams }: FinancialP
         transactions={transactions || []}
         workspaceSlug={workspaceSlug}
         currentType={typeFilter || 'all'}
+      />
+
+      {/* AI Assistant */}
+      <AIAssistant
+        workspaceId={workspace.id}
+        includeAnalytics={true}
       />
     </div>
   )

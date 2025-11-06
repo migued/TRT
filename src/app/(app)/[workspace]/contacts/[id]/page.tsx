@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ArrowLeft, Mail, Phone, Building2, Edit, Trash2 } from 'lucide-react'
 import { notFound, redirect } from 'next/navigation'
 import { DeleteContactButton } from '@/components/contacts/delete-contact-button'
+import { AIAssistant } from '@/components/ai/ai-assistant'
 
 interface ContactDetailPageProps {
   params: Promise<{ workspace: string; id: string }>
@@ -203,6 +204,13 @@ export default async function ContactDetailPage({ params }: ContactDetailPagePro
           </p>
         </div>
       </div>
+
+      {/* AI Assistant */}
+      <AIAssistant
+        workspaceId={workspace.id}
+        contactId={contact.id}
+        companyId={contact.companies?.id}
+      />
     </div>
   )
 }
