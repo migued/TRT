@@ -1,16 +1,15 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, FileText, User, Building2, Calendar, Mail, Phone, Edit, Send, CheckCircle, Trash2, ExternalLink } from 'lucide-react'
-import { MarkQuoteAcceptedButton } from '@/components/quotes/mark-quote-accepted-button'
-import { DeleteQuoteButton } from '@/components/quotes/delete-quote-button'
-import { CreateOrderButton } from '@/components/orders/create-order-button'
+import { ArrowLeft, ShoppingCart, User, Building2, Calendar, Mail, Phone, FileText, ExternalLink, DollarSign } from 'lucide-react'
+import { UpdateOrderStatusButton } from '@/components/orders/update-order-status-button'
+import { CreateProjectButton } from '@/components/projects/create-project-button'
 
-interface QuoteDetailPageProps {
+interface OrderDetailPageProps {
   params: Promise<{ workspace: string; id: string }>
 }
 
-export default async function QuoteDetailPage({ params }: QuoteDetailPageProps) {
+export default async function OrderDetailPage({ params }: OrderDetailPageProps) {
   const { workspace: workspaceSlug, id } = await params
   const supabase = await createClient()
 
@@ -25,9 +24,9 @@ export default async function QuoteDetailPage({ params }: QuoteDetailPageProps) 
     return <div>Workspace not found</div>
   }
 
-  // Get quote with contact info
-  const { data: quote, error } = await supabase
-    .from('quotes')
+  // Get order with contact info
+  const { data: order, error } = await supabase
+    .from('orders')
     .select(`
       *,
       contacts (
@@ -40,29 +39,40 @@ export default async function QuoteDetailPage({ params }: QuoteDetailPageProps) 
           name,
           website
         )
+      ),
+      quotes (
+        id,
+        quote_number
       )
     `)
     .eq('id', id)
     .eq('workspace_id', workspace.id)
     .single()
 
-  if (error || !quote) {
+  if (error || !order) {
     notFound()
   }
 
-  // Check if order already exists for this quote
-  const { data: existingOrder } = await supabase
-    .from('orders')
-    .select('id, order_number')
-    .eq('quote_id', id)
+  // Check if project already exists for this order
+  const { data: existingProject } = await supabase
+    .from('projects')
+    .select('id, title')
+    .eq('order_id', id)
     .single()
 
-  const contact = quote.contacts
+  // Get transactions related to this order
+  const { data: transactions } = await supabase
+    .from('transactions')
+    .select('*')
+    .eq('order_id', id)
+    .order('transaction_date', { ascending: false })
+
+  const contact = order.contacts
   const company = contact?.companies
 
   const formatter = new Intl.NumberFormat('es-MX', {
     style: 'currency',
-    currency: quote.currency || 'MXN',
+    currency: order.currency || 'MXN',
     minimumFractionDigits: 2
   })
 
@@ -76,90 +86,64 @@ export default async function QuoteDetailPage({ params }: QuoteDetailPageProps) 
   }
 
   const statusConfig = {
-    draft: { label: 'Borrador', color: 'bg-slate-100 text-slate-700' },
-    sent: { label: 'Enviada', color: 'bg-blue-100 text-blue-700' },
-    viewed: { label: 'Vista', color: 'bg-purple-100 text-purple-700' },
-    accepted: { label: 'Aceptada', color: 'bg-green-100 text-green-700' },
-    expired: { label: 'Expirada', color: 'bg-red-100 text-red-700' },
+    pending: { label: 'Pendiente', color: 'bg-yellow-100 text-yellow-700' },
+    in_progress: { label: 'En Proceso', color: 'bg-blue-100 text-blue-700' },
+    completed: { label: 'Completada', color: 'bg-green-100 text-green-700' },
+    cancelled: { label: 'Cancelada', color: 'bg-red-100 text-red-700' },
   }
 
-  const status = statusConfig[quote.status as keyof typeof statusConfig] || statusConfig.draft
+  const status = statusConfig[order.status as keyof typeof statusConfig] || statusConfig.pending
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div>
         <Link
-          href={`/${workspaceSlug}/quotes`}
+          href={`/${workspaceSlug}/orders`}
           className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 mb-4"
         >
           <ArrowLeft className="h-4 w-4" />
-          Volver a cotizaciones
+          Volver a órdenes
         </Link>
 
         <div className="flex items-start justify-between">
           <div>
             <div className="flex items-center gap-3">
-              <h1 className="text-3xl font-bold text-slate-900">{quote.quote_number}</h1>
+              <h1 className="text-3xl font-bold text-slate-900">{order.order_number}</h1>
               <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${status.color}`}>
                 {status.label}
               </span>
             </div>
             <p className="mt-2 text-slate-600">
-              Creada el {formatDate(quote.created_at)}
+              Creada el {formatDate(order.created_at)}
             </p>
           </div>
 
           <div className="flex items-center gap-3">
-            {quote.status === 'draft' && (
-              <>
-                <Link
-                  href={`/${workspaceSlug}/quotes/${quote.id}/edit`}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors font-medium"
-                >
-                  <Edit className="h-4 w-4" />
-                  Editar
-                </Link>
-                <button
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-                >
-                  <Send className="h-4 w-4" />
-                  Enviar
-                </button>
-              </>
-            )}
-
-            {(quote.status === 'sent' || quote.status === 'viewed') && (
-              <MarkQuoteAcceptedButton
-                quoteId={quote.id}
+            {order.status !== 'completed' && order.status !== 'cancelled' && (
+              <UpdateOrderStatusButton
+                orderId={order.id}
+                currentStatus={order.status}
                 workspaceSlug={workspaceSlug}
               />
             )}
 
-            {quote.status === 'accepted' && !existingOrder && (
-              <CreateOrderButton
-                quoteId={quote.id}
+            {order.status === 'completed' && !existingProject && (
+              <CreateProjectButton
+                orderId={order.id}
                 workspaceSlug={workspaceSlug}
                 workspaceId={workspace.id}
               />
             )}
 
-            {quote.status === 'accepted' && existingOrder && (
+            {existingProject && (
               <Link
-                href={`/${workspaceSlug}/orders/${existingOrder.id}`}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+                href={`/${workspaceSlug}/projects/${existingProject.id}`}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium"
               >
-                <CheckCircle className="h-4 w-4" />
-                Ver Orden {existingOrder.order_number}
+                <FileText className="h-4 w-4" />
+                Ver Proyecto
               </Link>
-            )}
-
-            {quote.status !== 'accepted' && (
-              <DeleteQuoteButton
-                quoteId={quote.id}
-                quoteNumber={quote.quote_number}
-                workspaceSlug={workspaceSlug}
-              />
             )}
           </div>
         </div>
@@ -192,7 +176,7 @@ export default async function QuoteDetailPage({ params }: QuoteDetailPageProps) 
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200">
-                  {Array.isArray(quote.items) && quote.items.map((item: any, index: number) => (
+                  {Array.isArray(order.items) && order.items.map((item: any, index: number) => (
                     <tr key={index}>
                       <td className="px-6 py-4 text-slate-900">{item.description}</td>
                       <td className="px-6 py-4 text-right text-slate-600">{item.quantity}</td>
@@ -209,39 +193,60 @@ export default async function QuoteDetailPage({ params }: QuoteDetailPageProps) 
               <div className="max-w-sm ml-auto space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-600">Subtotal:</span>
-                  <span className="font-medium text-slate-900">{formatter.format(quote.subtotal || 0)}</span>
+                  <span className="font-medium text-slate-900">{formatter.format(order.subtotal || 0)}</span>
                 </div>
-                {quote.discount > 0 && (
+                {order.discount > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-600">Descuento:</span>
-                    <span className="font-medium text-red-600">-{formatter.format(quote.discount)}</span>
+                    <span className="font-medium text-red-600">-{formatter.format(order.discount)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-600">IVA:</span>
-                  <span className="font-medium text-slate-900">{formatter.format(quote.tax || 0)}</span>
+                  <span className="font-medium text-slate-900">{formatter.format(order.tax || 0)}</span>
                 </div>
                 <div className="flex justify-between text-lg font-bold pt-2 border-t border-slate-300">
                   <span className="text-slate-900">Total:</span>
-                  <span className="text-orange-600">{formatter.format(quote.total || 0)}</span>
+                  <span className="text-orange-600">{formatter.format(order.total || 0)}</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Notes */}
-          {quote.notes && (
-            <div className="bg-white rounded-lg border border-slate-200 p-6">
-              <h3 className="text-sm font-semibold text-slate-900 mb-2">Notas Internas</h3>
-              <p className="text-slate-600 whitespace-pre-wrap">{quote.notes}</p>
+          {/* Transactions */}
+          {transactions && transactions.length > 0 && (
+            <div className="bg-white rounded-lg border border-slate-200">
+              <div className="px-6 py-4 border-b border-slate-200">
+                <h2 className="text-lg font-semibold text-slate-900">Transacciones</h2>
+              </div>
+              <div className="divide-y divide-slate-200">
+                {transactions.map(transaction => (
+                  <div key={transaction.id} className="px-6 py-4 flex items-center justify-between">
+                    <div>
+                      <p className="font-medium text-slate-900">{transaction.description}</p>
+                      <div className="flex items-center gap-3 mt-1 text-sm text-slate-600">
+                        <span>{formatDate(transaction.transaction_date)}</span>
+                        {transaction.payment_method && (
+                          <span className="px-2 py-0.5 bg-slate-100 rounded text-xs">
+                            {transaction.payment_method}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <div className={`font-semibold ${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
+                      {transaction.type === 'income' ? '+' : '-'}{formatter.format(transaction.amount)}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
-          {/* Terms */}
-          {quote.terms && (
+          {/* Notes */}
+          {order.notes && (
             <div className="bg-white rounded-lg border border-slate-200 p-6">
-              <h3 className="text-sm font-semibold text-slate-900 mb-2">Términos y Condiciones</h3>
-              <p className="text-slate-600 whitespace-pre-wrap">{quote.terms}</p>
+              <h3 className="text-sm font-semibold text-slate-900 mb-2">Notas</h3>
+              <p className="text-slate-600 whitespace-pre-wrap">{order.notes}</p>
             </div>
           )}
         </div>
@@ -303,64 +308,19 @@ export default async function QuoteDetailPage({ params }: QuoteDetailPageProps) 
             )}
           </div>
 
-          {/* Details */}
-          <div className="bg-white rounded-lg border border-slate-200 p-6">
-            <h3 className="text-sm font-semibold text-slate-900 mb-4">Detalles</h3>
-            <div className="space-y-3">
-              <div>
-                <p className="text-xs text-slate-500 mb-1">Válida Hasta</p>
-                <div className="flex items-center gap-2 text-sm text-slate-900">
-                  <Calendar className="h-4 w-4 text-slate-400" />
-                  {formatDate(quote.valid_until)}
-                </div>
-              </div>
-
-              {quote.sent_at && (
-                <div>
-                  <p className="text-xs text-slate-500 mb-1">Enviada</p>
-                  <div className="flex items-center gap-2 text-sm text-slate-900">
-                    <Send className="h-4 w-4 text-slate-400" />
-                    {formatDate(quote.sent_at)}
-                  </div>
-                </div>
-              )}
-
-              {quote.viewed_at && (
-                <div>
-                  <p className="text-xs text-slate-500 mb-1">Vista por Cliente</p>
-                  <div className="flex items-center gap-2 text-sm text-slate-900">
-                    <FileText className="h-4 w-4 text-slate-400" />
-                    {formatDate(quote.viewed_at)}
-                  </div>
-                </div>
-              )}
-
-              {quote.accepted_at && (
-                <div>
-                  <p className="text-xs text-slate-500 mb-1">Aceptada</p>
-                  <div className="flex items-center gap-2 text-sm text-slate-900">
-                    <CheckCircle className="h-4 w-4 text-green-600" />
-                    {formatDate(quote.accepted_at)}
-                  </div>
-                </div>
-              )}
-
-              {quote.public_token && (
-                <div>
-                  <p className="text-xs text-slate-500 mb-1">Enlace Público</p>
-                  <a
-                    href={`/${workspaceSlug}/public/quotes/${quote.public_token}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-orange-600 hover:text-orange-700 flex items-center gap-1"
-                  >
-                    <ExternalLink className="h-3 w-3" />
-                    Ver enlace
-                  </a>
-                </div>
-              )}
+          {/* Related Quote */}
+          {order.quotes && (
+            <div className="bg-white rounded-lg border border-slate-200 p-6">
+              <h3 className="text-sm font-semibold text-slate-900 mb-4">Cotización Origen</h3>
+              <Link
+                href={`/${workspaceSlug}/quotes/${order.quotes.id}`}
+                className="flex items-center gap-2 text-orange-600 hover:text-orange-700"
+              >
+                <FileText className="h-4 w-4" />
+                {order.quotes.quote_number}
+              </Link>
             </div>
-          </div>
+          )}
 
           {/* Timeline */}
           <div className="bg-white rounded-lg border border-slate-200 p-6">
@@ -371,43 +331,34 @@ export default async function QuoteDetailPage({ params }: QuoteDetailPageProps) 
                   <div className="w-2 h-2 mt-2 rounded-full bg-slate-400"></div>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-slate-900">Cotización creada</p>
-                  <p className="text-xs text-slate-500">{formatDate(quote.created_at)}</p>
+                  <p className="text-sm font-medium text-slate-900">Orden creada</p>
+                  <p className="text-xs text-slate-500">{formatDate(order.created_at)}</p>
                 </div>
               </div>
 
-              {quote.sent_at && (
-                <div className="flex gap-3">
-                  <div className="flex-shrink-0">
-                    <div className="w-2 h-2 mt-2 rounded-full bg-blue-400"></div>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-slate-900">Enviada al cliente</p>
-                    <p className="text-xs text-slate-500">{formatDate(quote.sent_at)}</p>
-                  </div>
-                </div>
-              )}
-
-              {quote.viewed_at && (
-                <div className="flex gap-3">
-                  <div className="flex-shrink-0">
-                    <div className="w-2 h-2 mt-2 rounded-full bg-purple-400"></div>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-slate-900">Vista por el cliente</p>
-                    <p className="text-xs text-slate-500">{formatDate(quote.viewed_at)}</p>
-                  </div>
-                </div>
-              )}
-
-              {quote.accepted_at && (
+              {order.invoiced_at && (
                 <div className="flex gap-3">
                   <div className="flex-shrink-0">
                     <div className="w-2 h-2 mt-2 rounded-full bg-green-400"></div>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-slate-900">Aceptada</p>
-                    <p className="text-xs text-slate-500">{formatDate(quote.accepted_at)}</p>
+                    <p className="text-sm font-medium text-slate-900">Facturada</p>
+                    <p className="text-xs text-slate-500">{formatDate(order.invoiced_at)}</p>
+                    {order.alegra_invoice_number && (
+                      <p className="text-xs text-slate-600 mt-1">#{order.alegra_invoice_number}</p>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {order.status === 'completed' && (
+                <div className="flex gap-3">
+                  <div className="flex-shrink-0">
+                    <div className="w-2 h-2 mt-2 rounded-full bg-green-400"></div>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-slate-900">Completada</p>
+                    <p className="text-xs text-slate-500">{formatDate(order.updated_at)}</p>
                   </div>
                 </div>
               )}
