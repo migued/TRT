@@ -1,23 +1,34 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter, useParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 
-export default function NewContactPage() {
-  const params = useParams()
-  const workspaceSlug = params.workspace as string
+interface Contact {
+  id: string
+  name: string
+  email: string | null
+  phone: string | null
+  notes: string | null
+}
+
+interface EditContactFormProps {
+  workspaceSlug: string
+  contact: Contact
+}
+
+export function EditContactForm({ workspaceSlug, contact }: EditContactFormProps) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    notes: '',
+    name: contact.name,
+    email: contact.email || '',
+    phone: contact.phone || '',
+    notes: contact.notes || '',
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,40 +39,26 @@ export default function NewContactPage() {
     try {
       const supabase = createClient()
 
-      // Get workspace ID
-      const { data: workspace } = await supabase
-        .from('workspaces')
-        .select('id')
-        .eq('slug', workspaceSlug)
-        .single()
-
-      if (!workspace) {
-        throw new Error('Workspace not found')
-      }
-
-      // Get current user
-      const { data: { user } } = await supabase.auth.getUser()
-
-      // Create contact
-      const { error: insertError } = await supabase
+      // Update contact
+      const { error: updateError } = await supabase
         .from('contacts')
-        .insert({
-          workspace_id: workspace.id,
+        .update({
           name: formData.name,
           email: formData.email || null,
           phone: formData.phone || null,
           notes: formData.notes || null,
-          created_by: user?.id,
-          source: 'manual',
+          updated_at: new Date().toISOString(),
         })
+        .eq('id', contact.id)
 
-      if (insertError) throw insertError
+      if (updateError) throw updateError
 
-      // Redirect to contacts list
-      router.push(`/${workspaceSlug}/contacts`)
+      // Redirect to contact detail
+      router.push(`/${workspaceSlug}/contacts/${contact.id}`)
+      router.refresh()
     } catch (err: any) {
-      console.error('Error creating contact:', err)
-      setError(err.message || 'Error al crear el contacto')
+      console.error('Error updating contact:', err)
+      setError(err.message || 'Error al actualizar el contacto')
     } finally {
       setLoading(false)
     }
@@ -81,17 +78,17 @@ export default function NewContactPage() {
       {/* Header */}
       <div>
         <Link
-          href={`/${workspaceSlug}/contacts`}
+          href={`/${workspaceSlug}/contacts/${contact.id}`}
           className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900"
         >
           <ArrowLeft className="h-4 w-4" />
-          Volver a contactos
+          Volver al contacto
         </Link>
         <h1 className="mt-4 text-3xl font-bold text-slate-900">
-          Nuevo Contacto
+          Editar Contacto
         </h1>
         <p className="mt-1 text-sm text-slate-600">
-          Agrega un nuevo contacto a tu CRM
+          Actualiza la información de {contact.name}
         </p>
       </div>
 
@@ -189,10 +186,10 @@ export default function NewContactPage() {
             disabled={loading}
             className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? 'Creando...' : 'Crear Contacto'}
+            {loading ? 'Guardando...' : 'Guardar Cambios'}
           </button>
           <Link
-            href={`/${workspaceSlug}/contacts`}
+            href={`/${workspaceSlug}/contacts/${contact.id}`}
             className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
           >
             Cancelar
