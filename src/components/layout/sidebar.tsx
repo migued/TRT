@@ -15,7 +15,8 @@ import {
   Settings,
   LogOut,
   MessageSquare,
-  ScanLine
+  Mail,
+  Clock
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
@@ -80,17 +81,11 @@ export function Sidebar({ workspaceSlug }: SidebarProps) {
       href: `/${workspaceSlug}/chat-con-ia`,
       icon: MessageSquare,
     },
-    {
-      name: 'Escáner',
-      href: `/${workspaceSlug}/escaner`,
-      icon: ScanLine,
-    },
-    {
-      name: 'Inbox',
-      href: `/${workspaceSlug}/inbox`,
-      icon: Inbox,
-      badge: '2', // TODO: Dynamic from actual data
-    },
+  ]
+
+  const comingSoon = [
+    { name: 'Integración WhatsApp', icon: MessageSquare },
+    { name: 'Campañas de Email', icon: Mail },
   ]
 
   const isActive = (href: string, exact: boolean = false) => {
@@ -136,7 +131,7 @@ export function Sidebar({ workspaceSlug }: SidebarProps) {
                   <Icon className="h-5 w-5" />
                   <span className="flex-1">{item.name}</span>
                   {item.badge && (
-                    <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs">
+                    <span className="rounded-full bg-slate-600 px-2 py-0.5 text-xs text-white">
                       {item.badge}
                     </span>
                   )}
@@ -145,6 +140,29 @@ export function Sidebar({ workspaceSlug }: SidebarProps) {
             )
           })}
         </ul>
+
+        {/* Coming Soon Section */}
+        <div className="mt-6 pt-6 border-t border-slate-800">
+          <div className="flex items-center gap-2 px-3 mb-2">
+            <Clock className="h-4 w-4 text-slate-500" />
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
+              Próximamente
+            </span>
+          </div>
+          <ul className="space-y-1">
+            {comingSoon.map((item) => {
+              const Icon = item.icon
+              return (
+                <li key={item.name}>
+                  <div className="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-slate-500 cursor-not-allowed">
+                    <Icon className="h-5 w-5" />
+                    <span className="flex-1">{item.name}</span>
+                  </div>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
       </nav>
 
       {/* Bottom section */}

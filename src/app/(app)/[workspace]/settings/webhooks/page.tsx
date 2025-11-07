@@ -92,7 +92,7 @@ export default async function WebhooksPage({ params }: WebhooksPageProps) {
               <Link
                 href="/docs/webhooks"
                 target="_blank"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors"
               >
                 <BookOpen className="h-4 w-4" />
                 Ver Documentación Completa

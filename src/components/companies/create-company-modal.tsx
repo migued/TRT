@@ -417,7 +417,7 @@ export function CreateCompanyModal({ workspaceSlug, workspaceId, isOpen, onClose
                           setNewContactData({ ...newContactData, name: contactSearch })
                           setContactSearch('')
                         }}
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 text-sm"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 text-sm"
                       >
                         <Plus className="h-4 w-4" />
                         Crear nuevo contacto
@@ -529,7 +529,7 @@ export function CreateCompanyModal({ workspaceSlug, workspaceId, isOpen, onClose
             <button
               type="submit"
               disabled={loading || !companyData.name}
-              className="px-6 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 disabled:bg-slate-300 disabled:cursor-not-allowed font-medium"
+              className="px-6 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed font-medium"
             >
               {loading ? 'Guardando...' : 'Guardar Empresa'}
             </button>

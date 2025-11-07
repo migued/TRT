@@ -66,7 +66,7 @@ export function DeleteWebhookButton({ webhookId, webhookName, workspaceSlug }: D
               <button
                 onClick={handleDelete}
                 disabled={isDeleting}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 disabled:opacity-50"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 disabled:opacity-50"
               >
                 {isDeleting && <Loader2 className="h-4 w-4 animate-spin" />}
                 Delete

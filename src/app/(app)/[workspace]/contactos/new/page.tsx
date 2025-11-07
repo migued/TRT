@@ -187,7 +187,7 @@ export default function NewContactPage() {
           <button
             type="submit"
             disabled={loading}
-            className="rounded-lg bg-slate-100 px-4 py-2 text-sm font-medium text-white hover:bg-slate-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Creando...' : 'Crear Contacto'}
           </button>

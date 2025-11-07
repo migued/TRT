@@ -111,7 +111,7 @@ export function MarkOpportunityLostButton({ opportunityId, opportunityTitle, wor
               <button
                 onClick={handleMarkLost}
                 disabled={loading}
-                className="px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 disabled:bg-slate-100 inline-flex items-center gap-2"
+                className="px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 disabled:bg-slate-100 inline-flex items-center gap-2"
               >
                 <X className="h-4 w-4" />
                 {loading ? 'Marcando...' : 'Marcar como Perdida'}

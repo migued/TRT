@@ -88,7 +88,7 @@ export function DeleteOpportunityButton({ opportunityId, opportunityTitle, works
               <button
                 onClick={handleDelete}
                 disabled={loading}
-                className="px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 disabled:bg-slate-100"
+                className="px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 disabled:bg-slate-100"
               >
                 {loading ? 'Eliminando...' : 'Eliminar Oportunidad'}
               </button>

@@ -69,7 +69,7 @@ export function AddTransactionButton({ workspaceSlug, workspaceId }: AddTransact
     <>
       <button
         onClick={() => setShowModal(true)}
-        className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 transition-colors font-medium"
+        className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors font-medium"
       >
         <Plus className="h-5 w-5" />
         Nueva Transacción
@@ -186,7 +186,7 @@ export function AddTransactionButton({ workspaceSlug, workspaceId }: AddTransact
               <button
                 onClick={handleSubmit}
                 disabled={loading}
-                className="px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 transition-colors font-medium disabled:opacity-50"
+                className="px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors font-medium disabled:opacity-50"
               >
                 {loading ? 'Guardando...' : 'Guardar Transacción'}
               </button>

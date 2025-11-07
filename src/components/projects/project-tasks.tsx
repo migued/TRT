@@ -132,7 +132,7 @@ export function ProjectTasks({ projectId, workspaceId, initialTasks }: ProjectTa
             <div className="flex items-center gap-2">
               <button
                 onClick={handleAddTask}
-                className="px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 text-sm font-medium"
+                className="px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 text-sm font-medium"
               >
                 Agregar
               </button>

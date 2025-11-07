@@ -768,7 +768,7 @@ app.post('/webhook', (req, res) => {
               </a>
               <button
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="px-6 py-3 bg-slate-100 text-white rounded-lg font-medium hover:bg-slate-100 transition-colors"
+                className="px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors"
               >
                 Volver Arriba ↑
               </button>

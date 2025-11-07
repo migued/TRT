@@ -22,7 +22,7 @@ export default function Home() {
             </Link>
             <Link
               href="/signup"
-              className="rounded-lg bg-slate-100 px-4 py-2 text-sm font-medium text-white hover:bg-slate-100"
+              className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
             >
               Comenzar gratis
             </Link>
@@ -45,7 +45,7 @@ export default function Home() {
           <div className="mt-10 flex items-center justify-center gap-4">
             <Link
               href="/signup"
-              className="inline-flex items-center gap-2 rounded-lg bg-slate-100 px-6 py-3 text-base font-medium text-white hover:bg-slate-100"
+              className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-6 py-3 text-base font-medium text-white hover:bg-slate-800"
             >
               Comenzar gratis
               <ArrowRight className="h-5 w-5" />
@@ -104,7 +104,7 @@ export default function Home() {
           <div className="mt-8">
             <Link
               href="/signup"
-              className="inline-flex items-center gap-2 rounded-lg bg-slate-100 px-8 py-4 text-lg font-medium text-white hover:bg-slate-100"
+              className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-8 py-4 text-lg font-medium text-white hover:bg-slate-800"
             >
               Comenzar ahora gratis
               <ArrowRight className="h-6 w-6" />

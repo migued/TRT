@@ -21,7 +21,7 @@ export function ScanButton({
 }: ScanButtonProps) {
   const [isOpen, setIsOpen] = useState(false)
 
-  const defaultLabel = type === 'business-card' ? '📇 Escanear Tarjeta' : '🧾 Escanear Recibo'
+  const defaultLabel = type === 'business-card' ? 'Escanear Tarjeta' : 'Escanear Recibo'
 
   return (
     <>
@@ -30,7 +30,7 @@ export function ScanButton({
         className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
           variant === 'outline'
             ? 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
-            : 'bg-slate-100 text-white hover:bg-slate-100'
+            : 'bg-slate-900 text-white hover:bg-slate-800'
         }`}
       >
         <Scan className="h-4 w-4" />

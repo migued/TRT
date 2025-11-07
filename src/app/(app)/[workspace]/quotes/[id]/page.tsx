@@ -180,7 +180,7 @@ ${workspace.name}`
             {quote.status === 'accepted' && existingOrder && (
               <Link
                 href={`/${workspaceSlug}/orders/${existingOrder.id}`}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 transition-colors font-medium"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors font-medium"
               >
                 <CheckCircle className="h-4 w-4" />
                 Ver Orden {existingOrder.order_number}

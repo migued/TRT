@@ -36,7 +36,7 @@ export function SendEmailButton({
   }
 
   const variantClasses = variant === 'primary'
-    ? 'bg-slate-100 text-white hover:bg-slate-100'
+    ? 'bg-slate-900 text-white hover:bg-slate-800'
     : 'bg-white text-slate-700 border border-slate-300 hover:bg-slate-50'
 
   return (

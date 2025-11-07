@@ -265,12 +265,12 @@ export function AIAssistant({
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 p-4 bg-gradient-to-r from-purple-600 to-orange-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 z-50 group"
+          className="fixed bottom-6 right-6 p-4 bg-slate-900 text-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 z-50 group"
         >
           <Bot className="h-6 w-6" />
           <span className="absolute -top-1 -right-1 flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-100 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-slate-100"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-600 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-slate-600"></span>
           </span>
           <div className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-slate-900 text-white text-sm rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
             Asistente IA
@@ -282,19 +282,19 @@ export function AIAssistant({
       {isOpen && (
         <div className="fixed bottom-6 right-6 w-96 h-[600px] bg-white rounded-lg shadow-2xl flex flex-col z-50 border border-slate-200">
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-slate-200 bg-gradient-to-r from-purple-600 to-orange-600 rounded-t-lg">
+          <div className="flex items-center justify-between p-4 border-b border-slate-200 bg-slate-900 rounded-t-lg">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-white/20 rounded-lg">
+              <div className="p-2 bg-slate-800 rounded-lg">
                 <Sparkles className="h-5 w-5 text-white" />
               </div>
               <div>
                 <h3 className="font-semibold text-white">Asistente IA</h3>
-                <p className="text-xs text-white/80">Powered by Claude</p>
+                <p className="text-xs text-slate-300">Powered by Claude</p>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-white/80 hover:text-white transition-colors"
+              className="text-slate-300 hover:text-white transition-colors"
             >
               <X className="h-5 w-5" />
             </button>
@@ -304,7 +304,7 @@ export function AIAssistant({
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {messages.length === 0 && (
               <div className="text-center py-8">
-                <div className="inline-flex p-4 bg-gradient-to-br from-purple-100 to-orange-100 rounded-full mb-4">
+                <div className="inline-flex p-4 bg-slate-100 rounded-full mb-4">
                   <Bot className="h-8 w-8 text-slate-600" />
                 </div>
                 <h4 className="font-semibold text-slate-900 mb-2">¡Hola! Soy tu asistente IA</h4>
@@ -333,7 +333,7 @@ export function AIAssistant({
                 <div
                   className={`max-w-[85%] rounded-lg px-4 py-2 ${
                     message.role === 'user'
-                      ? 'bg-gradient-to-r from-purple-600 to-orange-600 text-white'
+                      ? 'bg-slate-900 text-white'
                       : 'bg-slate-100 text-slate-900'
                   }`}
                 >
@@ -342,7 +342,7 @@ export function AIAssistant({
                   {message.role === 'assistant' && message.audioUrl && (
                     <button
                       onClick={() => playAudio(message.audioUrl!)}
-                      className="mt-2 flex items-center gap-1 text-xs text-slate-600 hover:text-slate-600"
+                      className="mt-2 flex items-center gap-1 text-xs text-slate-600 hover:text-slate-900"
                     >
                       <Volume2 className="h-3 w-3" />
                       Reproducir respuesta
@@ -415,8 +415,8 @@ export function AIAssistant({
                 disabled={isLoading || isTranscribing}
                 className={`px-3 py-2 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
                   isRecording
-                    ? 'bg-slate-100 text-white animate-pulse'
-                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                    ? 'bg-slate-900 text-white animate-pulse'
+                    : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
                 }`}
                 title="Mantén presionado para hablar"
               >
@@ -435,19 +435,19 @@ export function AIAssistant({
                 }}
                 placeholder={isRecording ? "Hablando..." : "Escribe o usa el micrófono..."}
                 rows={2}
-                className="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none text-sm"
+                className="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-400 resize-none text-sm"
                 disabled={isLoading || isRecording}
               />
               <button
                 type="submit"
                 disabled={!input.trim() || isLoading || isRecording}
-                className="px-4 bg-gradient-to-r from-purple-600 to-orange-600 text-white rounded-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send className="h-5 w-5" />
               </button>
             </div>
             <p className="text-xs text-slate-500 mt-2">
-              Presiona Enter para enviar, o mantén el 🎤 para hablar
+              Presiona Enter para enviar, o mantén presionado para hablar
             </p>
           </form>
         </div>

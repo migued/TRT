@@ -84,7 +84,7 @@ export function CreateProjectButton({ orderId, workspaceSlug, workspaceId }: Cre
     <>
       <button
         onClick={() => setShowModal(true)}
-        className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 transition-colors font-medium"
+        className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors font-medium"
       >
         <Folder className="h-4 w-4" />
         Crear Proyecto
@@ -162,7 +162,7 @@ export function CreateProjectButton({ orderId, workspaceSlug, workspaceId }: Cre
               <button
                 onClick={handleCreate}
                 disabled={loading}
-                className="px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 transition-colors font-medium disabled:opacity-50"
+                className="px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors font-medium disabled:opacity-50"
               >
                 {loading ? 'Creando...' : 'Crear Proyecto'}
               </button>
