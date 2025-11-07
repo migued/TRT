@@ -1,4 +1,6 @@
+import { Suspense } from 'react'
 import { createClient } from '@/lib/supabase/server'
+import { Loader2 } from 'lucide-react'
 
 interface DashboardPageProps {
   params: Promise<{ workspace: string }>
@@ -6,155 +8,125 @@ interface DashboardPageProps {
 
 export default async function DashboardPage({ params }: DashboardPageProps) {
   const { workspace: workspaceSlug } = await params
-  const supabase = await createClient()
-
-  // Get workspace data
-  const { data: workspace } = await supabase
-    .from('workspaces')
-    .select('*')
-    .eq('slug', workspaceSlug)
-    .single()
-
-  // Get some stats (we'll implement these queries properly later)
-  const { count: contactsCount } = await supabase
-    .from('contacts')
-    .select('*', { count: 'exact', head: true })
-    .eq('workspace_id', workspace?.id || '')
-
-  const { count: opportunitiesCount } = await supabase
-    .from('opportunities')
-    .select('*', { count: 'exact', head: true })
-    .eq('workspace_id', workspace?.id || '')
-
-  const { count: projectsCount } = await supabase
-    .from('projects')
-    .select('*', { count: 'exact', head: true })
-    .eq('workspace_id', workspace?.id || '')
-
-  const { count: ordersCount } = await supabase
-    .from('orders')
-    .select('*', { count: 'exact', head: true })
-    .eq('workspace_id', workspace?.id || '')
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-slate-900">
-          Bienvenido a {workspace?.name}
+          Bienvenido
         </h1>
         <p className="mt-2 text-slate-600">
           Aquí tienes un resumen de tu negocio
         </p>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard
-          title="Contactos"
-          value={contactsCount || 0}
-          href={`/${workspaceSlug}/contacts`}
-          color="blue"
-        />
-        <StatCard
-          title="Oportunidades"
-          value={opportunitiesCount || 0}
-          href={`/${workspaceSlug}/opportunities`}
-          color="green"
-        />
-        <StatCard
-          title="Proyectos"
-          value={projectsCount || 0}
-          href={`/${workspaceSlug}/projects`}
-          color="purple"
-        />
-        <StatCard
-          title="Órdenes"
-          value={ordersCount || 0}
-          href={`/${workspaceSlug}/orders`}
-          color="orange"
-        />
-      </div>
+      {/* Stats Grid - loads async */}
+      <Suspense fallback={<StatsGridSkeleton />}>
+        <StatsGrid workspaceSlug={workspaceSlug} />
+      </Suspense>
 
-      {/* Quick Actions */}
-      <div className="rounded-lg bg-white p-6 shadow">
+      {/* Quick Actions - shows immediately */}
+      <div className="rounded-lg bg-white p-6 shadow border border-slate-200">
         <h2 className="text-lg font-semibold text-slate-900">
           Acciones Rápidas
         </h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <QuickAction
             title="Nuevo Contacto"
-            href={`/${workspaceSlug}/contacts/new`}
+            href={`/${workspaceSlug}/contactos/new`}
+          />
+          <QuickAction
+            title="Nueva Empresa"
+            href={`/${workspaceSlug}/empresas/new`}
           />
           <QuickAction
             title="Nueva Oportunidad"
-            href={`/${workspaceSlug}/opportunities/new`}
+            href={`/${workspaceSlug}/oportunidades/new`}
           />
           <QuickAction
             title="Nueva Cotización"
-            href={`/${workspaceSlug}/quotes/new`}
-          />
-          <QuickAction
-            title="Nuevo Proyecto"
-            href={`/${workspaceSlug}/projects/new`}
+            href={`/${workspaceSlug}/cotizaciones/new`}
           />
         </div>
       </div>
+    </div>
+  )
+}
 
-      {/* Getting Started */}
-      {contactsCount === 0 && opportunitiesCount === 0 && (
-        <div className="rounded-lg bg-slate-100 p-6">
-          <h2 className="text-lg font-semibold text-slate-600">
-            ¡Comienza a usar TRT Platform!
-          </h2>
-          <p className="mt-2 text-slate-600">
-            Para empezar, te recomendamos:
-          </p>
-          <ul className="mt-4 space-y-2 text-sm text-slate-600">
-            <li className="flex items-center gap-2">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-xs text-white">
-                1
-              </span>
-              <span>
-                Agrega tus primeros contactos en la sección{' '}
-                <a
-                  href={`/${workspaceSlug}/contacts`}
-                  className="font-medium underline"
-                >
-                  Contactos
-                </a>
-              </span>
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-xs text-white">
-                2
-              </span>
-              <span>
-                Crea tu catálogo de productos en{' '}
-                <a
-                  href={`/${workspaceSlug}/products`}
-                  className="font-medium underline"
-                >
-                  Productos
-                </a>
-              </span>
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-xs text-white">
-                3
-              </span>
-              <span>
-                Crea tu primera oportunidad de venta en{' '}
-                <a
-                  href={`/${workspaceSlug}/opportunities`}
-                  className="font-medium underline"
-                >
-                  Oportunidades
-                </a>
-              </span>
-            </li>
-          </ul>
+async function StatsGrid({ workspaceSlug }: { workspaceSlug: string }) {
+  const supabase = await createClient()
+
+  // Get workspace
+  const { data: workspace } = await supabase
+    .from('workspaces')
+    .select('id')
+    .eq('slug', workspaceSlug)
+    .single()
+
+  if (!workspace) {
+    return <div>Workspace not found</div>
+  }
+
+  // Get counts in parallel
+  const [
+    { count: contactsCount },
+    { count: opportunitiesCount },
+    { count: projectsCount },
+    { count: ordersCount }
+  ] = await Promise.all([
+    supabase
+      .from('contacts')
+      .select('*', { count: 'exact', head: true })
+      .eq('workspace_id', workspace.id),
+    supabase
+      .from('opportunities')
+      .select('*', { count: 'exact', head: true })
+      .eq('workspace_id', workspace.id),
+    supabase
+      .from('projects')
+      .select('*', { count: 'exact', head: true })
+      .eq('workspace_id', workspace.id),
+    supabase
+      .from('orders')
+      .select('*', { count: 'exact', head: true })
+      .eq('workspace_id', workspace.id),
+  ])
+
+  return (
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <StatCard
+        title="Contactos"
+        value={contactsCount || 0}
+        href={`/${workspaceSlug}/contactos`}
+      />
+      <StatCard
+        title="Oportunidades"
+        value={opportunitiesCount || 0}
+        href={`/${workspaceSlug}/oportunidades`}
+      />
+      <StatCard
+        title="Proyectos"
+        value={projectsCount || 0}
+        href={`/${workspaceSlug}/proyectos`}
+      />
+      <StatCard
+        title="Órdenes"
+        value={ordersCount || 0}
+        href={`/${workspaceSlug}/ordenes`}
+      />
+    </div>
+  )
+}
+
+function StatsGridSkeleton() {
+  return (
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {[...Array(4)].map((_, i) => (
+        <div key={i} className="rounded-lg bg-white p-6 shadow border border-slate-200">
+          <div className="h-5 w-24 bg-slate-200 rounded animate-pulse mb-3" />
+          <div className="h-8 w-16 bg-slate-200 rounded animate-pulse" />
         </div>
-      )}
+      ))}
     </div>
   )
 }
@@ -163,46 +135,18 @@ function StatCard({
   title,
   value,
   href,
-  color,
 }: {
   title: string
   value: number
   href: string
-  color: 'blue' | 'green' | 'purple' | 'orange'
 }) {
-  const colorClasses = {
-    blue: 'bg-slate-100 text-slate-600',
-    green: 'bg-slate-100 text-slate-600',
-    purple: 'bg-slate-100 text-slate-600',
-    orange: 'bg-slate-100 text-slate-600',
-  }
-
   return (
     <a
       href={href}
-      className="rounded-lg bg-white p-6 shadow transition-shadow hover:shadow-md"
+      className="rounded-lg bg-white p-6 shadow border border-slate-200 transition-shadow hover:shadow-md"
     >
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-sm font-medium text-slate-600">{title}</p>
-          <p className="mt-2 text-3xl font-bold text-slate-900">{value}</p>
-        </div>
-        <div className={`rounded-full p-3 ${colorClasses[color]}`}>
-          <svg
-            className="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-            />
-          </svg>
-        </div>
-      </div>
+      <p className="text-sm font-medium text-slate-600">{title}</p>
+      <p className="mt-2 text-3xl font-bold text-slate-900">{value}</p>
     </a>
   )
 }
@@ -211,7 +155,7 @@ function QuickAction({ title, href }: { title: string; href: string }) {
   return (
     <a
       href={href}
-      className="flex items-center justify-center rounded-lg border-2 border-dashed border-slate-300 p-4 text-center font-medium text-slate-700 transition-colors hover:border-slate-200 hover:bg-slate-100 hover:text-slate-600"
+      className="flex items-center justify-center rounded-lg border-2 border-dashed border-slate-300 p-4 text-center font-medium text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900"
     >
       {title}
     </a>
