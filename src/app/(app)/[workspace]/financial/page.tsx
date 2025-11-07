@@ -3,6 +3,7 @@ import { DollarSign, TrendingUp, TrendingDown, Wallet } from 'lucide-react'
 import { TransactionsTable } from '@/components/financial/transactions-table'
 import { AddTransactionButton } from '@/components/financial/add-transaction-button'
 import { AIAssistant } from '@/components/ai/ai-assistant'
+import { ScanButton } from '@/components/scanner/scan-button'
 
 interface FinancialPageProps {
   params: Promise<{ workspace: string }>
@@ -91,10 +92,18 @@ export default async function FinancialPage({ params, searchParams }: FinancialP
             Control de ingresos y gastos
           </p>
         </div>
-        <AddTransactionButton
-          workspaceSlug={workspaceSlug}
-          workspaceId={workspace.id}
-        />
+        <div className="flex items-center gap-3">
+          <ScanButton
+            type="receipt"
+            workspaceId={workspace.id}
+            workspaceSlug={workspaceSlug}
+            variant="outline"
+          />
+          <AddTransactionButton
+            workspaceSlug={workspaceSlug}
+            workspaceId={workspace.id}
+          />
+        </div>
       </div>
 
       {/* Stats - All Time */}

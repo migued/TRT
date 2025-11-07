@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { Plus, Search } from 'lucide-react'
 import { ContactsTable } from '@/components/contacts/contacts-table'
 import { CreateContactButton } from '@/components/contacts/create-contact-button'
+import { ScanButton } from '@/components/scanner/scan-button'
 
 interface ContactsPageProps {
   params: Promise<{ workspace: string }>
@@ -55,11 +56,19 @@ export default async function ContactsPage({ params, searchParams }: ContactsPag
             Gestiona tus contactos y clientes
           </p>
         </div>
-        <CreateContactButton
-          workspaceSlug={workspaceSlug}
-          workspaceId={workspace.id}
-          variant="primary"
-        />
+        <div className="flex items-center gap-3">
+          <ScanButton
+            type="business-card"
+            workspaceId={workspace.id}
+            workspaceSlug={workspaceSlug}
+            variant="outline"
+          />
+          <CreateContactButton
+            workspaceSlug={workspaceSlug}
+            workspaceId={workspace.id}
+            variant="primary"
+          />
+        </div>
       </div>
 
       {/* Search and Filters */}
