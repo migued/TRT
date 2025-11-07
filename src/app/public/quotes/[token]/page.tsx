@@ -70,10 +70,10 @@ export default async function PublicQuotePage({ params }: PublicQuotePageProps) 
 
   const statusConfig = {
     draft: { label: 'Borrador', color: 'bg-slate-100 text-slate-700' },
-    sent: { label: 'Enviada', color: 'bg-blue-100 text-blue-700' },
-    viewed: { label: 'Vista', color: 'bg-purple-100 text-purple-700' },
-    accepted: { label: 'Aceptada', color: 'bg-green-100 text-green-700' },
-    expired: { label: 'Expirada', color: 'bg-red-100 text-red-700' },
+    sent: { label: 'Enviada', color: 'bg-slate-100 text-slate-600' },
+    viewed: { label: 'Vista', color: 'bg-slate-100 text-slate-600' },
+    accepted: { label: 'Aceptada', color: 'bg-slate-100 text-slate-600' },
+    expired: { label: 'Expirada', color: 'bg-slate-100 text-slate-600' },
   }
 
   const status = statusConfig[quote.status as keyof typeof statusConfig] || statusConfig.draft
@@ -89,7 +89,7 @@ export default async function PublicQuotePage({ params }: PublicQuotePageProps) 
               <p className="text-sm text-slate-600 mt-1">Propuesta Comercial</p>
             </div>
             <div className="flex items-center gap-2">
-              <FileText className="h-5 w-5 text-orange-600" />
+              <FileText className="h-5 w-5 text-slate-600" />
               <span className="text-lg font-semibold text-slate-900">{quote.quote_number}</span>
             </div>
           </div>
@@ -191,7 +191,7 @@ export default async function PublicQuotePage({ params }: PublicQuotePageProps) 
                 {quote.discount > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-600">Descuento:</span>
-                    <span className="font-medium text-red-600">-{formatter.format(quote.discount)}</span>
+                    <span className="font-medium text-slate-600">-{formatter.format(quote.discount)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-sm">
@@ -200,7 +200,7 @@ export default async function PublicQuotePage({ params }: PublicQuotePageProps) 
                 </div>
                 <div className="flex justify-between text-lg font-bold pt-2 border-t border-slate-300">
                   <span className="text-slate-900">Total:</span>
-                  <span className="text-orange-600">{formatter.format(quote.total || 0)}</span>
+                  <span className="text-slate-600">{formatter.format(quote.total || 0)}</span>
                 </div>
               </div>
             </div>

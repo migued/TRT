@@ -55,7 +55,7 @@ export function WebhooksList({ webhooks, workspaceSlug }: WebhooksListProps) {
                 <h3 className="font-semibold text-slate-900">{webhook.name}</h3>
                 <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${
                   webhook.is_active
-                    ? 'bg-green-100 text-green-700'
+                    ? 'bg-slate-100 text-slate-600'
                     : 'bg-slate-100 text-slate-600'
                 }`}>
                   {webhook.is_active ? 'Active' : 'Inactive'}
@@ -94,7 +94,7 @@ export function WebhooksList({ webhooks, workspaceSlug }: WebhooksListProps) {
                 title="Copy URL"
               >
                 {copiedId === `${webhook.id}-url` ? (
-                  <Check className="h-4 w-4 text-green-600" />
+                  <Check className="h-4 w-4 text-slate-600" />
                 ) : (
                   <Copy className="h-4 w-4" />
                 )}
@@ -141,7 +141,7 @@ export function WebhooksList({ webhooks, workspaceSlug }: WebhooksListProps) {
                 title="Copy secret"
               >
                 {copiedId === `${webhook.id}-secret` ? (
-                  <Check className="h-4 w-4 text-green-600" />
+                  <Check className="h-4 w-4 text-slate-600" />
                 ) : (
                   <Copy className="h-4 w-4" />
                 )}
@@ -158,7 +158,7 @@ export function WebhooksList({ webhooks, workspaceSlug }: WebhooksListProps) {
               {(webhook.type === 'incoming' ? webhook.allowed_events : webhook.events)?.map((event: string) => (
                 <span
                   key={event}
-                  className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded"
+                  className="px-2 py-1 text-xs font-medium bg-slate-100 text-slate-600 rounded"
                 >
                   {event}
                 </span>

@@ -110,7 +110,7 @@ export function ProjectTasks({ projectId, workspaceId, initialTasks }: ProjectTa
         <h2 className="text-lg font-semibold text-slate-900">Tareas</h2>
         <button
           onClick={() => setShowAddTask(true)}
-          className="inline-flex items-center gap-1 text-sm text-purple-600 hover:text-purple-700 font-medium"
+          className="inline-flex items-center gap-1 text-sm text-slate-600 hover:text-slate-600 font-medium"
         >
           <Plus className="h-4 w-4" />
           Agregar tarea
@@ -132,7 +132,7 @@ export function ProjectTasks({ projectId, workspaceId, initialTasks }: ProjectTa
             <div className="flex items-center gap-2">
               <button
                 onClick={handleAddTask}
-                className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 text-sm font-medium"
+                className="px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 text-sm font-medium"
               >
                 Agregar
               </button>
@@ -162,7 +162,7 @@ export function ProjectTasks({ projectId, workspaceId, initialTasks }: ProjectTa
                   onClick={() => handleToggleTask(task.id, task.status)}
                   className="flex-shrink-0 mt-0.5"
                 >
-                  <Circle className="h-5 w-5 text-slate-400 hover:text-purple-600" />
+                  <Circle className="h-5 w-5 text-slate-400 hover:text-slate-600" />
                 </button>
                 <div className="flex-1">
                   <p className="text-sm text-slate-900">{task.title}</p>
@@ -172,7 +172,7 @@ export function ProjectTasks({ projectId, workspaceId, initialTasks }: ProjectTa
                 </div>
                 <button
                   onClick={() => handleDeleteTask(task.id)}
-                  className="flex-shrink-0 text-slate-400 hover:text-red-600"
+                  className="flex-shrink-0 text-slate-400 hover:text-slate-600"
                 >
                   <Trash2 className="h-4 w-4" />
                 </button>
@@ -194,14 +194,14 @@ export function ProjectTasks({ projectId, workspaceId, initialTasks }: ProjectTa
                   onClick={() => handleToggleTask(task.id, task.status)}
                   className="flex-shrink-0 mt-0.5"
                 >
-                  <CheckCircle className="h-5 w-5 text-green-600 hover:text-slate-400" />
+                  <CheckCircle className="h-5 w-5 text-slate-600 hover:text-slate-400" />
                 </button>
                 <div className="flex-1">
                   <p className="text-sm text-slate-900 line-through">{task.title}</p>
                 </div>
                 <button
                   onClick={() => handleDeleteTask(task.id)}
-                  className="flex-shrink-0 text-slate-400 hover:text-red-600"
+                  className="flex-shrink-0 text-slate-400 hover:text-slate-600"
                 >
                   <Trash2 className="h-4 w-4" />
                 </button>
@@ -216,7 +216,7 @@ export function ProjectTasks({ projectId, workspaceId, initialTasks }: ProjectTa
             <p className="mt-2 text-sm text-slate-500">No hay tareas aún</p>
             <button
               onClick={() => setShowAddTask(true)}
-              className="mt-4 text-sm text-purple-600 hover:text-purple-700 font-medium"
+              className="mt-4 text-sm text-slate-600 hover:text-slate-600 font-medium"
             >
               Agregar primera tarea
             </button>

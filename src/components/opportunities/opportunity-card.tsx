@@ -61,7 +61,7 @@ export function OpportunityCard({ opportunity, workspaceSlug, onDragStart }: Opp
 
       {/* Amount */}
       <div className="flex items-center gap-2 text-sm text-slate-900 font-semibold mb-3">
-        <DollarSign className="h-4 w-4 text-orange-600" />
+        <DollarSign className="h-4 w-4 text-slate-600" />
         {formatCurrency(opportunity.amount, opportunity.currency)}
       </div>
 

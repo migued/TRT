@@ -30,7 +30,7 @@ export function ScanButton({
         className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
           variant === 'outline'
             ? 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
-            : 'bg-blue-600 text-white hover:bg-blue-700'
+            : 'bg-slate-100 text-white hover:bg-slate-100'
         }`}
       >
         <Scan className="h-4 w-4" />

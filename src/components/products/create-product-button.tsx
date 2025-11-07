@@ -19,8 +19,8 @@ export function CreateProductButton({ workspaceSlug, workspaceId, variant = 'pri
         onClick={() => setIsModalOpen(true)}
         className={
           variant === 'primary'
-            ? 'inline-flex items-center gap-2 rounded-lg bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-700'
-            : 'mt-6 inline-flex items-center gap-2 rounded-lg bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-700'
+            ? 'inline-flex items-center gap-2 rounded-lg bg-slate-100 px-4 py-2 text-sm font-medium text-white hover:bg-slate-100'
+            : 'mt-6 inline-flex items-center gap-2 rounded-lg bg-slate-100 px-4 py-2 text-sm font-medium text-white hover:bg-slate-100'
         }
       >
         <Plus className="h-4 w-4" />

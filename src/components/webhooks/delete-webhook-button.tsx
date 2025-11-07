@@ -41,7 +41,7 @@ export function DeleteWebhookButton({ webhookId, webhookName, workspaceSlug }: D
     <>
       <button
         onClick={() => setShowConfirm(true)}
-        className="p-2 text-red-600 hover:bg-red-50 rounded"
+        className="p-2 text-slate-600 hover:bg-slate-100 rounded"
         title="Delete webhook"
       >
         <Trash2 className="h-4 w-4" />
@@ -66,7 +66,7 @@ export function DeleteWebhookButton({ webhookId, webhookName, workspaceSlug }: D
               <button
                 onClick={handleDelete}
                 disabled={isDeleting}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 disabled:opacity-50"
               >
                 {isDeleting && <Loader2 className="h-4 w-4 animate-spin" />}
                 Delete

@@ -94,7 +94,7 @@ export function ProductsTable({ products, workspaceSlug }: ProductsTableProps) {
                   href={`/${workspaceSlug}/products/${product.id}`}
                   className="block"
                 >
-                  <div className="font-medium text-slate-900 hover:text-purple-600">
+                  <div className="font-medium text-slate-900 hover:text-slate-600">
                     {product.name}
                   </div>
                   {product.description && (
@@ -136,7 +136,7 @@ export function ProductsTable({ products, workspaceSlug }: ProductsTableProps) {
               </td>
               <td className="px-6 py-4">
                 {product.active ? (
-                  <span className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
+                  <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600">
                     Activo
                   </span>
                 ) : (

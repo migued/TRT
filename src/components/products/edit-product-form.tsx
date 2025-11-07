@@ -108,8 +108,8 @@ export function EditProductForm({ product, workspaceSlug }: EditProductFormProps
         </Link>
 
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-purple-100 rounded-lg">
-            <Package className="h-6 w-6 text-purple-600" />
+          <div className="p-2 bg-slate-100 rounded-lg">
+            <Package className="h-6 w-6 text-slate-600" />
           </div>
           <div>
             <h1 className="text-2xl font-bold text-slate-900">Editar Producto</h1>
@@ -121,7 +121,7 @@ export function EditProductForm({ product, workspaceSlug }: EditProductFormProps
       <div className="max-w-3xl">
         <form onSubmit={handleSubmit} className="bg-white rounded-lg border border-slate-200 p-6">
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+            <div className="mb-6 p-4 bg-slate-100 border border-slate-200 rounded-lg text-slate-600 text-sm">
               {error}
             </div>
           )}
@@ -130,7 +130,7 @@ export function EditProductForm({ product, workspaceSlug }: EditProductFormProps
             {/* Name - Required */}
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">
-                Nombre <span className="text-red-500">*</span>
+                Nombre <span className="text-slate-600">*</span>
               </label>
               <input
                 type="text"
@@ -163,7 +163,7 @@ export function EditProductForm({ product, workspaceSlug }: EditProductFormProps
             {/* Type Selection */}
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-3">
-                Tipo de Producto <span className="text-red-500">*</span>
+                Tipo de Producto <span className="text-slate-600">*</span>
               </label>
               <div className="grid grid-cols-3 gap-3">
                 <button
@@ -171,12 +171,12 @@ export function EditProductForm({ product, workspaceSlug }: EditProductFormProps
                   onClick={() => setFormData({ ...formData, type: 'physical' })}
                   className={`p-4 border-2 rounded-lg transition-all ${
                     formData.type === 'physical'
-                      ? 'border-purple-500 bg-purple-50'
+                      ? 'border-slate-200 bg-slate-100'
                       : 'border-slate-200 hover:border-slate-300'
                   }`}
                   disabled={loading}
                 >
-                  <Package className="h-6 w-6 mx-auto mb-2 text-purple-600" />
+                  <Package className="h-6 w-6 mx-auto mb-2 text-slate-600" />
                   <div className="text-sm font-medium text-slate-900">Físico</div>
                 </button>
 
@@ -185,12 +185,12 @@ export function EditProductForm({ product, workspaceSlug }: EditProductFormProps
                   onClick={() => setFormData({ ...formData, type: 'digital' })}
                   className={`p-4 border-2 rounded-lg transition-all ${
                     formData.type === 'digital'
-                      ? 'border-purple-500 bg-purple-50'
+                      ? 'border-slate-200 bg-slate-100'
                       : 'border-slate-200 hover:border-slate-300'
                   }`}
                   disabled={loading}
                 >
-                  <Box className="h-6 w-6 mx-auto mb-2 text-purple-600" />
+                  <Box className="h-6 w-6 mx-auto mb-2 text-slate-600" />
                   <div className="text-sm font-medium text-slate-900">Digital</div>
                 </button>
 
@@ -199,12 +199,12 @@ export function EditProductForm({ product, workspaceSlug }: EditProductFormProps
                   onClick={() => setFormData({ ...formData, type: 'service' })}
                   className={`p-4 border-2 rounded-lg transition-all ${
                     formData.type === 'service'
-                      ? 'border-purple-500 bg-purple-50'
+                      ? 'border-slate-200 bg-slate-100'
                       : 'border-slate-200 hover:border-slate-300'
                   }`}
                   disabled={loading}
                 >
-                  <Zap className="h-6 w-6 mx-auto mb-2 text-purple-600" />
+                  <Zap className="h-6 w-6 mx-auto mb-2 text-slate-600" />
                   <div className="text-sm font-medium text-slate-900">Servicio</div>
                 </button>
               </div>
@@ -344,7 +344,7 @@ export function EditProductForm({ product, workspaceSlug }: EditProductFormProps
                 id="active"
                 checked={formData.active}
                 onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
-                className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-slate-300 rounded"
+                className="h-4 w-4 text-slate-600 focus:ring-purple-500 border-slate-300 rounded"
                 disabled={loading}
               />
               <label htmlFor="active" className="text-sm font-medium text-slate-700 cursor-pointer">
@@ -357,7 +357,7 @@ export function EditProductForm({ product, workspaceSlug }: EditProductFormProps
             <button
               type="submit"
               disabled={loading || !formData.name}
-              className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:bg-slate-300 disabled:cursor-not-allowed font-medium"
+              className="px-6 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 disabled:bg-slate-300 disabled:cursor-not-allowed font-medium"
             >
               {loading ? 'Guardando...' : 'Guardar Cambios'}
             </button>

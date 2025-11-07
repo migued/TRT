@@ -43,7 +43,7 @@ export function MarkQuoteAcceptedButton({ quoteId, workspaceSlug }: MarkQuoteAcc
     <>
       <button
         onClick={() => setShowConfirm(true)}
-        className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+        className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 transition-colors font-medium"
       >
         <CheckCircle className="h-4 w-4" />
         Marcar Aceptada
@@ -69,7 +69,7 @@ export function MarkQuoteAcceptedButton({ quoteId, workspaceSlug }: MarkQuoteAcc
               <button
                 onClick={handleAccept}
                 disabled={loading}
-                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium disabled:opacity-50"
+                className="px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 transition-colors font-medium disabled:opacity-50"
               >
                 {loading ? 'Marcando...' : 'Sí, marcar como aceptada'}
               </button>

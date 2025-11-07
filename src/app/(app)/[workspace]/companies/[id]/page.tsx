@@ -69,8 +69,8 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
 
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-100 rounded-lg">
-              <Building2 className="h-6 w-6 text-blue-600" />
+            <div className="p-2 bg-slate-100 rounded-lg">
+              <Building2 className="h-6 w-6 text-slate-600" />
             </div>
             <div>
               <h1 className="text-2xl font-bold text-slate-900">{company.name}</h1>
@@ -83,7 +83,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
           <div className="flex items-center gap-3">
             <Link
               href={`/${workspaceSlug}/companies/${companyId}/edit`}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100"
             >
               <Edit className="h-4 w-4" />
               Editar
@@ -114,7 +114,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
                       href={company.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-600 hover:text-blue-700"
+                      className="text-slate-600 hover:text-slate-600"
                     >
                       {company.website}
                     </a>
@@ -151,7 +151,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
                         href={company.linkedin_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-3 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors"
+                        className="inline-flex items-center gap-2 px-3 py-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-100 transition-colors"
                       >
                         <Linkedin className="h-4 w-4" />
                         <span className="text-sm">LinkedIn</span>
@@ -162,7 +162,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
                         href={company.facebook_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-3 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors"
+                        className="inline-flex items-center gap-2 px-3 py-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-100 transition-colors"
                       >
                         <Facebook className="h-4 w-4" />
                         <span className="text-sm">Facebook</span>
@@ -212,7 +212,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
               </h2>
               <Link
                 href={`/${workspaceSlug}/contacts/new?company_id=${companyId}`}
-                className="text-sm text-blue-600 hover:text-blue-700"
+                className="text-sm text-slate-600 hover:text-slate-600"
               >
                 + Agregar contacto
               </Link>
@@ -224,7 +224,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
                   <Link
                     key={contact.id}
                     href={`/${workspaceSlug}/contacts/${contact.id}`}
-                    className="block p-4 border border-slate-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors"
+                    className="block p-4 border border-slate-200 rounded-lg hover:border-slate-200 hover:bg-slate-100 transition-colors"
                   >
                     <div className="flex items-start justify-between">
                       <div>
@@ -257,7 +257,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
                 <p className="text-slate-600 mb-4">No hay contactos asociados a esta empresa</p>
                 <Link
                   href={`/${workspaceSlug}/contacts/new?company_id=${companyId}`}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100"
                 >
                   <Users className="h-4 w-4" />
                   Agregar Primer Contacto

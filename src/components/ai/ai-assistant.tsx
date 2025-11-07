@@ -269,8 +269,8 @@ export function AIAssistant({
         >
           <Bot className="h-6 w-6" />
           <span className="absolute -top-1 -right-1 flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-100 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-slate-100"></span>
           </span>
           <div className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-slate-900 text-white text-sm rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
             Asistente IA
@@ -305,7 +305,7 @@ export function AIAssistant({
             {messages.length === 0 && (
               <div className="text-center py-8">
                 <div className="inline-flex p-4 bg-gradient-to-br from-purple-100 to-orange-100 rounded-full mb-4">
-                  <Bot className="h-8 w-8 text-purple-600" />
+                  <Bot className="h-8 w-8 text-slate-600" />
                 </div>
                 <h4 className="font-semibold text-slate-900 mb-2">¡Hola! Soy tu asistente IA</h4>
                 <p className="text-sm text-slate-600 mb-4">
@@ -342,7 +342,7 @@ export function AIAssistant({
                   {message.role === 'assistant' && message.audioUrl && (
                     <button
                       onClick={() => playAudio(message.audioUrl!)}
-                      className="mt-2 flex items-center gap-1 text-xs text-purple-600 hover:text-purple-700"
+                      className="mt-2 flex items-center gap-1 text-xs text-slate-600 hover:text-slate-600"
                     >
                       <Volume2 className="h-3 w-3" />
                       Reproducir respuesta
@@ -355,7 +355,7 @@ export function AIAssistant({
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-slate-100 rounded-lg px-4 py-3">
-                  <Loader2 className="h-4 w-4 text-purple-600 animate-spin" />
+                  <Loader2 className="h-4 w-4 text-slate-600 animate-spin" />
                 </div>
               </div>
             )}
@@ -374,7 +374,7 @@ export function AIAssistant({
               >
                 {voiceEnabled ? (
                   <>
-                    <Volume2 className="h-3 w-3 text-green-600" />
+                    <Volume2 className="h-3 w-3 text-slate-600" />
                     <span>Voz activada</span>
                   </>
                 ) : (
@@ -386,7 +386,7 @@ export function AIAssistant({
               </button>
 
               {isTranscribing && (
-                <span className="text-xs text-purple-600 flex items-center gap-1">
+                <span className="text-xs text-slate-600 flex items-center gap-1">
                   <Loader2 className="h-3 w-3 animate-spin" />
                   Transcribiendo...
                 </span>
@@ -396,7 +396,7 @@ export function AIAssistant({
                 <button
                   type="button"
                   onClick={stopAudio}
-                  className="text-xs text-purple-600 hover:text-purple-700 flex items-center gap-1"
+                  className="text-xs text-slate-600 hover:text-slate-600 flex items-center gap-1"
                 >
                   <Volume2 className="h-3 w-3 animate-pulse" />
                   Reproduciendo...
@@ -415,7 +415,7 @@ export function AIAssistant({
                 disabled={isLoading || isTranscribing}
                 className={`px-3 py-2 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
                   isRecording
-                    ? 'bg-red-500 text-white animate-pulse'
+                    ? 'bg-slate-100 text-white animate-pulse'
                     : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                 }`}
                 title="Mantén presionado para hablar"

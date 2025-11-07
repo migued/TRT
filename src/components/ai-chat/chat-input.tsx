@@ -175,7 +175,7 @@ export default function ChatInput({ conversationId, onMessageSent }: ChatInputPr
               <span className="truncate max-w-[150px]">{file.name}</span>
               <button
                 onClick={() => removeFile(index)}
-                className="text-slate-500 hover:text-red-600"
+                className="text-slate-500 hover:text-slate-600"
               >
                 <X className="h-4 w-4" />
               </button>

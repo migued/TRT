@@ -49,7 +49,7 @@ export function UpdateOrderStatusButton({ orderId, currentStatus, workspaceSlug 
       <button
         onClick={() => handleStatusUpdate(nextStatus)}
         disabled={loading}
-        className="inline-flex items-center gap-2 px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors font-medium disabled:opacity-50"
+        className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 transition-colors font-medium disabled:opacity-50"
       >
         <NextIcon className="h-4 w-4" />
         {loading ? 'Actualizando...' : nextLabel}

@@ -101,22 +101,22 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
 
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <div className={`p-2 rounded-lg ${isWon ? 'bg-green-100' : isLost ? 'bg-red-100' : 'bg-orange-100'}`}>
+            <div className={`p-2 rounded-lg ${isWon ? 'bg-slate-100' : isLost ? 'bg-slate-100' : 'bg-slate-100'}`}>
               {isWon ? (
-                <Trophy className="h-6 w-6 text-green-600" />
+                <Trophy className="h-6 w-6 text-slate-600" />
               ) : isLost ? (
-                <TrendingDown className="h-6 w-6 text-red-600" />
+                <TrendingDown className="h-6 w-6 text-slate-600" />
               ) : (
-                <TrendingUp className="h-6 w-6 text-orange-600" />
+                <TrendingUp className="h-6 w-6 text-slate-600" />
               )}
             </div>
             <div>
               <h1 className="text-2xl font-bold text-slate-900">{opportunity.title}</h1>
               <div className="flex items-center gap-3 mt-2">
                 <span className={`text-sm px-3 py-1 rounded-full font-medium ${
-                  isWon ? 'bg-green-100 text-green-800' :
-                  isLost ? 'bg-red-100 text-red-800' :
-                  'bg-orange-100 text-orange-800'
+                  isWon ? 'bg-slate-100 text-slate-600' :
+                  isLost ? 'bg-slate-100 text-slate-600' :
+                  'bg-slate-100 text-slate-600'
                 }`}>
                   {isWon ? 'Ganada' : isLost ? 'Perdida' : opportunity.stage}
                 </span>
@@ -136,7 +136,7 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
                 />
                 <Link
                   href={`/${workspaceSlug}/opportunities/${opportunityId}/edit`}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100"
                 >
                   <Edit className="h-4 w-4" />
                   Editar
@@ -208,11 +208,11 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
               {/* Won/Lost Info */}
               {isWon && (
                 <div className="pt-4 border-t border-slate-200">
-                  <div className="flex items-start gap-3 p-4 bg-green-50 rounded-lg">
-                    <Trophy className="h-5 w-5 text-green-600 mt-0.5" />
+                  <div className="flex items-start gap-3 p-4 bg-slate-100 rounded-lg">
+                    <Trophy className="h-5 w-5 text-slate-600 mt-0.5" />
                     <div>
-                      <p className="text-sm font-medium text-green-900">Oportunidad Ganada</p>
-                      <p className="text-sm text-green-700 mt-1">
+                      <p className="text-sm font-medium text-slate-600">Oportunidad Ganada</p>
+                      <p className="text-sm text-slate-600 mt-1">
                         {formatDate(opportunity.won_at)}
                       </p>
                     </div>
@@ -222,15 +222,15 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
 
               {isLost && (
                 <div className="pt-4 border-t border-slate-200">
-                  <div className="flex items-start gap-3 p-4 bg-red-50 rounded-lg">
-                    <TrendingDown className="h-5 w-5 text-red-600 mt-0.5" />
+                  <div className="flex items-start gap-3 p-4 bg-slate-100 rounded-lg">
+                    <TrendingDown className="h-5 w-5 text-slate-600 mt-0.5" />
                     <div>
-                      <p className="text-sm font-medium text-red-900">Oportunidad Perdida</p>
-                      <p className="text-sm text-red-700 mt-1">
+                      <p className="text-sm font-medium text-slate-600">Oportunidad Perdida</p>
+                      <p className="text-sm text-slate-600 mt-1">
                         {formatDate(opportunity.lost_at)}
                       </p>
                       {opportunity.lost_reason && (
-                        <p className="text-sm text-red-700 mt-2">
+                        <p className="text-sm text-slate-600 mt-2">
                           Razón: {opportunity.lost_reason}
                         </p>
                       )}
@@ -255,7 +255,7 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
                   </div>
                   <Link
                     href={`/${workspaceSlug}/contacts/${opportunity.contacts.id}`}
-                    className="block p-4 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-colors"
+                    className="block p-4 border border-slate-200 rounded-lg hover:border-slate-200 hover:bg-slate-100 transition-colors"
                   >
                     <p className="font-medium text-slate-900">{opportunity.contacts.name}</p>
                     {opportunity.contacts.position && (
@@ -265,7 +265,7 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
                       {opportunity.contacts.email && (
                         <div className="flex items-center gap-2 text-slate-600">
                           <Mail className="h-4 w-4" />
-                          <a href={`mailto:${opportunity.contacts.email}`} className="hover:text-orange-600">
+                          <a href={`mailto:${opportunity.contacts.email}`} className="hover:text-slate-600">
                             {opportunity.contacts.email}
                           </a>
                         </div>
@@ -273,7 +273,7 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
                       {opportunity.contacts.phone && (
                         <div className="flex items-center gap-2 text-slate-600">
                           <Phone className="h-4 w-4" />
-                          <a href={`tel:${opportunity.contacts.phone}`} className="hover:text-orange-600">
+                          <a href={`tel:${opportunity.contacts.phone}`} className="hover:text-slate-600">
                             {opportunity.contacts.phone}
                           </a>
                         </div>
@@ -293,7 +293,7 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
                   <div className="p-4 border border-slate-200 rounded-lg">
                     <Link
                       href={`/${workspaceSlug}/companies/${opportunity.contacts.companies.id}`}
-                      className="font-medium text-slate-900 hover:text-orange-600"
+                      className="font-medium text-slate-900 hover:text-slate-600"
                     >
                       {opportunity.contacts.companies.name}
                     </Link>
@@ -302,7 +302,7 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
                         href={opportunity.contacts.companies.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-blue-600 hover:text-blue-700 mt-1 block"
+                        className="text-sm text-slate-600 hover:text-slate-600 mt-1 block"
                       >
                         {opportunity.contacts.companies.website}
                       </a>

@@ -224,8 +224,8 @@ export default function AIChatInterface({
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col h-full">
         {error && (
-          <div className="p-4 bg-red-50 border-b border-red-200">
-            <div className="flex items-center gap-2 text-red-700">
+          <div className="p-4 bg-slate-100 border-b border-slate-200">
+            <div className="flex items-center gap-2 text-slate-600">
               <AlertCircle className="h-5 w-5" />
               <span>{error}</span>
             </div>

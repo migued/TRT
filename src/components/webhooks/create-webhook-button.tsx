@@ -94,7 +94,7 @@ export function CreateWebhookButton({ workspaceSlug, workspaceId }: CreateWebhoo
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+        className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100"
       >
         <Plus className="h-4 w-4" />
         Create Webhook
@@ -109,7 +109,7 @@ export function CreateWebhookButton({ workspaceSlug, workspaceId }: CreateWebhoo
 
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+                <div className="bg-slate-100 border border-slate-200 text-slate-600 px-4 py-3 rounded">
                   {error}
                 </div>
               )}
@@ -125,7 +125,7 @@ export function CreateWebhookButton({ workspaceSlug, workspaceId }: CreateWebhoo
                     onClick={() => setFormData((prev) => ({ ...prev, type: 'incoming' }))}
                     className={`p-4 border-2 rounded-lg text-left transition-colors ${
                       formData.type === 'incoming'
-                        ? 'border-blue-500 bg-blue-50'
+                        ? 'border-slate-200 bg-slate-100'
                         : 'border-slate-200 hover:border-slate-300'
                     }`}
                   >
@@ -139,7 +139,7 @@ export function CreateWebhookButton({ workspaceSlug, workspaceId }: CreateWebhoo
                     onClick={() => setFormData((prev) => ({ ...prev, type: 'outgoing' }))}
                     className={`p-4 border-2 rounded-lg text-left transition-colors ${
                       formData.type === 'outgoing'
-                        ? 'border-blue-500 bg-blue-50'
+                        ? 'border-slate-200 bg-slate-100'
                         : 'border-slate-200 hover:border-slate-300'
                     }`}
                   >
@@ -241,7 +241,7 @@ export function CreateWebhookButton({ workspaceSlug, workspaceId }: CreateWebhoo
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 disabled:opacity-50"
                 >
                   {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
                   Create Webhook

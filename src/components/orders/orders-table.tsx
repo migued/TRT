@@ -30,10 +30,10 @@ interface OrdersTableProps {
 }
 
 const statusConfig = {
-  pending: { label: 'Pendiente', color: 'bg-yellow-100 text-yellow-700' },
-  in_progress: { label: 'En Proceso', color: 'bg-blue-100 text-blue-700' },
-  completed: { label: 'Completada', color: 'bg-green-100 text-green-700' },
-  cancelled: { label: 'Cancelada', color: 'bg-red-100 text-red-700' },
+  pending: { label: 'Pendiente', color: 'bg-slate-100 text-slate-600' },
+  in_progress: { label: 'En Proceso', color: 'bg-slate-100 text-slate-600' },
+  completed: { label: 'Completada', color: 'bg-slate-100 text-slate-600' },
+  cancelled: { label: 'Cancelada', color: 'bg-slate-100 text-slate-600' },
 }
 
 export function OrdersTable({ orders, workspaceSlug, currentStatus }: OrdersTableProps) {
@@ -71,7 +71,7 @@ export function OrdersTable({ orders, workspaceSlug, currentStatus }: OrdersTabl
               className={`
                 px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap
                 ${currentStatus === tab.value
-                  ? 'border-orange-500 text-orange-600'
+                  ? 'border-slate-200 text-slate-600'
                   : 'border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300'
                 }
               `}
@@ -120,7 +120,7 @@ export function OrdersTable({ orders, workspaceSlug, currentStatus }: OrdersTabl
                     <td className="px-6 py-4">
                       <Link
                         href={`/${workspaceSlug}/orders/${order.id}`}
-                        className="font-medium text-orange-600 hover:text-orange-700 flex items-center gap-2"
+                        className="font-medium text-slate-600 hover:text-slate-600 flex items-center gap-2"
                       >
                         <ShoppingCart className="h-4 w-4" />
                         {order.order_number}
@@ -142,7 +142,7 @@ export function OrdersTable({ orders, workspaceSlug, currentStatus }: OrdersTabl
                       {order.quotes ? (
                         <Link
                           href={`/${workspaceSlug}/quotes/${order.quotes.id}`}
-                          className="text-sm text-orange-600 hover:text-orange-700"
+                          className="text-sm text-slate-600 hover:text-slate-600"
                         >
                           {order.quotes.quote_number}
                         </Link>
@@ -164,7 +164,7 @@ export function OrdersTable({ orders, workspaceSlug, currentStatus }: OrdersTabl
                     <td className="px-6 py-4 text-center">
                       <Link
                         href={`/${workspaceSlug}/orders/${order.id}`}
-                        className="inline-flex items-center gap-1 text-sm text-slate-600 hover:text-orange-600"
+                        className="inline-flex items-center gap-1 text-sm text-slate-600 hover:text-slate-600"
                       >
                         <Eye className="h-4 w-4" />
                         Ver

@@ -113,7 +113,7 @@ export default function OnboardingPage() {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent mx-auto"></div>
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-200 border-t-transparent mx-auto"></div>
           <p className="mt-4 text-slate-600">Cargando...</p>
         </div>
       </div>
@@ -135,7 +135,7 @@ export default function OnboardingPage() {
         <div className="rounded-lg bg-white p-8 shadow-lg dark:bg-slate-800">
           <form onSubmit={handleCreateWorkspace} className="space-y-6">
             {error && (
-              <div className="rounded-md bg-red-50 p-4 text-sm text-red-800 dark:bg-red-900/20 dark:text-red-400">
+              <div className="rounded-md bg-slate-100 p-4 text-sm text-slate-600 dark:bg-slate-100/20 dark:text-slate-600">
                 {error}
               </div>
             )}
@@ -153,7 +153,7 @@ export default function OnboardingPage() {
                 value={workspaceName}
                 onChange={(e) => handleWorkspaceNameChange(e.target.value)}
                 required
-                className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white"
+                className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-slate-200 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white"
                 placeholder="Mi Empresa"
               />
               <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
@@ -179,7 +179,7 @@ export default function OnboardingPage() {
                   onChange={(e) => setWorkspaceSlug(e.target.value)}
                   required
                   pattern="[a-z0-9-]+"
-                  className="block w-full rounded-r-md border border-slate-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white"
+                  className="block w-full rounded-r-md border border-slate-300 px-3 py-2 focus:border-slate-200 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-700 dark:text-white"
                   placeholder="mi-empresa"
                 />
               </div>
@@ -191,18 +191,18 @@ export default function OnboardingPage() {
             <button
               type="submit"
               disabled={loading || !workspaceName || !workspaceSlug}
-              className="w-full rounded-md bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full rounded-md bg-slate-100 px-4 py-2 font-medium text-white hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Creando workspace...' : 'Crear Workspace'}
             </button>
           </form>
         </div>
 
-        <div className="mt-6 rounded-lg bg-blue-50 p-4 dark:bg-blue-900/20">
-          <h3 className="font-medium text-blue-900 dark:text-blue-300">
+        <div className="mt-6 rounded-lg bg-slate-100 p-4 dark:bg-slate-100/20">
+          <h3 className="font-medium text-slate-600 dark:text-slate-600">
             ¿Qué incluye tu workspace?
           </h3>
-          <ul className="mt-2 space-y-1 text-sm text-blue-800 dark:text-blue-400">
+          <ul className="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-600">
             <li>✓ CRM para gestionar contactos y empresas</li>
             <li>✓ Pipeline de ventas con oportunidades</li>
             <li>✓ Gestión de proyectos y tareas</li>

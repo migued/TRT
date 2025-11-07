@@ -73,7 +73,7 @@ export default async function CompaniesPage({ params, searchParams }: CompaniesP
                 name="search"
                 defaultValue={search}
                 placeholder="Buscar por nombre o sitio web..."
-                className="w-full rounded-lg border border-slate-300 pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="w-full rounded-lg border border-slate-300 pl-10 pr-4 py-2 focus:border-slate-200 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
             </div>
           </div>

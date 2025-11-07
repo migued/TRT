@@ -52,7 +52,7 @@ export function CompaniesTable({ companies, workspaceSlug }: CompaniesTableProps
                 <td className="px-6 py-4">
                   <Link
                     href={`/${workspaceSlug}/companies/${company.id}`}
-                    className="font-medium text-slate-900 hover:text-blue-600"
+                    className="font-medium text-slate-900 hover:text-slate-600"
                   >
                     {company.name}
                   </Link>
@@ -72,7 +72,7 @@ export function CompaniesTable({ companies, workspaceSlug }: CompaniesTableProps
                         href={company.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:text-blue-600"
+                        className="hover:text-slate-600"
                       >
                         {company.website.replace(/^https?:\/\//, '').replace(/\/$/, '')}
                       </a>

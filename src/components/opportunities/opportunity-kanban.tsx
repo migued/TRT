@@ -94,8 +94,8 @@ export function OpportunityKanban({ stages, opportunities: initialOpportunities,
   }
 
   const getStageColor = (stage: Stage) => {
-    if (stage.stage_type === 'won') return 'bg-green-100 border-green-300'
-    if (stage.stage_type === 'lost') return 'bg-red-100 border-red-300'
+    if (stage.stage_type === 'won') return 'bg-slate-100 border-slate-200'
+    if (stage.stage_type === 'lost') return 'bg-slate-100 border-slate-200'
     return stage.color ? `bg-${stage.color}-100 border-${stage.color}-300` : 'bg-slate-100 border-slate-300'
   }
 

@@ -59,7 +59,7 @@ export function TransactionsTable({ transactions, workspaceSlug, currentType }: 
               className={`
                 px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap
                 ${currentType === tab.value
-                  ? 'border-orange-500 text-orange-600'
+                  ? 'border-slate-200 text-slate-600'
                   : 'border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300'
                 }
               `}
@@ -105,16 +105,16 @@ export function TransactionsTable({ transactions, workspaceSlug, currentType }: 
                   <td className="px-6 py-4">
                     <div className="flex items-start gap-2">
                       {transaction.type === 'income' ? (
-                        <TrendingUp className="h-4 w-4 text-green-600 mt-0.5" />
+                        <TrendingUp className="h-4 w-4 text-slate-600 mt-0.5" />
                       ) : (
-                        <TrendingDown className="h-4 w-4 text-red-600 mt-0.5" />
+                        <TrendingDown className="h-4 w-4 text-slate-600 mt-0.5" />
                       )}
                       <div>
                         <p className="text-sm font-medium text-slate-900">{transaction.description}</p>
                         {transaction.orders && (
                           <Link
                             href={`/${workspaceSlug}/orders/${transaction.orders.id}`}
-                            className="text-xs text-orange-600 hover:text-orange-700"
+                            className="text-xs text-slate-600 hover:text-slate-600"
                           >
                             Orden: {transaction.orders.order_number}
                           </Link>
@@ -122,7 +122,7 @@ export function TransactionsTable({ transactions, workspaceSlug, currentType }: 
                         {transaction.projects && (
                           <Link
                             href={`/${workspaceSlug}/projects/${transaction.projects.id}`}
-                            className="text-xs text-purple-600 hover:text-purple-700"
+                            className="text-xs text-slate-600 hover:text-slate-600"
                           >
                             Proyecto: {transaction.projects.title}
                           </Link>
@@ -145,7 +145,7 @@ export function TransactionsTable({ transactions, workspaceSlug, currentType }: 
                     {transaction.payment_method || '-'}
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <span className={`font-semibold ${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
+                    <span className={`font-semibold ${transaction.type === 'income' ? 'text-slate-600' : 'text-slate-600'}`}>
                       {transaction.type === 'income' ? '+' : '-'}{formatter.format(transaction.amount)}
                     </span>
                   </td>

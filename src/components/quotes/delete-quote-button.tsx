@@ -39,7 +39,7 @@ export function DeleteQuoteButton({ quoteId, quoteNumber, workspaceSlug }: Delet
     <>
       <button
         onClick={() => setShowConfirm(true)}
-        className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition-colors font-medium"
+        className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-100 transition-colors font-medium"
       >
         <Trash2 className="h-4 w-4" />
         Eliminar
@@ -68,7 +68,7 @@ export function DeleteQuoteButton({ quoteId, quoteNumber, workspaceSlug }: Delet
               <button
                 onClick={handleDelete}
                 disabled={loading}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium disabled:opacity-50"
+                className="px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 transition-colors font-medium disabled:opacity-50"
               >
                 {loading ? 'Eliminando...' : 'Sí, eliminar'}
               </button>

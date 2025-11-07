@@ -49,7 +49,7 @@ export function UpdateProjectStatusButton({ projectId, workspaceSlug }: UpdatePr
     <div className="relative">
       <button
         onClick={() => setShowMenu(!showMenu)}
-        className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium"
+        className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 transition-colors font-medium"
       >
         Actualizar Estado
       </button>
@@ -61,7 +61,7 @@ export function UpdateProjectStatusButton({ projectId, workspaceSlug }: UpdatePr
             disabled={loading}
             className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2"
           >
-            <CheckCircle className="h-4 w-4 text-green-600" />
+            <CheckCircle className="h-4 w-4 text-slate-600" />
             Completar
           </button>
           <button
@@ -69,7 +69,7 @@ export function UpdateProjectStatusButton({ projectId, workspaceSlug }: UpdatePr
             disabled={loading}
             className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2"
           >
-            <Pause className="h-4 w-4 text-yellow-600" />
+            <Pause className="h-4 w-4 text-slate-600" />
             Pausar
           </button>
           <button
@@ -77,7 +77,7 @@ export function UpdateProjectStatusButton({ projectId, workspaceSlug }: UpdatePr
             disabled={loading}
             className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2"
           >
-            <XCircle className="h-4 w-4 text-red-600" />
+            <XCircle className="h-4 w-4 text-slate-600" />
             Cancelar
           </button>
         </div>

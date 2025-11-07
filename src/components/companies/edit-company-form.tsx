@@ -88,8 +88,8 @@ export function EditCompanyForm({ company, workspaceSlug }: EditCompanyFormProps
         </Link>
 
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-blue-100 rounded-lg">
-            <Building2 className="h-6 w-6 text-blue-600" />
+          <div className="p-2 bg-slate-100 rounded-lg">
+            <Building2 className="h-6 w-6 text-slate-600" />
           </div>
           <div>
             <h1 className="text-2xl font-bold text-slate-900">Editar Empresa</h1>
@@ -101,7 +101,7 @@ export function EditCompanyForm({ company, workspaceSlug }: EditCompanyFormProps
       <div className="max-w-2xl">
         <form onSubmit={handleSubmit} className="bg-white rounded-lg border border-slate-200 p-6">
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+            <div className="mb-6 p-4 bg-slate-100 border border-slate-200 rounded-lg text-slate-600 text-sm">
               {error}
             </div>
           )}
@@ -110,7 +110,7 @@ export function EditCompanyForm({ company, workspaceSlug }: EditCompanyFormProps
             {/* Name - Required */}
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">
-                Nombre de la empresa <span className="text-red-500">*</span>
+                Nombre de la empresa <span className="text-slate-600">*</span>
               </label>
               <input
                 type="text"
@@ -180,7 +180,7 @@ export function EditCompanyForm({ company, workspaceSlug }: EditCompanyFormProps
               </label>
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <Linkedin className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                  <Linkedin className="h-5 w-5 text-slate-600 flex-shrink-0" />
                   <input
                     type="url"
                     value={formData.linkedin_url}
@@ -191,7 +191,7 @@ export function EditCompanyForm({ company, workspaceSlug }: EditCompanyFormProps
                   />
                 </div>
                 <div className="flex items-center gap-2">
-                  <Facebook className="h-5 w-5 text-blue-500 flex-shrink-0" />
+                  <Facebook className="h-5 w-5 text-slate-600 flex-shrink-0" />
                   <input
                     type="url"
                     value={formData.facebook_url}
@@ -247,7 +247,7 @@ export function EditCompanyForm({ company, workspaceSlug }: EditCompanyFormProps
             <button
               type="submit"
               disabled={loading || !formData.name}
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed font-medium"
+              className="px-6 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 disabled:bg-slate-300 disabled:cursor-not-allowed font-medium"
             >
               {loading ? 'Guardando...' : 'Guardar Cambios'}
             </button>

@@ -53,7 +53,7 @@ export function ContactsTable({ contacts, workspaceSlug }: ContactsTableProps) {
               <td className="px-6 py-4">
                 <Link
                   href={`/${workspaceSlug}/contacts/${contact.id}`}
-                  className="font-medium text-slate-900 hover:text-blue-600"
+                  className="font-medium text-slate-900 hover:text-slate-600"
                 >
                   {contact.name}
                 </Link>
@@ -75,7 +75,7 @@ export function ContactsTable({ contacts, workspaceSlug }: ContactsTableProps) {
                       <Mail className="h-4 w-4" />
                       <a
                         href={`mailto:${contact.email}`}
-                        className="hover:text-blue-600"
+                        className="hover:text-slate-600"
                       >
                         {contact.email}
                       </a>
@@ -86,7 +86,7 @@ export function ContactsTable({ contacts, workspaceSlug }: ContactsTableProps) {
                       <Phone className="h-4 w-4" />
                       <a
                         href={`tel:${contact.phone}`}
-                        className="hover:text-blue-600"
+                        className="hover:text-slate-600"
                       >
                         {contact.phone}
                       </a>
@@ -103,7 +103,7 @@ export function ContactsTable({ contacts, workspaceSlug }: ContactsTableProps) {
                     {contact.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="inline-flex items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800"
+                        className="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600"
                       >
                         {tag}
                       </span>

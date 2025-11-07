@@ -139,7 +139,7 @@ export function ProjectKanban({ stages, projects: initialProjects, workspaceSlug
                       )}
 
                       {project.due_date && (
-                        <div className={`flex items-center gap-1 ${isOverdue ? 'text-red-600' : ''}`}>
+                        <div className={`flex items-center gap-1 ${isOverdue ? 'text-slate-600' : ''}`}>
                           <Calendar className="h-3 w-3" />
                           <span>{formatDate(project.due_date)}</span>
                         </div>

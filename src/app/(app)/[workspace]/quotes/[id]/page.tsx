@@ -79,10 +79,10 @@ export default async function QuoteDetailPage({ params }: QuoteDetailPageProps) 
 
   const statusConfig = {
     draft: { label: 'Borrador', color: 'bg-slate-100 text-slate-700' },
-    sent: { label: 'Enviada', color: 'bg-blue-100 text-blue-700' },
-    viewed: { label: 'Vista', color: 'bg-purple-100 text-purple-700' },
-    accepted: { label: 'Aceptada', color: 'bg-green-100 text-green-700' },
-    expired: { label: 'Expirada', color: 'bg-red-100 text-red-700' },
+    sent: { label: 'Enviada', color: 'bg-slate-100 text-slate-600' },
+    viewed: { label: 'Vista', color: 'bg-slate-100 text-slate-600' },
+    accepted: { label: 'Aceptada', color: 'bg-slate-100 text-slate-600' },
+    expired: { label: 'Expirada', color: 'bg-slate-100 text-slate-600' },
   }
 
   const status = statusConfig[quote.status as keyof typeof statusConfig] || statusConfig.draft
@@ -180,7 +180,7 @@ ${workspace.name}`
             {quote.status === 'accepted' && existingOrder && (
               <Link
                 href={`/${workspaceSlug}/orders/${existingOrder.id}`}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 transition-colors font-medium"
               >
                 <CheckCircle className="h-4 w-4" />
                 Ver Orden {existingOrder.order_number}
@@ -247,7 +247,7 @@ ${workspace.name}`
                 {quote.discount > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-600">Descuento:</span>
-                    <span className="font-medium text-red-600">-{formatter.format(quote.discount)}</span>
+                    <span className="font-medium text-slate-600">-{formatter.format(quote.discount)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-sm">
@@ -256,7 +256,7 @@ ${workspace.name}`
                 </div>
                 <div className="flex justify-between text-lg font-bold pt-2 border-t border-slate-300">
                   <span className="text-slate-900">Total:</span>
-                  <span className="text-orange-600">{formatter.format(quote.total || 0)}</span>
+                  <span className="text-slate-600">{formatter.format(quote.total || 0)}</span>
                 </div>
               </div>
             </div>
@@ -289,7 +289,7 @@ ${workspace.name}`
                 <div>
                   <Link
                     href={`/${workspaceSlug}/contacts/${contact.id}`}
-                    className="flex items-center gap-2 text-orange-600 hover:text-orange-700 font-medium"
+                    className="flex items-center gap-2 text-slate-600 hover:text-slate-600 font-medium"
                   >
                     <User className="h-4 w-4" />
                     {contact.name}
@@ -312,7 +312,7 @@ ${workspace.name}`
                   <div className="pt-4 border-t border-slate-200">
                     <Link
                       href={`/${workspaceSlug}/companies/${company.id}`}
-                      className="flex items-center gap-2 text-orange-600 hover:text-orange-700 font-medium"
+                      className="flex items-center gap-2 text-slate-600 hover:text-slate-600 font-medium"
                     >
                       <Building2 className="h-4 w-4" />
                       {company.name}
@@ -322,7 +322,7 @@ ${workspace.name}`
                         href={company.website.startsWith('http') ? company.website : `https://${company.website}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm text-slate-600 hover:text-orange-600 mt-2"
+                        className="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-600 mt-2"
                       >
                         <ExternalLink className="h-3 w-3" />
                         {company.website}
@@ -372,7 +372,7 @@ ${workspace.name}`
                 <div>
                   <p className="text-xs text-slate-500 mb-1">Aceptada</p>
                   <div className="flex items-center gap-2 text-sm text-slate-900">
-                    <CheckCircle className="h-4 w-4 text-green-600" />
+                    <CheckCircle className="h-4 w-4 text-slate-600" />
                     {formatDate(quote.accepted_at)}
                   </div>
                 </div>
@@ -385,7 +385,7 @@ ${workspace.name}`
                     href={`/${workspaceSlug}/public/quotes/${quote.public_token}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-orange-600 hover:text-orange-700 flex items-center gap-1"
+                    className="text-sm text-slate-600 hover:text-slate-600 flex items-center gap-1"
                   >
                     <ExternalLink className="h-3 w-3" />
                     Ver enlace
@@ -412,7 +412,7 @@ ${workspace.name}`
               {quote.sent_at && (
                 <div className="flex gap-3">
                   <div className="flex-shrink-0">
-                    <div className="w-2 h-2 mt-2 rounded-full bg-blue-400"></div>
+                    <div className="w-2 h-2 mt-2 rounded-full bg-slate-100"></div>
                   </div>
                   <div>
                     <p className="text-sm font-medium text-slate-900">Enviada al cliente</p>
@@ -424,7 +424,7 @@ ${workspace.name}`
               {quote.viewed_at && (
                 <div className="flex gap-3">
                   <div className="flex-shrink-0">
-                    <div className="w-2 h-2 mt-2 rounded-full bg-purple-400"></div>
+                    <div className="w-2 h-2 mt-2 rounded-full bg-slate-100"></div>
                   </div>
                   <div>
                     <p className="text-sm font-medium text-slate-900">Vista por el cliente</p>
@@ -436,7 +436,7 @@ ${workspace.name}`
               {quote.accepted_at && (
                 <div className="flex gap-3">
                   <div className="flex-shrink-0">
-                    <div className="w-2 h-2 mt-2 rounded-full bg-green-400"></div>
+                    <div className="w-2 h-2 mt-2 rounded-full bg-slate-100"></div>
                   </div>
                   <div>
                     <p className="text-sm font-medium text-slate-900">Aceptada</p>

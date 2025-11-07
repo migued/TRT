@@ -88,10 +88,10 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
   }
 
   const statusConfig = {
-    active: { label: 'Activo', color: 'bg-blue-100 text-blue-700' },
-    completed: { label: 'Completado', color: 'bg-green-100 text-green-700' },
-    on_hold: { label: 'En Pausa', color: 'bg-yellow-100 text-yellow-700' },
-    cancelled: { label: 'Cancelado', color: 'bg-red-100 text-red-700' },
+    active: { label: 'Activo', color: 'bg-slate-100 text-slate-600' },
+    completed: { label: 'Completado', color: 'bg-slate-100 text-slate-600' },
+    on_hold: { label: 'En Pausa', color: 'bg-slate-100 text-slate-600' },
+    cancelled: { label: 'Cancelado', color: 'bg-slate-100 text-slate-600' },
   }
 
   const status = statusConfig[project.status as keyof typeof statusConfig] || statusConfig.active
@@ -144,7 +144,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
         </div>
         <div className="w-full bg-slate-200 rounded-full h-2">
           <div
-            className="bg-purple-600 h-2 rounded-full transition-all"
+            className="bg-slate-100 h-2 rounded-full transition-all"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -178,7 +178,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               <div>
                 <Link
                   href={`/${workspaceSlug}/contacts/${contact.id}`}
-                  className="flex items-center gap-2 text-purple-600 hover:text-purple-700 font-medium"
+                  className="flex items-center gap-2 text-slate-600 hover:text-slate-600 font-medium"
                 >
                   <User className="h-4 w-4" />
                   {contact.name}
@@ -186,7 +186,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                 {company && (
                   <Link
                     href={`/${workspaceSlug}/companies/${company.id}`}
-                    className="flex items-center gap-2 text-sm text-slate-600 hover:text-purple-600 mt-2"
+                    className="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-600 mt-2"
                   >
                     <Building2 className="h-3 w-3" />
                     {company.name}
@@ -204,7 +204,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               <h3 className="text-sm font-semibold text-slate-900 mb-4">Orden Origen</h3>
               <Link
                 href={`/${workspaceSlug}/orders/${project.orders.id}`}
-                className="flex items-center gap-2 text-purple-600 hover:text-purple-700"
+                className="flex items-center gap-2 text-slate-600 hover:text-slate-600"
               >
                 <ShoppingCart className="h-4 w-4" />
                 {project.orders.order_number}
@@ -243,7 +243,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                 <div>
                   <p className="text-xs text-slate-500 mb-1">Completado</p>
                   <div className="flex items-center gap-2 text-sm text-slate-900">
-                    <CheckCircle className="h-4 w-4 text-green-600" />
+                    <CheckCircle className="h-4 w-4 text-slate-600" />
                     {formatDate(project.completed_at)}
                   </div>
                 </div>
@@ -258,11 +258,11 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-slate-600">Total Gastos</span>
-                  <span className="font-semibold text-red-600">{formatter.format(totalExpenses)}</span>
+                  <span className="font-semibold text-slate-600">{formatter.format(totalExpenses)}</span>
                 </div>
                 <Link
                   href={`/${workspaceSlug}/financial?project=${project.id}`}
-                  className="block text-sm text-purple-600 hover:text-purple-700"
+                  className="block text-sm text-slate-600 hover:text-slate-600"
                 >
                   Ver todas las transacciones →
                 </Link>

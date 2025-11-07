@@ -85,8 +85,8 @@ export default async function OpportunitiesPage({ params }: OpportunitiesPagePro
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="bg-white rounded-lg border border-slate-200 p-6">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-orange-100 rounded-lg">
-              <DollarSign className="h-5 w-5 text-orange-600" />
+            <div className="p-2 bg-slate-100 rounded-lg">
+              <DollarSign className="h-5 w-5 text-slate-600" />
             </div>
             <div>
               <p className="text-sm text-slate-600">Valor Total</p>
@@ -97,8 +97,8 @@ export default async function OpportunitiesPage({ params }: OpportunitiesPagePro
 
         <div className="bg-white rounded-lg border border-slate-200 p-6">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-orange-100 rounded-lg">
-              <Plus className="h-5 w-5 text-orange-600" />
+            <div className="p-2 bg-slate-100 rounded-lg">
+              <Plus className="h-5 w-5 text-slate-600" />
             </div>
             <div>
               <p className="text-sm text-slate-600">Oportunidades Activas</p>
@@ -109,8 +109,8 @@ export default async function OpportunitiesPage({ params }: OpportunitiesPagePro
 
         <div className="bg-white rounded-lg border border-slate-200 p-6">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-green-100 rounded-lg">
-              <DollarSign className="h-5 w-5 text-green-600" />
+            <div className="p-2 bg-slate-100 rounded-lg">
+              <DollarSign className="h-5 w-5 text-slate-600" />
             </div>
             <div>
               <p className="text-sm text-slate-600">Ganadas este mes</p>

@@ -49,7 +49,7 @@ export function MarkOpportunityWonButton({ opportunityId, opportunityTitle, work
     <>
       <button
         onClick={() => setShowConfirm(true)}
-        className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+        className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100"
       >
         <Trophy className="h-4 w-4" />
         Marcar como Ganada
@@ -60,8 +60,8 @@ export function MarkOpportunityWonButton({ opportunityId, opportunityTitle, work
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg max-w-md w-full p-6">
             <div className="flex items-start gap-4 mb-4">
-              <div className="p-2 bg-green-100 rounded-lg">
-                <Trophy className="h-6 w-6 text-green-600" />
+              <div className="p-2 bg-slate-100 rounded-lg">
+                <Trophy className="h-6 w-6 text-slate-600" />
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-slate-900 mb-2">
@@ -77,7 +77,7 @@ export function MarkOpportunityWonButton({ opportunityId, opportunityTitle, work
             </div>
 
             {error && (
-              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+              <div className="mb-4 p-3 bg-slate-100 border border-slate-200 rounded-lg text-slate-600 text-sm">
                 {error}
               </div>
             )}
@@ -93,7 +93,7 @@ export function MarkOpportunityWonButton({ opportunityId, opportunityTitle, work
               <button
                 onClick={handleMarkWon}
                 disabled={loading}
-                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-green-300 inline-flex items-center gap-2"
+                className="px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 disabled:bg-slate-100 inline-flex items-center gap-2"
               >
                 <Check className="h-4 w-4" />
                 {loading ? 'Marcando...' : 'Marcar como Ganada'}

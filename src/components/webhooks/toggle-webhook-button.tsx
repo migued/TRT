@@ -43,7 +43,7 @@ export function ToggleWebhookButton({ webhookId, isActive, workspaceSlug }: Togg
       disabled={isLoading}
       className={`p-2 rounded ${
         isActive
-          ? 'text-green-600 hover:bg-green-50'
+          ? 'text-slate-600 hover:bg-slate-100'
           : 'text-slate-400 hover:bg-slate-50'
       } disabled:opacity-50`}
       title={isActive ? 'Deactivate webhook' : 'Activate webhook'}

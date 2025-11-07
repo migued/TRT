@@ -94,7 +94,7 @@ export function EditContactForm({ workspaceSlug, contact }: EditContactFormProps
       {/* Form */}
       <form onSubmit={handleSubmit} className="rounded-lg bg-white p-6 shadow">
         {error && (
-          <div className="mb-6 rounded-md bg-red-50 p-4 text-sm text-red-800">
+          <div className="mb-6 rounded-md bg-slate-100 p-4 text-sm text-slate-600">
             {error}
           </div>
         )}
@@ -106,7 +106,7 @@ export function EditContactForm({ workspaceSlug, contact }: EditContactFormProps
               htmlFor="name"
               className="block text-sm font-medium text-slate-700"
             >
-              Nombre <span className="text-red-500">*</span>
+              Nombre <span className="text-slate-600">*</span>
             </label>
             <input
               type="text"
@@ -115,7 +115,7 @@ export function EditContactForm({ workspaceSlug, contact }: EditContactFormProps
               value={formData.name}
               onChange={handleChange}
               required
-              className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-slate-200 focus:outline-none focus:ring-1 focus:ring-blue-500"
               placeholder="Juan Pérez"
             />
           </div>
@@ -134,7 +134,7 @@ export function EditContactForm({ workspaceSlug, contact }: EditContactFormProps
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-slate-200 focus:outline-none focus:ring-1 focus:ring-blue-500"
               placeholder="juan@empresa.com"
             />
           </div>
@@ -153,7 +153,7 @@ export function EditContactForm({ workspaceSlug, contact }: EditContactFormProps
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-slate-200 focus:outline-none focus:ring-1 focus:ring-blue-500"
               placeholder="+52 55 1234 5678"
             />
           </div>
@@ -172,7 +172,7 @@ export function EditContactForm({ workspaceSlug, contact }: EditContactFormProps
               value={formData.notes}
               onChange={handleChange}
               rows={4}
-              className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 shadow-sm focus:border-slate-200 focus:outline-none focus:ring-1 focus:ring-blue-500"
               placeholder="Información adicional sobre el contacto..."
             />
           </div>
@@ -183,7 +183,7 @@ export function EditContactForm({ workspaceSlug, contact }: EditContactFormProps
           <button
             type="submit"
             disabled={loading}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="rounded-lg bg-slate-100 px-4 py-2 text-sm font-medium text-white hover:bg-slate-100 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Guardando...' : 'Guardar Cambios'}
           </button>

@@ -102,16 +102,16 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
 
       {/* Getting Started */}
       {contactsCount === 0 && opportunitiesCount === 0 && (
-        <div className="rounded-lg bg-blue-50 p-6">
-          <h2 className="text-lg font-semibold text-blue-900">
+        <div className="rounded-lg bg-slate-100 p-6">
+          <h2 className="text-lg font-semibold text-slate-600">
             ¡Comienza a usar TRT Platform!
           </h2>
-          <p className="mt-2 text-blue-800">
+          <p className="mt-2 text-slate-600">
             Para empezar, te recomendamos:
           </p>
-          <ul className="mt-4 space-y-2 text-sm text-blue-800">
+          <ul className="mt-4 space-y-2 text-sm text-slate-600">
             <li className="flex items-center gap-2">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-xs text-white">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-xs text-white">
                 1
               </span>
               <span>
@@ -125,7 +125,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
               </span>
             </li>
             <li className="flex items-center gap-2">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-xs text-white">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-xs text-white">
                 2
               </span>
               <span>
@@ -139,7 +139,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
               </span>
             </li>
             <li className="flex items-center gap-2">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-xs text-white">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-xs text-white">
                 3
               </span>
               <span>
@@ -171,10 +171,10 @@ function StatCard({
   color: 'blue' | 'green' | 'purple' | 'orange'
 }) {
   const colorClasses = {
-    blue: 'bg-blue-50 text-blue-700',
-    green: 'bg-green-50 text-green-700',
-    purple: 'bg-purple-50 text-purple-700',
-    orange: 'bg-orange-50 text-orange-700',
+    blue: 'bg-slate-100 text-slate-600',
+    green: 'bg-slate-100 text-slate-600',
+    purple: 'bg-slate-100 text-slate-600',
+    orange: 'bg-slate-100 text-slate-600',
   }
 
   return (
@@ -211,7 +211,7 @@ function QuickAction({ title, href }: { title: string; href: string }) {
   return (
     <a
       href={href}
-      className="flex items-center justify-center rounded-lg border-2 border-dashed border-slate-300 p-4 text-center font-medium text-slate-700 transition-colors hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700"
+      className="flex items-center justify-center rounded-lg border-2 border-dashed border-slate-300 p-4 text-center font-medium text-slate-700 transition-colors hover:border-slate-200 hover:bg-slate-100 hover:text-slate-600"
     >
       {title}
     </a>

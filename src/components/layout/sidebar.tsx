@@ -136,7 +136,7 @@ export function Sidebar({ workspaceSlug }: SidebarProps) {
                   <Icon className="h-5 w-5" />
                   <span className="flex-1">{item.name}</span>
                   {item.badge && (
-                    <span className="rounded-full bg-blue-600 px-2 py-0.5 text-xs">
+                    <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs">
                       {item.badge}
                     </span>
                   )}

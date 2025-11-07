@@ -64,11 +64,11 @@ export default async function SettingsPage({ params }: SettingsPageProps) {
               <Link
                 key={section.href}
                 href={section.href}
-                className="block bg-white rounded-lg border border-slate-200 p-6 hover:border-blue-300 hover:shadow-md transition-all"
+                className="block bg-white rounded-lg border border-slate-200 p-6 hover:border-slate-200 hover:shadow-md transition-all"
               >
                 <div className="flex items-start gap-4">
-                  <div className="p-3 bg-blue-100 rounded-lg">
-                    <Icon className="h-6 w-6 text-blue-600" />
+                  <div className="p-3 bg-slate-100 rounded-lg">
+                    <Icon className="h-6 w-6 text-slate-600" />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-slate-900">{section.title}</h3>

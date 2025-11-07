@@ -47,13 +47,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const getTypeIcon = (type: string) => {
     switch (type) {
       case 'physical':
-        return <Package className="h-6 w-6 text-purple-600" />
+        return <Package className="h-6 w-6 text-slate-600" />
       case 'digital':
-        return <Box className="h-6 w-6 text-purple-600" />
+        return <Box className="h-6 w-6 text-slate-600" />
       case 'service':
-        return <Zap className="h-6 w-6 text-purple-600" />
+        return <Zap className="h-6 w-6 text-slate-600" />
       default:
-        return <Package className="h-6 w-6 text-purple-600" />
+        return <Package className="h-6 w-6 text-slate-600" />
     }
   }
 
@@ -95,7 +95,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-purple-100 rounded-lg">
+            <div className="p-2 bg-slate-100 rounded-lg">
               {getTypeIcon(product.type)}
             </div>
             <div>
@@ -121,7 +121,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <div className="flex items-center gap-3">
             <Link
               href={`/${workspaceSlug}/products/${productId}/edit`}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100"
             >
               <Edit className="h-4 w-4" />
               Editar
@@ -201,7 +201,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                         {product.tags.map((tag: string, index: number) => (
                           <span
                             key={index}
-                            className="inline-flex items-center rounded-full bg-purple-100 px-3 py-1 text-xs font-medium text-purple-800"
+                            className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600"
                           >
                             {tag}
                           </span>
@@ -243,7 +243,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <div>
                 <p className="text-sm text-slate-600 mb-2">Estado actual</p>
                 {product.active ? (
-                  <span className="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800">
+                  <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-600">
                     Activo
                   </span>
                 ) : (

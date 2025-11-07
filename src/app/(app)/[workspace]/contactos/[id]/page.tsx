@@ -99,7 +99,7 @@ export default async function ContactDetailPage({ params }: ContactDetailPagePro
                   <dd className="mt-1">
                     <a
                       href={`mailto:${contact.email}`}
-                      className="text-blue-600 hover:text-blue-700"
+                      className="text-slate-600 hover:text-slate-600"
                     >
                       {contact.email}
                     </a>
@@ -116,7 +116,7 @@ export default async function ContactDetailPage({ params }: ContactDetailPagePro
                   <dd className="mt-1">
                     <a
                       href={`tel:${contact.phone}`}
-                      className="text-blue-600 hover:text-blue-700"
+                      className="text-slate-600 hover:text-slate-600"
                     >
                       {contact.phone}
                     </a>
@@ -143,7 +143,7 @@ export default async function ContactDetailPage({ params }: ContactDetailPagePro
               {contact.tags.map((tag: string) => (
                 <span
                   key={tag}
-                  className="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800"
+                  className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-600"
                 >
                   {tag}
                 </span>

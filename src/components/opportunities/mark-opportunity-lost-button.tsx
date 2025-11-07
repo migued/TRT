@@ -62,8 +62,8 @@ export function MarkOpportunityLostButton({ opportunityId, opportunityTitle, wor
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg max-w-md w-full p-6">
             <div className="flex items-start gap-4 mb-4">
-              <div className="p-2 bg-red-100 rounded-lg">
-                <TrendingDown className="h-6 w-6 text-red-600" />
+              <div className="p-2 bg-slate-100 rounded-lg">
+                <TrendingDown className="h-6 w-6 text-slate-600" />
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-slate-900 mb-2">
@@ -92,7 +92,7 @@ export function MarkOpportunityLostButton({ opportunityId, opportunityTitle, wor
             </div>
 
             {error && (
-              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+              <div className="mb-4 p-3 bg-slate-100 border border-slate-200 rounded-lg text-slate-600 text-sm">
                 {error}
               </div>
             )}
@@ -111,7 +111,7 @@ export function MarkOpportunityLostButton({ opportunityId, opportunityTitle, wor
               <button
                 onClick={handleMarkLost}
                 disabled={loading}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:bg-red-300 inline-flex items-center gap-2"
+                className="px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 disabled:bg-slate-100 inline-flex items-center gap-2"
               >
                 <X className="h-4 w-4" />
                 {loading ? 'Marcando...' : 'Marcar como Perdida'}

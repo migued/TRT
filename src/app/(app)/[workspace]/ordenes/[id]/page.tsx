@@ -87,10 +87,10 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
   }
 
   const statusConfig = {
-    pending: { label: 'Pendiente', color: 'bg-yellow-100 text-yellow-700' },
-    in_progress: { label: 'En Proceso', color: 'bg-blue-100 text-blue-700' },
-    completed: { label: 'Completada', color: 'bg-green-100 text-green-700' },
-    cancelled: { label: 'Cancelada', color: 'bg-red-100 text-red-700' },
+    pending: { label: 'Pendiente', color: 'bg-slate-100 text-slate-600' },
+    in_progress: { label: 'En Proceso', color: 'bg-slate-100 text-slate-600' },
+    completed: { label: 'Completada', color: 'bg-slate-100 text-slate-600' },
+    cancelled: { label: 'Cancelada', color: 'bg-slate-100 text-slate-600' },
   }
 
   const status = statusConfig[order.status as keyof typeof statusConfig] || statusConfig.pending
@@ -140,7 +140,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
             {existingProject && (
               <Link
                 href={`/${workspaceSlug}/projects/${existingProject.id}`}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 transition-colors font-medium"
               >
                 <FileText className="h-4 w-4" />
                 Ver Proyecto
@@ -199,7 +199,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
                 {order.discount > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-600">Descuento:</span>
-                    <span className="font-medium text-red-600">-{formatter.format(order.discount)}</span>
+                    <span className="font-medium text-slate-600">-{formatter.format(order.discount)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-sm">
@@ -208,7 +208,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
                 </div>
                 <div className="flex justify-between text-lg font-bold pt-2 border-t border-slate-300">
                   <span className="text-slate-900">Total:</span>
-                  <span className="text-orange-600">{formatter.format(order.total || 0)}</span>
+                  <span className="text-slate-600">{formatter.format(order.total || 0)}</span>
                 </div>
               </div>
             </div>
@@ -234,7 +234,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
                         )}
                       </div>
                     </div>
-                    <div className={`font-semibold ${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
+                    <div className={`font-semibold ${transaction.type === 'income' ? 'text-slate-600' : 'text-slate-600'}`}>
                       {transaction.type === 'income' ? '+' : '-'}{formatter.format(transaction.amount)}
                     </div>
                   </div>
@@ -262,7 +262,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
                 <div>
                   <Link
                     href={`/${workspaceSlug}/contacts/${contact.id}`}
-                    className="flex items-center gap-2 text-orange-600 hover:text-orange-700 font-medium"
+                    className="flex items-center gap-2 text-slate-600 hover:text-slate-600 font-medium"
                   >
                     <User className="h-4 w-4" />
                     {contact.name}
@@ -285,7 +285,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
                   <div className="pt-4 border-t border-slate-200">
                     <Link
                       href={`/${workspaceSlug}/companies/${company.id}`}
-                      className="flex items-center gap-2 text-orange-600 hover:text-orange-700 font-medium"
+                      className="flex items-center gap-2 text-slate-600 hover:text-slate-600 font-medium"
                     >
                       <Building2 className="h-4 w-4" />
                       {company.name}
@@ -295,7 +295,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
                         href={company.website.startsWith('http') ? company.website : `https://${company.website}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm text-slate-600 hover:text-orange-600 mt-2"
+                        className="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-600 mt-2"
                       >
                         <ExternalLink className="h-3 w-3" />
                         {company.website}
@@ -315,7 +315,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
               <h3 className="text-sm font-semibold text-slate-900 mb-4">Cotización Origen</h3>
               <Link
                 href={`/${workspaceSlug}/quotes/${order.quotes.id}`}
-                className="flex items-center gap-2 text-orange-600 hover:text-orange-700"
+                className="flex items-center gap-2 text-slate-600 hover:text-slate-600"
               >
                 <FileText className="h-4 w-4" />
                 {order.quotes.quote_number}
@@ -340,7 +340,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
               {order.invoiced_at && (
                 <div className="flex gap-3">
                   <div className="flex-shrink-0">
-                    <div className="w-2 h-2 mt-2 rounded-full bg-green-400"></div>
+                    <div className="w-2 h-2 mt-2 rounded-full bg-slate-100"></div>
                   </div>
                   <div>
                     <p className="text-sm font-medium text-slate-900">Facturada</p>
@@ -355,7 +355,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
               {order.status === 'completed' && (
                 <div className="flex gap-3">
                   <div className="flex-shrink-0">
-                    <div className="w-2 h-2 mt-2 rounded-full bg-green-400"></div>
+                    <div className="w-2 h-2 mt-2 rounded-full bg-slate-100"></div>
                   </div>
                   <div>
                     <p className="text-sm font-medium text-slate-900">Completada</p>

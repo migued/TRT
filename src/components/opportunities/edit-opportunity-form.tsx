@@ -160,8 +160,8 @@ export function EditOpportunityForm({ opportunity, stages, workspaceSlug, worksp
         </Link>
 
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-orange-100 rounded-lg">
-            <TrendingUp className="h-6 w-6 text-orange-600" />
+          <div className="p-2 bg-slate-100 rounded-lg">
+            <TrendingUp className="h-6 w-6 text-slate-600" />
           </div>
           <div>
             <h1 className="text-2xl font-bold text-slate-900">Editar Oportunidad</h1>
@@ -173,7 +173,7 @@ export function EditOpportunityForm({ opportunity, stages, workspaceSlug, worksp
       <div className="max-w-3xl">
         <form onSubmit={handleSubmit} className="bg-white rounded-lg border border-slate-200 p-6">
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+            <div className="mb-6 p-4 bg-slate-100 border border-slate-200 rounded-lg text-slate-600 text-sm">
               {error}
             </div>
           )}
@@ -182,7 +182,7 @@ export function EditOpportunityForm({ opportunity, stages, workspaceSlug, worksp
             {/* Title - Required */}
             <div>
               <label htmlFor="title" className="block text-sm font-medium text-slate-700 mb-2">
-                Título <span className="text-red-500">*</span>
+                Título <span className="text-slate-600">*</span>
               </label>
               <input
                 type="text"
@@ -199,7 +199,7 @@ export function EditOpportunityForm({ opportunity, stages, workspaceSlug, worksp
             {/* Contact - Required */}
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-3">
-                Contacto <span className="text-red-500">*</span>
+                Contacto <span className="text-slate-600">*</span>
               </label>
 
               {!selectedContact ? (
@@ -233,7 +233,7 @@ export function EditOpportunityForm({ opportunity, stages, workspaceSlug, worksp
                             setContactSearch('')
                             setSearchResults([])
                           }}
-                          className="w-full p-3 text-left hover:bg-orange-50 transition-colors"
+                          className="w-full p-3 text-left hover:bg-slate-100 transition-colors"
                         >
                           <div className="font-medium text-slate-900">{contact.name}</div>
                           <div className="text-sm text-slate-600 mt-1">
@@ -248,11 +248,11 @@ export function EditOpportunityForm({ opportunity, stages, workspaceSlug, worksp
                   )}
                 </div>
               ) : (
-                <div className="p-4 bg-orange-50 border border-orange-200 rounded-lg">
+                <div className="p-4 bg-slate-100 border border-slate-200 rounded-lg">
                   <div className="flex items-start justify-between">
                     <div>
                       <div className="flex items-center gap-2">
-                        <User className="h-4 w-4 text-orange-600" />
+                        <User className="h-4 w-4 text-slate-600" />
                         <span className="font-medium text-slate-900">{selectedContact.name}</span>
                       </div>
                       <div className="text-sm text-slate-600 mt-1 space-y-0.5 ml-6">
@@ -318,7 +318,7 @@ export function EditOpportunityForm({ opportunity, stages, workspaceSlug, worksp
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="stage" className="block text-sm font-medium text-slate-700 mb-2">
-                  Etapa <span className="text-red-500">*</span>
+                  Etapa <span className="text-slate-600">*</span>
                 </label>
                 <select
                   id="stage"
@@ -389,7 +389,7 @@ export function EditOpportunityForm({ opportunity, stages, workspaceSlug, worksp
             <button
               type="submit"
               disabled={loading || !formData.title || !selectedContact}
-              className="px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 disabled:bg-slate-300 disabled:cursor-not-allowed font-medium"
+              className="px-6 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 disabled:bg-slate-300 disabled:cursor-not-allowed font-medium"
             >
               {loading ? 'Guardando...' : 'Guardar Cambios'}
             </button>

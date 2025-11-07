@@ -254,11 +254,11 @@ export function SmartScannerModal({
 
               <div
                 onClick={() => fileInputRef.current?.click()}
-                className="border-2 border-dashed border-slate-300 rounded-lg p-12 text-center cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition-colors"
+                className="border-2 border-dashed border-slate-300 rounded-lg p-12 text-center cursor-pointer hover:border-slate-200 hover:bg-slate-100 transition-colors"
               >
                 {isScanning ? (
                   <div className="space-y-4">
-                    <Loader2 className="h-12 w-12 text-blue-600 animate-spin mx-auto" />
+                    <Loader2 className="h-12 w-12 text-slate-600 animate-spin mx-auto" />
                     <p className="text-slate-700 font-medium">Escaneando imágenes...</p>
                     <p className="text-sm text-slate-500">Esto puede tomar unos segundos</p>
                   </div>
@@ -284,9 +284,9 @@ export function SmartScannerModal({
               </div>
 
               {error && (
-                <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-                  <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-red-800">{error}</p>
+                <div className="mt-4 p-4 bg-slate-100 border border-slate-200 rounded-lg flex items-start gap-3">
+                  <AlertCircle className="h-5 w-5 text-slate-600 flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-slate-600">{error}</p>
                 </div>
               )}
             </div>
@@ -338,7 +338,7 @@ export function SmartScannerModal({
                       Confianza: {currentScan.confidence}%
                     </span>
                     {currentScan.edited && (
-                      <span className="flex items-center gap-1 text-blue-600">
+                      <span className="flex items-center gap-1 text-slate-600">
                         <Check className="h-4 w-4" />
                         Editado
                       </span>
@@ -390,7 +390,7 @@ export function SmartScannerModal({
                   <button
                     onClick={handleCreateAll}
                     disabled={isCreating}
-                    className="inline-flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
                     {isCreating && <Loader2 className="h-4 w-4 animate-spin" />}
                     {hasMultiple
@@ -413,9 +413,9 @@ function BusinessCardForm({ data, onChange }: { data: any; onChange: (field: str
   const getConfidence = (field: string) => data.confidence?.[field] || 0
 
   const getConfidenceColor = (confidence: number) => {
-    if (confidence >= 90) return 'text-green-600'
-    if (confidence >= 70) return 'text-yellow-600'
-    return 'text-red-600'
+    if (confidence >= 90) return 'text-slate-600'
+    if (confidence >= 70) return 'text-slate-600'
+    return 'text-slate-600'
   }
 
   const fields = [
@@ -458,9 +458,9 @@ function ReceiptForm({ data, onChange }: { data: any; onChange: (field: string, 
   const getConfidence = (field: string) => data.confidence?.[field] || 0
 
   const getConfidenceColor = (confidence: number) => {
-    if (confidence >= 90) return 'text-green-600'
-    if (confidence >= 70) return 'text-yellow-600'
-    return 'text-red-600'
+    if (confidence >= 90) return 'text-slate-600'
+    if (confidence >= 70) return 'text-slate-600'
+    return 'text-slate-600'
   }
 
   return (

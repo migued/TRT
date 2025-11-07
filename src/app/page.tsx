@@ -8,7 +8,7 @@ export default function Home() {
       <header className="border-b border-slate-200 bg-white">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100">
               <span className="text-lg font-bold text-white">T</span>
             </div>
             <span className="text-xl font-bold text-slate-900">TRT Platform</span>
@@ -22,7 +22,7 @@ export default function Home() {
             </Link>
             <Link
               href="/signup"
-              className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+              className="rounded-lg bg-slate-100 px-4 py-2 text-sm font-medium text-white hover:bg-slate-100"
             >
               Comenzar gratis
             </Link>
@@ -36,7 +36,7 @@ export default function Home() {
           <h1 className="text-5xl font-bold tracking-tight text-slate-900 sm:text-6xl">
             Organiza tu negocio,
             <br />
-            <span className="text-blue-600">crece más rápido</span>
+            <span className="text-slate-600">crece más rápido</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-600">
             La plataforma todo-en-uno para pequeñas y medianas empresas en LATAM.
@@ -45,7 +45,7 @@ export default function Home() {
           <div className="mt-10 flex items-center justify-center gap-4">
             <Link
               href="/signup"
-              className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700"
+              className="inline-flex items-center gap-2 rounded-lg bg-slate-100 px-6 py-3 text-base font-medium text-white hover:bg-slate-100"
             >
               Comenzar gratis
               <ArrowRight className="h-5 w-5" />
@@ -104,7 +104,7 @@ export default function Home() {
           <div className="mt-8">
             <Link
               href="/signup"
-              className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-8 py-4 text-lg font-medium text-white hover:bg-blue-700"
+              className="inline-flex items-center gap-2 rounded-lg bg-slate-100 px-8 py-4 text-lg font-medium text-white hover:bg-slate-100"
             >
               Comenzar ahora gratis
               <ArrowRight className="h-6 w-6" />
@@ -134,7 +134,7 @@ function Feature({
 }) {
   return (
     <div className="rounded-lg bg-white p-6 shadow-sm">
-      <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
+      <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-slate-100 text-slate-600">
         {icon}
       </div>
       <h3 className="mt-4 text-lg font-semibold text-slate-900">{title}</h3>

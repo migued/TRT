@@ -334,8 +334,8 @@ export function CreateQuoteModal({
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-slate-200">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-orange-100 rounded-lg">
-              <FileText className="h-5 w-5 text-orange-600" />
+            <div className="p-2 bg-slate-100 rounded-lg">
+              <FileText className="h-5 w-5 text-slate-600" />
             </div>
             <div>
               <h2 className="text-xl font-semibold text-slate-900">Nueva Cotización</h2>
@@ -353,7 +353,7 @@ export function CreateQuoteModal({
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+            <div className="bg-slate-100 border border-slate-200 text-slate-600 px-4 py-3 rounded-lg">
               {error}
             </div>
           )}
@@ -382,7 +382,7 @@ export function CreateQuoteModal({
                 <button
                   type="button"
                   onClick={() => setSelectedContact(null)}
-                  className="text-sm text-red-600 hover:text-red-700 font-medium"
+                  className="text-sm text-slate-600 hover:text-slate-600 font-medium"
                 >
                   Cambiar
                 </button>
@@ -428,7 +428,7 @@ export function CreateQuoteModal({
                 )}
                 {searching && (
                   <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                    <div className="animate-spin h-5 w-5 border-2 border-orange-600 border-t-transparent rounded-full"></div>
+                    <div className="animate-spin h-5 w-5 border-2 border-slate-200 border-t-transparent rounded-full"></div>
                   </div>
                 )}
               </div>
@@ -444,7 +444,7 @@ export function CreateQuoteModal({
               <button
                 type="button"
                 onClick={addLineItem}
-                className="inline-flex items-center gap-1 text-sm text-orange-600 hover:text-orange-700 font-medium"
+                className="inline-flex items-center gap-1 text-sm text-slate-600 hover:text-slate-600 font-medium"
               >
                 <Plus className="h-4 w-4" />
                 Agregar artículo
@@ -524,7 +524,7 @@ export function CreateQuoteModal({
                     <button
                       type="button"
                       onClick={() => removeLineItem(item.id)}
-                      className="flex-shrink-0 p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                      className="flex-shrink-0 p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
                     >
                       <Trash2 className="h-5 w-5" />
                     </button>
@@ -572,7 +572,7 @@ export function CreateQuoteModal({
                 {totals.discount > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-600">Descuento:</span>
-                    <span className="font-medium text-red-600">-{formatter.format(totals.discount)}</span>
+                    <span className="font-medium text-slate-600">-{formatter.format(totals.discount)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-sm">
@@ -581,7 +581,7 @@ export function CreateQuoteModal({
                 </div>
                 <div className="flex justify-between text-lg font-bold pt-2 border-t border-slate-300">
                   <span className="text-slate-900">Total:</span>
-                  <span className="text-orange-600">{formatter.format(totals.total)}</span>
+                  <span className="text-slate-600">{formatter.format(totals.total)}</span>
                 </div>
               </div>
             </div>
@@ -642,7 +642,7 @@ export function CreateQuoteModal({
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className="px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-6 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Creando...' : 'Crear Cotización'}
           </button>

@@ -198,7 +198,7 @@ export function EditQuoteForm({ quote, products, workspaceSlug, workspaceId }: E
       {/* Form */}
       <form onSubmit={handleSubmit} className="max-w-4xl space-y-6">
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+          <div className="bg-slate-100 border border-slate-200 text-slate-600 px-4 py-3 rounded-lg">
             {error}
           </div>
         )}
@@ -224,7 +224,7 @@ export function EditQuoteForm({ quote, products, workspaceSlug, workspaceId }: E
             <button
               type="button"
               onClick={addLineItem}
-              className="inline-flex items-center gap-1 text-sm text-orange-600 hover:text-orange-700 font-medium"
+              className="inline-flex items-center gap-1 text-sm text-slate-600 hover:text-slate-600 font-medium"
             >
               <Plus className="h-4 w-4" />
               Agregar artículo
@@ -296,7 +296,7 @@ export function EditQuoteForm({ quote, products, workspaceSlug, workspaceId }: E
                   <button
                     type="button"
                     onClick={() => removeLineItem(item.id)}
-                    className="flex-shrink-0 p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    className="flex-shrink-0 p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
                   >
                     <Trash2 className="h-5 w-5" />
                   </button>
@@ -345,7 +345,7 @@ export function EditQuoteForm({ quote, products, workspaceSlug, workspaceId }: E
               {totals.discount > 0 && (
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-600">Descuento:</span>
-                  <span className="font-medium text-red-600">-{formatter.format(totals.discount)}</span>
+                  <span className="font-medium text-slate-600">-{formatter.format(totals.discount)}</span>
                 </div>
               )}
               <div className="flex justify-between text-sm">
@@ -354,7 +354,7 @@ export function EditQuoteForm({ quote, products, workspaceSlug, workspaceId }: E
               </div>
               <div className="flex justify-between text-lg font-bold pt-2 border-t border-slate-300">
                 <span className="text-slate-900">Total:</span>
-                <span className="text-orange-600">{formatter.format(totals.total)}</span>
+                <span className="text-slate-600">{formatter.format(totals.total)}</span>
               </div>
             </div>
           </div>
@@ -412,7 +412,7 @@ export function EditQuoteForm({ quote, products, workspaceSlug, workspaceId }: E
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex items-center gap-2 px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-2 px-6 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Save className="h-4 w-4" />
             {loading ? 'Guardando...' : 'Guardar Cambios'}

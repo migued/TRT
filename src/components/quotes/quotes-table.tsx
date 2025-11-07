@@ -28,10 +28,10 @@ interface QuotesTableProps {
 
 const statusConfig = {
   draft: { label: 'Borrador', color: 'bg-slate-100 text-slate-700' },
-  sent: { label: 'Enviada', color: 'bg-blue-100 text-blue-700' },
-  viewed: { label: 'Vista', color: 'bg-purple-100 text-purple-700' },
-  accepted: { label: 'Aceptada', color: 'bg-green-100 text-green-700' },
-  expired: { label: 'Expirada', color: 'bg-red-100 text-red-700' },
+  sent: { label: 'Enviada', color: 'bg-slate-100 text-slate-600' },
+  viewed: { label: 'Vista', color: 'bg-slate-100 text-slate-600' },
+  accepted: { label: 'Aceptada', color: 'bg-slate-100 text-slate-600' },
+  expired: { label: 'Expirada', color: 'bg-slate-100 text-slate-600' },
 }
 
 export function QuotesTable({ quotes, workspaceSlug, currentStatus }: QuotesTableProps) {
@@ -69,7 +69,7 @@ export function QuotesTable({ quotes, workspaceSlug, currentStatus }: QuotesTabl
               className={`
                 px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap
                 ${currentStatus === tab.value
-                  ? 'border-orange-500 text-orange-600'
+                  ? 'border-slate-200 text-slate-600'
                   : 'border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300'
                 }
               `}
@@ -118,7 +118,7 @@ export function QuotesTable({ quotes, workspaceSlug, currentStatus }: QuotesTabl
                     <td className="px-6 py-4">
                       <Link
                         href={`/${workspaceSlug}/quotes/${quote.id}`}
-                        className="font-medium text-orange-600 hover:text-orange-700 flex items-center gap-2"
+                        className="font-medium text-slate-600 hover:text-slate-600 flex items-center gap-2"
                       >
                         <FileText className="h-4 w-4" />
                         {quote.quote_number}
@@ -153,7 +153,7 @@ export function QuotesTable({ quotes, workspaceSlug, currentStatus }: QuotesTabl
                     <td className="px-6 py-4 text-center">
                       <Link
                         href={`/${workspaceSlug}/quotes/${quote.id}`}
-                        className="inline-flex items-center gap-1 text-sm text-slate-600 hover:text-orange-600"
+                        className="inline-flex items-center gap-1 text-sm text-slate-600 hover:text-slate-600"
                       >
                         <Eye className="h-4 w-4" />
                         Ver

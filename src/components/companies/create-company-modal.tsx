@@ -194,8 +194,8 @@ export function CreateCompanyModal({ workspaceSlug, workspaceId, isOpen, onClose
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-slate-200">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-100 rounded-lg">
-              <Building2 className="h-5 w-5 text-blue-600" />
+            <div className="p-2 bg-slate-100 rounded-lg">
+              <Building2 className="h-5 w-5 text-slate-600" />
             </div>
             <div>
               <h2 className="text-xl font-bold text-slate-900">Nueva Empresa</h2>
@@ -213,7 +213,7 @@ export function CreateCompanyModal({ workspaceSlug, workspaceId, isOpen, onClose
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-6">
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+            <div className="mb-6 p-4 bg-slate-100 border border-slate-200 rounded-lg text-slate-600 text-sm">
               {error}
             </div>
           )}
@@ -222,7 +222,7 @@ export function CreateCompanyModal({ workspaceSlug, workspaceId, isOpen, onClose
             {/* Company Name - Required */}
             <div>
               <label htmlFor="company-name" className="block text-sm font-medium text-slate-700 mb-2">
-                Nombre de la empresa <span className="text-red-500">*</span>
+                Nombre de la empresa <span className="text-slate-600">*</span>
               </label>
               <input
                 type="text"
@@ -292,7 +292,7 @@ export function CreateCompanyModal({ workspaceSlug, workspaceId, isOpen, onClose
               </label>
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <Linkedin className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                  <Linkedin className="h-5 w-5 text-slate-600 flex-shrink-0" />
                   <input
                     type="url"
                     value={companyData.linkedin_url}
@@ -303,7 +303,7 @@ export function CreateCompanyModal({ workspaceSlug, workspaceId, isOpen, onClose
                   />
                 </div>
                 <div className="flex items-center gap-2">
-                  <Facebook className="h-5 w-5 text-blue-500 flex-shrink-0" />
+                  <Facebook className="h-5 w-5 text-slate-600 flex-shrink-0" />
                   <input
                     type="url"
                     value={companyData.facebook_url}
@@ -392,7 +392,7 @@ export function CreateCompanyModal({ workspaceSlug, workspaceId, isOpen, onClose
                             setContactSearch('')
                             setSearchResults([])
                           }}
-                          className="w-full p-3 text-left hover:bg-blue-50 transition-colors"
+                          className="w-full p-3 text-left hover:bg-slate-100 transition-colors"
                         >
                           <div className="font-medium text-slate-900">{contact.name}</div>
                           <div className="text-sm text-slate-600 mt-1 space-y-0.5">
@@ -417,7 +417,7 @@ export function CreateCompanyModal({ workspaceSlug, workspaceId, isOpen, onClose
                           setNewContactData({ ...newContactData, name: contactSearch })
                           setContactSearch('')
                         }}
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 text-sm"
                       >
                         <Plus className="h-4 w-4" />
                         Crear nuevo contacto
@@ -429,11 +429,11 @@ export function CreateCompanyModal({ workspaceSlug, workspaceId, isOpen, onClose
 
               {/* Selected Contact */}
               {selectedContact && (
-                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <div className="p-4 bg-slate-100 border border-slate-200 rounded-lg">
                   <div className="flex items-start justify-between">
                     <div>
                       <div className="flex items-center gap-2">
-                        <User className="h-4 w-4 text-blue-600" />
+                        <User className="h-4 w-4 text-slate-600" />
                         <span className="font-medium text-slate-900">{selectedContact.name}</span>
                       </div>
                       <div className="text-sm text-slate-600 mt-1 space-y-0.5 ml-6">
@@ -529,7 +529,7 @@ export function CreateCompanyModal({ workspaceSlug, workspaceId, isOpen, onClose
             <button
               type="submit"
               disabled={loading || !companyData.name}
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed font-medium"
+              className="px-6 py-2 bg-slate-100 text-white rounded-lg hover:bg-slate-100 disabled:bg-slate-300 disabled:cursor-not-allowed font-medium"
             >
               {loading ? 'Guardando...' : 'Guardar Empresa'}
             </button>

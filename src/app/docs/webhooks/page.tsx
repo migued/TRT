@@ -19,8 +19,8 @@ export default function WebhooksDocsPage() {
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-blue-100 rounded-lg">
-              <WebhookIcon className="h-8 w-8 text-blue-600" />
+            <div className="p-2 bg-slate-100 rounded-lg">
+              <WebhookIcon className="h-8 w-8 text-slate-600" />
             </div>
             <div>
               <h1 className="text-4xl font-bold text-slate-900">Documentación de Webhooks</h1>
@@ -36,7 +36,7 @@ export default function WebhooksDocsPage() {
               onClick={() => setActiveTab('incoming')}
               className={`px-6 py-3 rounded-lg font-medium transition-all ${
                 activeTab === 'incoming'
-                  ? 'bg-blue-600 text-white shadow-lg'
+                  ? 'bg-slate-100 text-white shadow-lg'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
@@ -46,7 +46,7 @@ export default function WebhooksDocsPage() {
               onClick={() => setActiveTab('outgoing')}
               className={`px-6 py-3 rounded-lg font-medium transition-all ${
                 activeTab === 'outgoing'
-                  ? 'bg-blue-600 text-white shadow-lg'
+                  ? 'bg-slate-100 text-white shadow-lg'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
@@ -70,9 +70,9 @@ export default function WebhooksDocsPage() {
               </p>
 
               <div className="grid md:grid-cols-3 gap-6 mt-8">
-                <div className="p-6 bg-blue-50 rounded-lg">
-                  <div className="p-2 bg-blue-100 rounded-lg w-fit mb-3">
-                    <Globe className="h-6 w-6 text-blue-600" />
+                <div className="p-6 bg-slate-100 rounded-lg">
+                  <div className="p-2 bg-slate-100 rounded-lg w-fit mb-3">
+                    <Globe className="h-6 w-6 text-slate-600" />
                   </div>
                   <h3 className="font-semibold text-slate-900 mb-2">Formularios Web</h3>
                   <p className="text-sm text-slate-600">
@@ -80,9 +80,9 @@ export default function WebhooksDocsPage() {
                   </p>
                 </div>
 
-                <div className="p-6 bg-green-50 rounded-lg">
-                  <div className="p-2 bg-green-100 rounded-lg w-fit mb-3">
-                    <Zap className="h-6 w-6 text-green-600" />
+                <div className="p-6 bg-slate-100 rounded-lg">
+                  <div className="p-2 bg-slate-100 rounded-lg w-fit mb-3">
+                    <Zap className="h-6 w-6 text-slate-600" />
                   </div>
                   <h3 className="font-semibold text-slate-900 mb-2">Automatización</h3>
                   <p className="text-sm text-slate-600">
@@ -90,9 +90,9 @@ export default function WebhooksDocsPage() {
                   </p>
                 </div>
 
-                <div className="p-6 bg-purple-50 rounded-lg">
-                  <div className="p-2 bg-purple-100 rounded-lg w-fit mb-3">
-                    <Activity className="h-6 w-6 text-purple-600" />
+                <div className="p-6 bg-slate-100 rounded-lg">
+                  <div className="p-2 bg-slate-100 rounded-lg w-fit mb-3">
+                    <Activity className="h-6 w-6 text-slate-600" />
                   </div>
                   <h3 className="font-semibold text-slate-900 mb-2">Tiempo Real</h3>
                   <p className="text-sm text-slate-600">
@@ -109,7 +109,7 @@ export default function WebhooksDocsPage() {
               <div className="space-y-6">
                 {/* Step 1 */}
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                  <div className="flex-shrink-0 w-8 h-8 bg-slate-100 text-white rounded-full flex items-center justify-center font-bold">
                     1
                   </div>
                   <div className="flex-1">
@@ -123,7 +123,7 @@ export default function WebhooksDocsPage() {
 
                 {/* Step 2 */}
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                  <div className="flex-shrink-0 w-8 h-8 bg-slate-100 text-white rounded-full flex items-center justify-center font-bold">
                     2
                   </div>
                   <div className="flex-1">
@@ -132,7 +132,7 @@ export default function WebhooksDocsPage() {
                       Una vez creado, obtendrás una URL única como:
                     </p>
                     <div className="relative">
-                      <code className="block bg-slate-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono">
+                      <code className="block bg-slate-900 text-slate-600 p-4 rounded-lg overflow-x-auto text-sm font-mono">
                         https://tu-dominio.com/api/webhooks/incoming/whk_abc123def456...
                       </code>
                       <button className="absolute top-2 right-2 p-2 bg-slate-800 hover:bg-slate-700 rounded text-slate-300">
@@ -144,7 +144,7 @@ export default function WebhooksDocsPage() {
 
                 {/* Step 3 */}
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                  <div className="flex-shrink-0 w-8 h-8 bg-slate-100 text-white rounded-full flex items-center justify-center font-bold">
                     3
                   </div>
                   <div className="flex-1">
@@ -197,15 +197,15 @@ export default function WebhooksDocsPage() {
                     className="absolute top-2 right-2 p-2 bg-slate-800 hover:bg-slate-700 rounded text-slate-300"
                   >
                     {copiedCode === 'contact-example' ? (
-                      <Check className="h-4 w-4 text-green-400" />
+                      <Check className="h-4 w-4 text-slate-600" />
                     ) : (
                       <Copy className="h-4 w-4" />
                     )}
                   </button>
                 </div>
 
-                <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
-                  <p className="text-sm text-blue-800">
+                <div className="mt-4 bg-slate-100 border border-slate-200 rounded-lg p-4">
+                  <p className="text-sm text-slate-600">
                     <strong>✨ Automágico:</strong> Si &quot;Empresa ABC&quot; no existe, se creará automáticamente
                     y el contacto se asociará a ella.
                   </p>
@@ -246,7 +246,7 @@ export default function WebhooksDocsPage() {
                     className="absolute top-2 right-2 p-2 bg-slate-800 hover:bg-slate-700 rounded text-slate-300"
                   >
                     {copiedCode === 'opportunity-example' ? (
-                      <Check className="h-4 w-4 text-green-400" />
+                      <Check className="h-4 w-4 text-slate-600" />
                     ) : (
                       <Copy className="h-4 w-4" />
                     )}
@@ -286,7 +286,7 @@ export default function WebhooksDocsPage() {
                     className="absolute top-2 right-2 p-2 bg-slate-800 hover:bg-slate-700 rounded text-slate-300"
                   >
                     {copiedCode === 'company-example' ? (
-                      <Check className="h-4 w-4 text-green-400" />
+                      <Check className="h-4 w-4 text-slate-600" />
                     ) : (
                       <Copy className="h-4 w-4" />
                     )}
@@ -303,8 +303,8 @@ export default function WebhooksDocsPage() {
                 {/* Zapier */}
                 <div className="border border-slate-200 rounded-lg p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-orange-100 rounded-lg">
-                      <Zap className="h-6 w-6 text-orange-600" />
+                    <div className="p-2 bg-slate-100 rounded-lg">
+                      <Zap className="h-6 w-6 text-slate-600" />
                     </div>
                     <h3 className="text-lg font-semibold text-slate-900">Zapier</h3>
                   </div>
@@ -320,8 +320,8 @@ export default function WebhooksDocsPage() {
                 {/* Make.com */}
                 <div className="border border-slate-200 rounded-lg p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-purple-100 rounded-lg">
-                      <Activity className="h-6 w-6 text-purple-600" />
+                    <div className="p-2 bg-slate-100 rounded-lg">
+                      <Activity className="h-6 w-6 text-slate-600" />
                     </div>
                     <h3 className="text-lg font-semibold text-slate-900">Make.com</h3>
                   </div>
@@ -337,8 +337,8 @@ export default function WebhooksDocsPage() {
                 {/* HTML Form */}
                 <div className="border border-slate-200 rounded-lg p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-blue-100 rounded-lg">
-                      <Code className="h-6 w-6 text-blue-600" />
+                    <div className="p-2 bg-slate-100 rounded-lg">
+                      <Code className="h-6 w-6 text-slate-600" />
                     </div>
                     <h3 className="text-lg font-semibold text-slate-900">Formulario HTML</h3>
                   </div>
@@ -367,8 +367,8 @@ export default function WebhooksDocsPage() {
                 {/* Typeform */}
                 <div className="border border-slate-200 rounded-lg p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-green-100 rounded-lg">
-                      <Globe className="h-6 w-6 text-green-600" />
+                    <div className="p-2 bg-slate-100 rounded-lg">
+                      <Globe className="h-6 w-6 text-slate-600" />
                     </div>
                     <h3 className="text-lg font-semibold text-slate-900">Typeform</h3>
                   </div>
@@ -391,14 +391,14 @@ export default function WebhooksDocsPage() {
               </div>
 
               <div className="space-y-4">
-                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                  <h3 className="font-semibold text-yellow-900 mb-2">🔐 Firma de Seguridad (Opcional)</h3>
-                  <p className="text-sm text-yellow-800 mb-3">
+                <div className="bg-slate-100 border border-slate-200 rounded-lg p-4">
+                  <h3 className="font-semibold text-slate-600 mb-2">🔐 Firma de Seguridad (Opcional)</h3>
+                  <p className="text-sm text-slate-600 mb-3">
                     Para mayor seguridad, cada webhook incluye una clave secreta que puedes usar para validar
                     que las peticiones realmente vienen de fuentes confiables.
                   </p>
                   <details className="text-sm">
-                    <summary className="cursor-pointer font-medium text-yellow-900 hover:text-yellow-700">
+                    <summary className="cursor-pointer font-medium text-slate-600 hover:text-slate-600">
                       Ver ejemplo de validación →
                     </summary>
                     <pre className="mt-3 bg-slate-900 text-slate-100 p-3 rounded text-xs overflow-x-auto">
@@ -422,14 +422,14 @@ const signature = crypto
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="flex gap-3 items-start">
-                    <div className="mt-1 text-green-600">✓</div>
+                    <div className="mt-1 text-slate-600">✓</div>
                     <div>
                       <p className="font-medium text-slate-900">HTTPS Requerido</p>
                       <p className="text-sm text-slate-600">Todas las conexiones están encriptadas</p>
                     </div>
                   </div>
                   <div className="flex gap-3 items-start">
-                    <div className="mt-1 text-green-600">✓</div>
+                    <div className="mt-1 text-slate-600">✓</div>
                     <div>
                       <p className="font-medium text-slate-900">Logs Completos</p>
                       <p className="text-sm text-slate-600">Monitorea toda la actividad en tiempo real</p>
@@ -454,9 +454,9 @@ const signature = crypto
               </p>
 
               <div className="grid md:grid-cols-3 gap-6 mt-8">
-                <div className="p-6 bg-blue-50 rounded-lg">
-                  <div className="p-2 bg-blue-100 rounded-lg w-fit mb-3">
-                    <Activity className="h-6 w-6 text-blue-600" />
+                <div className="p-6 bg-slate-100 rounded-lg">
+                  <div className="p-2 bg-slate-100 rounded-lg w-fit mb-3">
+                    <Activity className="h-6 w-6 text-slate-600" />
                   </div>
                   <h3 className="font-semibold text-slate-900 mb-2">Notificaciones</h3>
                   <p className="text-sm text-slate-600">
@@ -464,9 +464,9 @@ const signature = crypto
                   </p>
                 </div>
 
-                <div className="p-6 bg-green-50 rounded-lg">
-                  <div className="p-2 bg-green-100 rounded-lg w-fit mb-3">
-                    <Zap className="h-6 w-6 text-green-600" />
+                <div className="p-6 bg-slate-100 rounded-lg">
+                  <div className="p-2 bg-slate-100 rounded-lg w-fit mb-3">
+                    <Zap className="h-6 w-6 text-slate-600" />
                   </div>
                   <h3 className="font-semibold text-slate-900 mb-2">Sincronización</h3>
                   <p className="text-sm text-slate-600">
@@ -474,9 +474,9 @@ const signature = crypto
                   </p>
                 </div>
 
-                <div className="p-6 bg-purple-50 rounded-lg">
-                  <div className="p-2 bg-purple-100 rounded-lg w-fit mb-3">
-                    <Globe className="h-6 w-6 text-purple-600" />
+                <div className="p-6 bg-slate-100 rounded-lg">
+                  <div className="p-2 bg-slate-100 rounded-lg w-fit mb-3">
+                    <Globe className="h-6 w-6 text-slate-600" />
                   </div>
                   <h3 className="font-semibold text-slate-900 mb-2">Automatización</h3>
                   <p className="text-sm text-slate-600">
@@ -492,7 +492,7 @@ const signature = crypto
 
               <div className="space-y-6">
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                  <div className="flex-shrink-0 w-8 h-8 bg-slate-100 text-white rounded-full flex items-center justify-center font-bold">
                     1
                   </div>
                   <div className="flex-1">
@@ -510,7 +510,7 @@ const signature = crypto
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                  <div className="flex-shrink-0 w-8 h-8 bg-slate-100 text-white rounded-full flex items-center justify-center font-bold">
                     2
                   </div>
                   <div className="flex-1">
@@ -523,7 +523,7 @@ const signature = crypto
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                  <div className="flex-shrink-0 w-8 h-8 bg-slate-100 text-white rounded-full flex items-center justify-center font-bold">
                     3
                   </div>
                   <div className="flex-1">
@@ -535,7 +535,7 @@ const signature = crypto
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                  <div className="flex-shrink-0 w-8 h-8 bg-slate-100 text-white rounded-full flex items-center justify-center font-bold">
                     4
                   </div>
                   <div className="flex-1">
@@ -615,19 +615,19 @@ const signature = crypto
                   className="absolute top-2 right-2 p-2 bg-slate-800 hover:bg-slate-700 rounded text-slate-300"
                 >
                   {copiedCode === 'outgoing-format' ? (
-                    <Check className="h-4 w-4 text-green-400" />
+                    <Check className="h-4 w-4 text-slate-600" />
                   ) : (
                     <Copy className="h-4 w-4" />
                   )}
                 </button>
               </div>
 
-              <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <h3 className="font-semibold text-blue-900 mb-2">🔐 Headers de Seguridad</h3>
-                <p className="text-sm text-blue-800 mb-3">
+              <div className="mt-6 bg-slate-100 border border-slate-200 rounded-lg p-4">
+                <h3 className="font-semibold text-slate-600 mb-2">🔐 Headers de Seguridad</h3>
+                <p className="text-sm text-slate-600 mb-3">
                   Cada petición incluye estos headers para que puedas validar el origen:
                 </p>
-                <ul className="text-sm text-blue-800 space-y-1 font-mono">
+                <ul className="text-sm text-slate-600 space-y-1 font-mono">
                   <li>• X-Webhook-Signature: firma HMAC SHA256</li>
                   <li>• X-Webhook-Event: nombre del evento</li>
                   <li>• X-Webhook-ID: ID del webhook</li>
@@ -737,9 +737,9 @@ app.post('/webhook', (req, res) => {
                   </div>
                 </div>
 
-                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                  <h3 className="font-semibold text-yellow-900 mb-2">⚡ Mejores Prácticas</h3>
-                  <ul className="text-sm text-yellow-800 space-y-1">
+                <div className="bg-slate-100 border border-slate-200 rounded-lg p-4">
+                  <h3 className="font-semibold text-slate-600 mb-2">⚡ Mejores Prácticas</h3>
+                  <ul className="text-sm text-slate-600 space-y-1">
                     <li>• Responde rápido (en menos de 5 segundos)</li>
                     <li>• Procesa tareas pesadas de forma asíncrona</li>
                     <li>• Siempre valida la firma de seguridad</li>
@@ -756,19 +756,19 @@ app.post('/webhook', (req, res) => {
         <section className="mt-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl shadow-lg p-8 text-white">
           <div className="text-center">
             <h2 className="text-2xl font-bold mb-3">¿Necesitas Ayuda?</h2>
-            <p className="text-blue-100 mb-6">
+            <p className="text-slate-600 mb-6">
               Nuestro equipo está listo para ayudarte a configurar tus webhooks
             </p>
             <div className="flex gap-4 justify-center">
               <a
                 href="mailto:soporte@tucrm.com"
-                className="px-6 py-3 bg-white text-blue-600 rounded-lg font-medium hover:bg-blue-50 transition-colors"
+                className="px-6 py-3 bg-white text-slate-600 rounded-lg font-medium hover:bg-slate-100 transition-colors"
               >
                 Contactar Soporte
               </a>
               <button
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="px-6 py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-400 transition-colors"
+                className="px-6 py-3 bg-slate-100 text-white rounded-lg font-medium hover:bg-slate-100 transition-colors"
               >
                 Volver Arriba ↑
               </button>
