@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import { Webhook, Plus, Activity } from 'lucide-react'
+import { Webhook, Plus, Activity, BookOpen } from 'lucide-react'
 import Link from 'next/link'
 import { WebhooksList } from '@/components/webhooks/webhooks-list'
 import { CreateWebhookButton } from '@/components/webhooks/create-webhook-button'
@@ -58,11 +58,49 @@ export default async function WebhooksPage({ params }: WebhooksPageProps) {
             Connect external services and automate workflows
           </p>
         </div>
-        <CreateWebhookButton
-          workspaceSlug={workspaceSlug}
-          workspaceId={workspace.id}
-        />
+        <div className="flex items-center gap-3">
+          <Link
+            href="/docs/webhooks"
+            target="_blank"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors"
+          >
+            <BookOpen className="h-4 w-4" />
+            Documentación
+          </Link>
+          <CreateWebhookButton
+            workspaceSlug={workspaceSlug}
+            workspaceId={workspace.id}
+          />
+        </div>
       </div>
+
+      {/* Help Banner (only show if no webhooks) */}
+      {(!webhooks || webhooks.length === 0) && (
+        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-6">
+          <div className="flex items-start gap-4">
+            <div className="p-2 bg-blue-100 rounded-lg">
+              <BookOpen className="h-6 w-6 text-blue-600" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold text-slate-900 mb-2">
+                ¿Primera vez usando Webhooks?
+              </h3>
+              <p className="text-slate-700 mb-4">
+                Los webhooks te permiten conectar tu CRM con servicios externos como formularios web, Zapier, Slack y más.
+                Recibe datos automáticamente o envía notificaciones cuando ocurran eventos importantes.
+              </p>
+              <Link
+                href="/docs/webhooks"
+                target="_blank"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                <BookOpen className="h-4 w-4" />
+                Ver Documentación Completa
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
