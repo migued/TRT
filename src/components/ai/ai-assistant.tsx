@@ -1,11 +1,12 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Bot, X, Send, Sparkles, Loader2 } from 'lucide-react'
+import { Bot, X, Send, Sparkles, Loader2, Mic, MicOff, Volume2, VolumeX } from 'lucide-react'
 
 interface Message {
   role: 'user' | 'assistant'
   content: string
+  audioUrl?: string // For voice responses
 }
 
 interface AIAssistantProps {
@@ -36,6 +37,15 @@ export function AIAssistant({
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
 
+  // Voice state
+  const [isRecording, setIsRecording] = useState(false)
+  const [isTranscribing, setIsTranscribing] = useState(false)
+  const [voiceEnabled, setVoiceEnabled] = useState(true)
+  const [isPlayingAudio, setIsPlayingAudio] = useState(false)
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null)
+  const audioChunksRef = useRef<Blob[]>([])
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
@@ -50,11 +60,12 @@ export function AIAssistant({
     }
   }, [isOpen])
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent, textOverride?: string) => {
     e.preventDefault()
-    if (!input.trim() || isLoading) return
+    const messageText = textOverride || input
+    if (!messageText.trim() || isLoading) return
 
-    const userMessage: Message = { role: 'user', content: input }
+    const userMessage: Message = { role: 'user', content: messageText }
     setMessages(prev => [...prev, userMessage])
     setInput('')
     setIsLoading(true)
@@ -107,6 +118,38 @@ export function AIAssistant({
           })
         }
       }
+
+      // Generate voice response if voice is enabled
+      if (voiceEnabled && assistantMessage) {
+        try {
+          const voiceResponse = await fetch('/api/ai/voice-output', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: assistantMessage })
+          })
+
+          if (voiceResponse.ok) {
+            const audioBlob = await voiceResponse.blob()
+            const audioUrl = URL.createObjectURL(audioBlob)
+
+            // Update the last message with audio URL
+            setMessages(prev => {
+              const newMessages = [...prev]
+              newMessages[newMessages.length - 1] = {
+                ...newMessages[newMessages.length - 1],
+                audioUrl
+              }
+              return newMessages
+            })
+
+            // Auto-play the audio
+            playAudio(audioUrl)
+          }
+        } catch (error) {
+          console.error('Voice generation error:', error)
+          // Continue without voice if it fails
+        }
+      }
     } catch (error) {
       console.error('AI chat error:', error)
       setMessages(prev => [...prev, {
@@ -115,6 +158,97 @@ export function AIAssistant({
       }])
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      const mediaRecorder = new MediaRecorder(stream)
+
+      mediaRecorderRef.current = mediaRecorder
+      audioChunksRef.current = []
+
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          audioChunksRef.current.push(event.data)
+        }
+      }
+
+      mediaRecorder.onstop = async () => {
+        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' })
+        await transcribeAudio(audioBlob)
+
+        // Stop all tracks
+        stream.getTracks().forEach(track => track.stop())
+      }
+
+      mediaRecorder.start()
+      setIsRecording(true)
+    } catch (error) {
+      console.error('Error starting recording:', error)
+      alert('No se pudo acceder al micrófono. Por favor verifica los permisos.')
+    }
+  }
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && isRecording) {
+      mediaRecorderRef.current.stop()
+      setIsRecording(false)
+    }
+  }
+
+  const transcribeAudio = async (audioBlob: Blob) => {
+    setIsTranscribing(true)
+
+    try {
+      const formData = new FormData()
+      formData.append('audio', audioBlob, 'recording.webm')
+
+      const response = await fetch('/api/ai/voice-input', {
+        method: 'POST',
+        body: formData
+      })
+
+      if (!response.ok) throw new Error('Transcription failed')
+
+      const { text } = await response.json()
+
+      // Submit the transcribed text
+      if (text) {
+        const fakeEvent = { preventDefault: () => {} } as React.FormEvent
+        await handleSubmit(fakeEvent, text)
+      }
+    } catch (error) {
+      console.error('Transcription error:', error)
+      alert('Error al transcribir el audio. Por favor intenta de nuevo.')
+    } finally {
+      setIsTranscribing(false)
+    }
+  }
+
+  const playAudio = (audioUrl: string) => {
+    if (audioRef.current) {
+      audioRef.current.pause()
+    }
+
+    const audio = new Audio(audioUrl)
+    audioRef.current = audio
+
+    audio.onplay = () => setIsPlayingAudio(true)
+    audio.onended = () => setIsPlayingAudio(false)
+    audio.onerror = () => setIsPlayingAudio(false)
+
+    audio.play().catch(error => {
+      console.error('Error playing audio:', error)
+    })
+  }
+
+  const stopAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.pause()
+      audioRef.current.currentTime = 0
+      setIsPlayingAudio(false)
     }
   }
 
@@ -204,6 +338,16 @@ export function AIAssistant({
                   }`}
                 >
                   <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                  {/* Audio playback button for assistant messages */}
+                  {message.role === 'assistant' && message.audioUrl && (
+                    <button
+                      onClick={() => playAudio(message.audioUrl!)}
+                      className="mt-2 flex items-center gap-1 text-xs text-purple-600 hover:text-purple-700"
+                    >
+                      <Volume2 className="h-3 w-3" />
+                      Reproducir respuesta
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
@@ -221,7 +365,64 @@ export function AIAssistant({
 
           {/* Input */}
           <form onSubmit={handleSubmit} className="p-4 border-t border-slate-200">
+            {/* Voice toggle and status */}
+            <div className="flex items-center justify-between mb-2">
+              <button
+                type="button"
+                onClick={() => setVoiceEnabled(!voiceEnabled)}
+                className="flex items-center gap-2 text-xs text-slate-600 hover:text-slate-900 transition-colors"
+              >
+                {voiceEnabled ? (
+                  <>
+                    <Volume2 className="h-3 w-3 text-green-600" />
+                    <span>Voz activada</span>
+                  </>
+                ) : (
+                  <>
+                    <VolumeX className="h-3 w-3 text-slate-400" />
+                    <span>Voz desactivada</span>
+                  </>
+                )}
+              </button>
+
+              {isTranscribing && (
+                <span className="text-xs text-purple-600 flex items-center gap-1">
+                  <Loader2 className="h-3 w-3 animate-spin" />
+                  Transcribiendo...
+                </span>
+              )}
+
+              {isPlayingAudio && (
+                <button
+                  type="button"
+                  onClick={stopAudio}
+                  className="text-xs text-purple-600 hover:text-purple-700 flex items-center gap-1"
+                >
+                  <Volume2 className="h-3 w-3 animate-pulse" />
+                  Reproduciendo...
+                </button>
+              )}
+            </div>
+
             <div className="flex gap-2">
+              {/* Voice recording button */}
+              <button
+                type="button"
+                onMouseDown={startRecording}
+                onMouseUp={stopRecording}
+                onTouchStart={startRecording}
+                onTouchEnd={stopRecording}
+                disabled={isLoading || isTranscribing}
+                className={`px-3 py-2 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
+                  isRecording
+                    ? 'bg-red-500 text-white animate-pulse'
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
+                title="Mantén presionado para hablar"
+              >
+                {isRecording ? <MicOff className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
+              </button>
+
               <textarea
                 ref={inputRef}
                 value={input}
@@ -232,21 +433,21 @@ export function AIAssistant({
                     handleSubmit(e)
                   }
                 }}
-                placeholder="Escribe tu pregunta..."
+                placeholder={isRecording ? "Hablando..." : "Escribe o usa el micrófono..."}
                 rows={2}
                 className="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none text-sm"
-                disabled={isLoading}
+                disabled={isLoading || isRecording}
               />
               <button
                 type="submit"
-                disabled={!input.trim() || isLoading}
+                disabled={!input.trim() || isLoading || isRecording}
                 className="px-4 bg-gradient-to-r from-purple-600 to-orange-600 text-white rounded-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send className="h-5 w-5" />
               </button>
             </div>
             <p className="text-xs text-slate-500 mt-2">
-              Presiona Enter para enviar, Shift+Enter para nueva línea
+              Presiona Enter para enviar, o mantén el 🎤 para hablar
             </p>
           </form>
         </div>
