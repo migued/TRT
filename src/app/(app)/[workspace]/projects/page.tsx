@@ -49,26 +49,37 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
       )
     `)
     .eq('workspace_id', workspace.id)
-    .eq('status', 'active')
     .order('created_at', { ascending: false })
 
   if (error) {
     console.error('Error fetching projects:', error)
-    return <div>Error loading projects</div>
+    return (
+      <div className="space-y-6">
+        <h1 className="text-3xl font-bold text-slate-900">Proyectos</h1>
+        <div className="bg-slate-50 border border-slate-200 rounded-lg p-6">
+          <p className="text-slate-900 font-semibold">Error al cargar proyectos</p>
+          <p className="text-sm text-slate-600 mt-2">{error.message}</p>
+          <p className="text-xs text-slate-500 mt-2">Código: {error.code}</p>
+        </div>
+      </div>
+    )
   }
+
+  // Filter active projects
+  const activeProjects = projects?.filter(p => p.status === 'active') || []
 
   // Calculate statistics
   const stats = {
     total: projects?.length || 0,
-    active: projects?.filter(p => p.status === 'active').length || 0,
-    onTime: projects?.filter(p => {
+    active: activeProjects.length,
+    onTime: activeProjects.filter(p => {
       if (!p.due_date) return true
       return new Date(p.due_date) >= new Date()
-    }).length || 0,
-    overdue: projects?.filter(p => {
+    }).length,
+    overdue: activeProjects.filter(p => {
       if (!p.due_date) return false
       return new Date(p.due_date) < new Date()
-    }).length || 0,
+    }).length,
   }
 
   return (
@@ -134,16 +145,24 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
         </div>
       </div>
 
-      {/* Kanban Board */}
-      {stages && stages.length > 0 ? (
+      {/* Kanban Board or Empty State */}
+      {!projects || projects.length === 0 ? (
+        <div className="rounded-lg bg-white border border-slate-200 p-12 text-center">
+          <Folder className="h-12 w-12 text-slate-400 mx-auto mb-4" />
+          <h3 className="text-lg font-medium text-slate-900">No hay proyectos</h3>
+          <p className="mt-2 text-sm text-slate-600">
+            Crea tu primer proyecto para comenzar.
+          </p>
+        </div>
+      ) : stages && stages.length > 0 ? (
         <ProjectKanban
           stages={stages}
-          projects={projects || []}
+          projects={projects}
           workspaceSlug={workspaceSlug}
           workspaceId={workspace.id}
         />
       ) : (
-        <div className="rounded-lg bg-white p-12 text-center shadow">
+        <div className="rounded-lg bg-white border border-slate-200 p-12 text-center">
           <h3 className="text-lg font-medium text-slate-900">No hay etapas configuradas</h3>
           <p className="mt-2 text-sm text-slate-600">
             Se requieren etapas para gestionar proyectos. Contacta al administrador.
