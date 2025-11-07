@@ -13,7 +13,9 @@ import {
   DollarSign,
   Inbox,
   Settings,
-  LogOut
+  LogOut,
+  MessageSquare,
+  ScanLine
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
@@ -35,43 +37,53 @@ export function Sidebar({ workspaceSlug }: SidebarProps) {
     },
     {
       name: 'Contactos',
-      href: `/${workspaceSlug}/contacts`,
+      href: `/${workspaceSlug}/contactos`,
       icon: Users,
     },
     {
       name: 'Empresas',
-      href: `/${workspaceSlug}/companies`,
+      href: `/${workspaceSlug}/empresas`,
       icon: Building2,
     },
     {
       name: 'Oportunidades',
-      href: `/${workspaceSlug}/opportunities`,
+      href: `/${workspaceSlug}/oportunidades`,
       icon: TrendingUp,
     },
     {
       name: 'Cotizaciones',
-      href: `/${workspaceSlug}/quotes`,
+      href: `/${workspaceSlug}/cotizaciones`,
       icon: FileText,
     },
     {
       name: 'Órdenes',
-      href: `/${workspaceSlug}/orders`,
+      href: `/${workspaceSlug}/ordenes`,
       icon: ShoppingCart,
     },
     {
       name: 'Proyectos',
-      href: `/${workspaceSlug}/projects`,
+      href: `/${workspaceSlug}/proyectos`,
       icon: FolderKanban,
     },
     {
       name: 'Productos',
-      href: `/${workspaceSlug}/products`,
+      href: `/${workspaceSlug}/productos`,
       icon: Package,
     },
     {
       name: 'Finanzas',
-      href: `/${workspaceSlug}/finances`,
+      href: `/${workspaceSlug}/finanzas`,
       icon: DollarSign,
+    },
+    {
+      name: 'Chat con IA',
+      href: `/${workspaceSlug}/chat-con-ia`,
+      icon: MessageSquare,
+    },
+    {
+      name: 'Escáner',
+      href: `/${workspaceSlug}/escaner`,
+      icon: ScanLine,
     },
     {
       name: 'Inbox',

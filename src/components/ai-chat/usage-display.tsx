@@ -81,38 +81,26 @@ export default function AIUsageDisplay({ initialData }: UsageDisplayProps) {
   }
 
   const getUsageColor = (percent: number) => {
-    if (percent >= 100) return 'text-red-600 bg-red-100'
-    if (percent >= 80) return 'text-orange-600 bg-orange-100'
-    if (percent >= 50) return 'text-yellow-600 bg-yellow-100'
-    return 'text-green-600 bg-green-100'
+    if (percent >= 80) return 'text-slate-900 bg-slate-200'
+    return 'text-slate-700 bg-slate-100'
   }
 
   const getProgressColor = (percent: number) => {
-    if (percent >= 100) return 'bg-red-500'
-    if (percent >= 80) return 'bg-orange-500'
-    if (percent >= 50) return 'bg-yellow-500'
-    return 'bg-green-500'
+    if (percent >= 80) return 'bg-slate-900'
+    return 'bg-slate-600'
   }
 
   return (
     <div className="space-y-6">
       {/* Warning Banner */}
       {usage.percentUsed >= 80 && (
-        <div className={`rounded-lg p-4 flex items-start gap-3 ${
-          usage.isOverLimit ? 'bg-red-50 border border-red-200' : 'bg-orange-50 border border-orange-200'
-        }`}>
-          <AlertTriangle className={`h-5 w-5 mt-0.5 ${
-            usage.isOverLimit ? 'text-red-600' : 'text-orange-600'
-          }`} />
+        <div className="rounded-lg p-4 flex items-start gap-3 bg-slate-100 border border-slate-200">
+          <AlertTriangle className="h-5 w-5 mt-0.5 text-slate-700" />
           <div className="flex-1">
-            <h3 className={`font-semibold ${
-              usage.isOverLimit ? 'text-red-900' : 'text-orange-900'
-            }`}>
+            <h3 className="font-semibold text-slate-900">
               {usage.isOverLimit ? '¡Límite alcanzado!' : '¡Acercándote al límite!'}
             </h3>
-            <p className={`text-sm mt-1 ${
-              usage.isOverLimit ? 'text-red-700' : 'text-orange-700'
-            }`}>
+            <p className="text-sm mt-1 text-slate-700">
               {usage.isOverLimit
                 ? `Has alcanzado tu límite mensual de ${usage.messageLimit} mensajes. Puedes continuar usando el servicio, pero considera los costos adicionales.`
                 : `Has usado ${Math.round(usage.percentUsed)}% de tu límite mensual. Quedan ${usage.messageLimit - usage.totalMessages} mensajes.`
@@ -148,8 +136,8 @@ export default function AIUsageDisplay({ initialData }: UsageDisplayProps) {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="flex items-start gap-3">
-            <div className="p-2 bg-blue-100 rounded-lg">
-              <MessageSquare className="h-5 w-5 text-blue-600" />
+            <div className="p-2 bg-slate-100 rounded-lg">
+              <MessageSquare className="h-5 w-5 text-slate-600" />
             </div>
             <div>
               <div className="text-2xl font-bold text-slate-900">{usage.totalMessages}</div>
@@ -158,8 +146,8 @@ export default function AIUsageDisplay({ initialData }: UsageDisplayProps) {
           </div>
 
           <div className="flex items-start gap-3">
-            <div className="p-2 bg-purple-100 rounded-lg">
-              <Zap className="h-5 w-5 text-purple-600" />
+            <div className="p-2 bg-slate-100 rounded-lg">
+              <Zap className="h-5 w-5 text-slate-600" />
             </div>
             <div>
               <div className="text-2xl font-bold text-slate-900">{formatNumber(usage.totalTokens)}</div>
@@ -168,8 +156,8 @@ export default function AIUsageDisplay({ initialData }: UsageDisplayProps) {
           </div>
 
           <div className="flex items-start gap-3">
-            <div className="p-2 bg-green-100 rounded-lg">
-              <DollarSign className="h-5 w-5 text-green-600" />
+            <div className="p-2 bg-slate-100 rounded-lg">
+              <DollarSign className="h-5 w-5 text-slate-600" />
             </div>
             <div>
               <div className="text-2xl font-bold text-slate-900">{formatCost(usage.totalCost)}</div>
@@ -178,8 +166,8 @@ export default function AIUsageDisplay({ initialData }: UsageDisplayProps) {
           </div>
 
           <div className="flex items-start gap-3">
-            <div className="p-2 bg-orange-100 rounded-lg">
-              <FileText className="h-5 w-5 text-orange-600" />
+            <div className="p-2 bg-slate-100 rounded-lg">
+              <FileText className="h-5 w-5 text-slate-600" />
             </div>
             <div>
               <div className="text-2xl font-bold text-slate-900">{usage.filesProcessed}</div>
@@ -190,16 +178,16 @@ export default function AIUsageDisplay({ initialData }: UsageDisplayProps) {
       </div>
 
       {/* Info Card */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+      <div className="bg-slate-50 border border-slate-200 rounded-lg p-6">
         <div className="flex items-start gap-3">
-          <TrendingUp className="h-5 w-5 text-blue-600 mt-0.5" />
+          <TrendingUp className="h-5 w-5 text-slate-600 mt-0.5" />
           <div>
-            <h3 className="font-semibold text-blue-900 mb-1">Límites suaves mensuales</h3>
-            <p className="text-sm text-blue-700">
+            <h3 className="font-semibold text-slate-900 mb-1">Límites suaves mensuales</h3>
+            <p className="text-sm text-slate-700">
               Los límites son soft limits - recibirás advertencias cuando te acerques al límite,
               pero puedes continuar usando el servicio. El contador se reinicia cada mes.
             </p>
-            <div className="mt-3 text-sm text-blue-800">
+            <div className="mt-3 text-sm text-slate-700">
               <strong>Límite de mensajes:</strong> {usage.messageLimit} mensajes/mes<br />
               <strong>Límite de tokens:</strong> {formatNumber(usage.tokenLimit)} tokens/mes
             </div>

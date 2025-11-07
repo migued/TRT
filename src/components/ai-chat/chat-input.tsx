@@ -220,14 +220,14 @@ export default function ChatInput({ conversationId, onMessageSent }: ChatInputPr
           placeholder={isStreaming ? "Generando respuesta..." : "Escribe tu mensaje..."}
           rows={1}
           disabled={isSending}
-          className="flex-1 px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
         />
 
         {/* Send Button */}
         <button
           type="submit"
           disabled={!input.trim() || isSending}
-          className="px-6 py-3 bg-gradient-to-r from-purple-600 to-orange-600 text-white rounded-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+          className="px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium"
         >
           {isSending ? (
             <Loader2 className="h-5 w-5 animate-spin" />

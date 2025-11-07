@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { Plus, Menu, X, AlertCircle } from 'lucide-react'
+import { Plus, Menu, X, AlertCircle, MessageSquare } from 'lucide-react'
 import ConversationList from './conversation-list'
 import ChatMessages from './chat-messages'
 import ChatInput from './chat-input'
@@ -202,7 +202,7 @@ export default function AIChatInterface({
           <div className="p-4 border-b border-slate-200">
             <button
               onClick={createNewConversation}
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-purple-600 to-orange-600 text-white rounded-lg hover:shadow-lg transition-all font-medium"
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors font-medium"
             >
               <Plus className="h-5 w-5" />
               Nueva Conversación
@@ -233,8 +233,8 @@ export default function AIChatInterface({
         )}
 
         {usageWarning && (
-          <div className="p-4 bg-orange-50 border-b border-orange-200">
-            <div className="flex items-center gap-2 text-orange-700">
+          <div className="p-4 bg-slate-100 border-b border-slate-200">
+            <div className="flex items-center gap-2 text-slate-700">
               <AlertCircle className="h-5 w-5" />
               <span>{usageWarning}</span>
             </div>
@@ -280,7 +280,9 @@ export default function AIChatInterface({
         ) : (
           <div className="flex-1 flex items-center justify-center">
             <div className="text-center">
-              <div className="text-6xl mb-4">💬</div>
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-slate-100 rounded-full mb-4">
+                <MessageSquare className="h-10 w-10 text-slate-600" />
+              </div>
               <h2 className="text-2xl font-bold text-slate-900 mb-2">
                 Bienvenido al Chat con IA
               </h2>
@@ -289,7 +291,7 @@ export default function AIChatInterface({
               </p>
               <button
                 onClick={createNewConversation}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-orange-600 text-white rounded-lg hover:shadow-lg transition-all font-medium"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors font-medium"
               >
                 <Plus className="h-5 w-5" />
                 Nueva Conversación

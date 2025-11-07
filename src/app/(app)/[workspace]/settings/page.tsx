@@ -10,10 +10,10 @@ export default async function SettingsPage({ params }: SettingsPageProps) {
 
   const settingsSections = [
     {
-      title: 'AI Chat',
+      title: 'Chat con IA',
       description: 'Ver uso de mensajes y límites mensuales del asistente de IA',
       icon: Bot,
-      href: `/${workspaceSlug}/settings/ai-chat`,
+      href: `/${workspaceSlug}/settings/chat-con-ia`,
       available: true,
     },
     {

@@ -60,7 +60,9 @@ export default function ChatMessages({ messages, isLoading }: ChatMessagesProps)
       {messages.length === 0 && !isLoading && (
         <div className="flex items-center justify-center h-full text-center">
           <div>
-            <div className="text-6xl mb-4">🤖</div>
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-slate-100 rounded-full mb-4">
+              <Bot className="h-10 w-10 text-slate-600" />
+            </div>
             <h3 className="text-lg font-semibold text-slate-900 mb-2">
               ¡Comienza una conversación!
             </h3>
@@ -84,8 +86,8 @@ export default function ChatMessages({ messages, isLoading }: ChatMessagesProps)
             <div
               className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${
                 isUser
-                  ? 'bg-gradient-to-br from-purple-500 to-orange-500'
-                  : 'bg-gradient-to-br from-blue-500 to-cyan-500'
+                  ? 'bg-slate-900'
+                  : 'bg-slate-700'
               }`}
             >
               {isUser ? (
@@ -107,7 +109,7 @@ export default function ChatMessages({ messages, isLoading }: ChatMessagesProps)
                   <div className="mb-2">
                     <button
                       onClick={() => toggleReasoning(message.id)}
-                      className="flex items-center gap-2 px-4 py-2 bg-purple-50 text-purple-700 rounded-lg hover:bg-purple-100 transition-colors text-sm font-medium mb-2"
+                      className="flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors text-sm font-medium mb-2"
                     >
                       <Sparkles className="h-4 w-4" />
                       <span>Proceso de razonamiento</span>
@@ -119,14 +121,14 @@ export default function ChatMessages({ messages, isLoading }: ChatMessagesProps)
                     </button>
 
                     {isReasoningExpanded && (
-                      <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-3">
+                      <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 mb-3">
                         <div className="flex items-center gap-2 mb-2">
-                          <Sparkles className="h-4 w-4 text-purple-600" />
-                          <span className="text-sm font-semibold text-purple-900">
+                          <Sparkles className="h-4 w-4 text-slate-600" />
+                          <span className="text-sm font-semibold text-slate-900">
                             Razonamiento del Modelo
                           </span>
                         </div>
-                        <pre className="text-sm text-purple-800 whitespace-pre-wrap font-mono">
+                        <pre className="text-sm text-slate-700 whitespace-pre-wrap font-mono">
                           {message.reasoning}
                         </pre>
                       </div>
@@ -138,7 +140,7 @@ export default function ChatMessages({ messages, isLoading }: ChatMessagesProps)
                 <div
                   className={`rounded-lg px-4 py-3 ${
                     isUser
-                      ? 'bg-gradient-to-r from-purple-600 to-orange-600 text-white'
+                      ? 'bg-slate-900 text-white'
                       : 'bg-white border border-slate-200 text-slate-900'
                   }`}
                 >
@@ -198,12 +200,12 @@ export default function ChatMessages({ messages, isLoading }: ChatMessagesProps)
 
       {isLoading && (
         <div className="flex gap-4">
-          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
+          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center">
             <Bot className="h-5 w-5 text-white" />
           </div>
           <div className="bg-white border border-slate-200 rounded-lg px-4 py-3">
             <div className="flex items-center gap-2">
-              <Loader2 className="h-4 w-4 animate-spin text-purple-600" />
+              <Loader2 className="h-4 w-4 animate-spin text-slate-600" />
               <span className="text-sm text-slate-600">Pensando...</span>
             </div>
           </div>

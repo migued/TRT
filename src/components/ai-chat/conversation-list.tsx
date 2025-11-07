@@ -61,17 +61,21 @@ export default function ConversationList({
               key={conversation.id}
               className={`group relative px-3 py-2 mx-2 rounded-lg mb-1 cursor-pointer transition-colors ${
                 currentConversationId === conversation.id
-                  ? 'bg-gradient-to-r from-purple-100 to-orange-100'
+                  ? 'bg-slate-900 text-white'
                   : 'hover:bg-slate-100'
               }`}
               onClick={() => onSelectConversation(conversation.id)}
             >
               <div className="flex items-start gap-3">
-                <MessageSquare className="h-5 w-5 text-slate-600 mt-0.5 flex-shrink-0" />
+                <MessageSquare className={`h-5 w-5 mt-0.5 flex-shrink-0 ${
+                  currentConversationId === conversation.id ? 'text-white' : 'text-slate-600'
+                }`} />
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2">
-                    <h3 className="font-medium text-slate-900 truncate">
+                    <h3 className={`font-medium truncate ${
+                      currentConversationId === conversation.id ? 'text-white' : 'text-slate-900'
+                    }`}>
                       {getDisplayTitle(conversation)}
                     </h3>
 
@@ -81,13 +85,21 @@ export default function ConversationList({
                         e.stopPropagation()
                         setOpenMenuId(openMenuId === conversation.id ? null : conversation.id)
                       }}
-                      className="opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-200 rounded transition-opacity"
+                      className={`opacity-0 group-hover:opacity-100 p-1 rounded transition-opacity ${
+                        currentConversationId === conversation.id
+                          ? 'hover:bg-slate-800'
+                          : 'hover:bg-slate-200'
+                      }`}
                     >
-                      <MoreVertical className="h-4 w-4 text-slate-600" />
+                      <MoreVertical className={`h-4 w-4 ${
+                        currentConversationId === conversation.id ? 'text-white' : 'text-slate-600'
+                      }`} />
                     </button>
                   </div>
 
-                  <div className="flex items-center gap-2 text-xs text-slate-500 mt-1">
+                  <div className={`flex items-center gap-2 text-xs mt-1 ${
+                    currentConversationId === conversation.id ? 'text-slate-300' : 'text-slate-500'
+                  }`}>
                     <span>{conversation.message_count} mensajes</span>
                     <span>•</span>
                     <span>{formatDate(conversation.last_message_at)}</span>
