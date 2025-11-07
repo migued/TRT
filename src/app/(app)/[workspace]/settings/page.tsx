@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Webhook, Users, Settings as SettingsIcon, Mail } from 'lucide-react'
+import { Webhook, Users, Settings as SettingsIcon, Mail, Bot } from 'lucide-react'
 
 interface SettingsPageProps {
   params: Promise<{ workspace: string }>
@@ -9,6 +9,13 @@ export default async function SettingsPage({ params }: SettingsPageProps) {
   const { workspace: workspaceSlug } = await params
 
   const settingsSections = [
+    {
+      title: 'AI Chat',
+      description: 'Ver uso de mensajes y límites mensuales del asistente de IA',
+      icon: Bot,
+      href: `/${workspaceSlug}/settings/ai-chat`,
+      available: true,
+    },
     {
       title: 'Webhooks',
       description: 'Connect external services and automate workflows',
