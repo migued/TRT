@@ -145,6 +145,8 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
                   opportunityId={opportunityId}
                   opportunityTitle={opportunity.title}
                   workspaceSlug={workspaceSlug}
+                  workspaceId={workspace.id}
+                  contactId={opportunity.contact_id}
                 />
                 <MarkOpportunityLostButton
                   opportunityId={opportunityId}

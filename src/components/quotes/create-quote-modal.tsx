@@ -279,8 +279,16 @@ export function CreateQuoteModal({
     try {
       const supabase = createClient()
 
-      // Generate quote number
-      const quoteNumber = `COT-${Date.now()}`
+      // Generate quote number using database function
+      const { data: quoteNumberData, error: numberError } = await supabase
+        .rpc('generate_quote_number', { p_workspace_id: workspaceId })
+
+      if (numberError) {
+        console.error('Error generating quote number:', numberError)
+        throw new Error('Error al generar número de cotización')
+      }
+
+      const quoteNumber = quoteNumberData as string
 
       const totals = calculateTotals()
 
@@ -290,6 +298,7 @@ export function CreateQuoteModal({
           workspace_id: workspaceId,
           quote_number: quoteNumber,
           contact_id: selectedContact.id,
+          opportunity_id: opportunityId || null, // Link to opportunity if provided
           items: lineItems,
           subtotal: totals.subtotal,
           tax: totals.tax,
