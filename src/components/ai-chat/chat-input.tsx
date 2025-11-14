@@ -2,10 +2,20 @@
 
 import { useState, useRef } from 'react'
 import { Send, Paperclip, X, FileText, Image, FileSpreadsheet, Loader2 } from 'lucide-react'
+import { createClient } from '@/lib/supabase/client'
 
 interface ChatInputProps {
   conversationId: string
   onMessageSent: (userMessage: any, assistantMessage: any, warning?: string) => void
+}
+
+interface UploadedFile {
+  fileName: string
+  fileType: string
+  fileSize: number
+  mimeType: string
+  storagePath: string
+  storageUrl: string
 }
 
 export default function ChatInput({ conversationId, onMessageSent }: ChatInputProps) {
@@ -45,6 +55,53 @@ export default function ChatInput({ conversationId, onMessageSent }: ChatInputPr
     setFiles(prev => prev.filter((_, i) => i !== index))
   }
 
+  const uploadFilesToStorage = async (filesToUpload: File[]): Promise<UploadedFile[]> => {
+    const supabase = createClient()
+    const uploadedFiles: UploadedFile[] = []
+
+    // Get current user ID for file path
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) {
+      throw new Error('User not authenticated')
+    }
+
+    for (const file of filesToUpload) {
+      // Create unique file path: userId/conversationId/timestamp-filename
+      const timestamp = Date.now()
+      const sanitizedFileName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_')
+      const storagePath = `${user.id}/${conversationId}/${timestamp}-${sanitizedFileName}`
+
+      // Upload to Supabase Storage
+      const { data, error } = await supabase.storage
+        .from('ai-chat-files')
+        .upload(storagePath, file, {
+          cacheControl: '3600',
+          upsert: false
+        })
+
+      if (error) {
+        console.error('Error uploading file:', error)
+        throw new Error(`Error al subir archivo "${file.name}": ${error.message}`)
+      }
+
+      // Get public URL (or signed URL if bucket is private)
+      const { data: urlData } = supabase.storage
+        .from('ai-chat-files')
+        .getPublicUrl(storagePath)
+
+      uploadedFiles.push({
+        fileName: file.name,
+        fileType: file.name.split('.').pop()?.toLowerCase() || 'unknown',
+        fileSize: file.size,
+        mimeType: file.type,
+        storagePath: data.path,
+        storageUrl: urlData.publicUrl
+      })
+    }
+
+    return uploadedFiles
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -57,15 +114,18 @@ export default function ChatInput({ conversationId, onMessageSent }: ChatInputPr
     setInput('')
 
     try {
-      // TODO: Handle file uploads
-      // For now, we'll just send the text message
+      // Upload files to storage if any
+      let uploadedFiles: UploadedFile[] = []
+      if (files.length > 0) {
+        uploadedFiles = await uploadFilesToStorage(files)
+      }
 
       const response = await fetch(`/api/ai-chat/conversations/${conversationId}/messages`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           content: userMessageContent,
-          files: files.length > 0 ? files.map(f => ({ fileName: f.name, fileType: f.type })) : undefined,
+          files: uploadedFiles.length > 0 ? uploadedFiles : undefined,
           useReasoning: true
         })
       })

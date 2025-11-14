@@ -103,11 +103,29 @@ export async function POST(request: NextRequest, context: RouteContext) {
     let fileContext = ''
     if (files && Array.isArray(files) && files.length > 0) {
       // Files are expected to be already uploaded to storage
-      // Here we just reference them and add context
-      fileContext = `\n\n[User attached ${files.length} file(s): ${files.map((f: any) => f.fileName).join(', ')}]`
+      // Save file attachments to ai_file_attachments table
+      for (const file of files) {
+        const { error: fileError } = await supabase
+          .from('ai_file_attachments')
+          .insert({
+            message_id: userMessage.id,
+            file_name: file.fileName,
+            file_type: file.fileType,
+            file_size: file.fileSize,
+            mime_type: file.mimeType,
+            storage_path: file.storagePath,
+            storage_url: file.storageUrl,
+            processing_status: 'pending'
+          })
 
-      // TODO: Save file attachments to ai_file_attachments table
-      // This would be done in a separate file upload endpoint
+        if (fileError) {
+          console.error('Error saving file attachment:', fileError)
+          // Continue with other files even if one fails
+        }
+      }
+
+      // Add context about attached files to the message
+      fileContext = `\n\n[User attached ${files.length} file(s): ${files.map((f: any) => f.fileName).join(', ')}]`
     }
 
     // Build messages for AI
