@@ -77,6 +77,11 @@ export function Sidebar({ workspaceSlug }: SidebarProps) {
       icon: DollarSign,
     },
     {
+      name: 'Inbox',
+      href: `/${workspaceSlug}/inbox`,
+      icon: Mail,
+    },
+    {
       name: 'Chat con IA',
       href: `/${workspaceSlug}/chat-con-ia`,
       icon: MessageSquare,
